@@ -1,0 +1,21 @@
+{
+  "nav": {
+    "home": "Home",
+    "search": "Search",
+    "activity": "Activity",
+    "profile": "Profile"
+  },
+  "post": {
+    "create": "Create post",
+    "edit": "Edit post",
+    "delete": "Delete post",
+    "deleteConfirm": "Are you sure you want to delete this post?",
+    "placeholder": "What's on your mind?"
+  },
+  "auth": {
+    "login": "Log in",
+    "register": "Sign up",
+    "logout": "Log out",
+    "forgotPassword": "Forgot password?"
+  }
+}
