@@ -36,14 +36,12 @@ app.post("/register", validate(registerSchema), async (req, res) => {
   const { username, email, password } = req.body;
   res.json({ message: "Đăng ký thành công" });
 });
-
 app.post("/login", validate(loginSchema), async (req, res) => {
   const { email, password } = req.body;
   res.json({ message: "Đăng nhập thành công" });
 });
-
 app.use(handleMulterError); // Middleware xử lý lỗi từ Multer
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Server running on port ${port}`);
 });
