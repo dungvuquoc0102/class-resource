@@ -4,8 +4,6 @@
 
 Sau buổi này học viên sẽ biết xử lý upload file trong Node.js/Express theo hai hướng: lưu file vào thư mục local trên server và đẩy lên cloud storage với Cloudinary. Song song đó, học viên nắm được cách validate dữ liệu đầu vào bằng Zod, đóng gói thành middleware tái sử dụng cho nhiều route khác nhau.
 
----
-
 <!--
 Client -(req kèm theo file)-> Server Express -(req)-Middleware-> req mới
  -->
@@ -22,18 +20,16 @@ Khi client gửi file lên server, dữ liệu được encode theo định dạ
 npm install multer
 ```
 
----
-
 ### 2. Các thành phần chính của Multer
 
 #### 2.1. `multer.diskStorage(options)` — lưu file xuống ổ cứng
 
 Tạo một storage engine điều khiển **nơi lưu** và **tên file**.
 
-| Tham số       | Kiểu                      | Mô tả                                                                                                                    |
-| ------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `destination` | `function(req, file, cb)` | Thư mục lưu file. Gọi `cb(null, 'đường/dẫn')`. Thư mục phải tồn tại trước.                                               |
-| `filename`    | `function(req, file, cb)` | Tên file lưu vào disk. Gọi `cb(null, 'tên-file')`. Nếu không khai báo, Multer tự sinh tên ngẫu nhiên không có extension. |
+| Tham số | Kiểu | Mô tả |
+| - | - | |
+| `destination` | `function(req, file, cb)` | Thư mục lưu file. Gọi `cb(null, 'đường/dẫn')`. Thư mục phải tồn tại trước. |
+| `filename` | `function(req, file, cb)` | Tên file lưu vào disk. Gọi `cb(null, 'tên-file')`. Nếu không khai báo, Multer tự sinh tên ngẫu nhiên không có extension. |
 
 Trong cả hai callback, tham số `file` chứa thông tin file **trước khi lưu** (chưa có `path`, `filename`):
 
@@ -52,8 +48,8 @@ File không lưu xuống disk mà giữ trong bộ nhớ dưới dạng `Buffer`
 
 ```js
 const storage = multer.memoryStorage();
-// req.file.buffer → Buffer chứa nội dung file
-// req.file.size   → kích thước tính bằng byte
+// req.file.buffer -> Buffer chứa nội dung file
+// req.file.size   -> kích thước tính bằng byte
 ```
 
 #### 2.3. `fileFilter` — lọc file được phép upload
@@ -61,9 +57,9 @@ const storage = multer.memoryStorage();
 ```js
 function fileFilter(req, file, cb) {
   // cb(error, accept)
-  // accept = true  → cho phép
-  // accept = false → từ chối (không throw lỗi, chỉ bỏ qua file)
-  // error !== null → throw lỗi ngay
+  // accept = true  -> cho phép
+  // accept = false -> từ chối (không throw lỗi, chỉ bỏ qua file)
+  // error !== null -> throw lỗi ngay
 }
 ```
 
@@ -96,8 +92,8 @@ upload.fields([
   { name: "avatar", maxCount: 1 },
   { name: "gallery", maxCount: 5 },
 ]);
-// req.files['avatar'] → array 1 file
-// req.files['gallery'] → array tối đa 5 file
+// req.files['avatar'] -> array 1 file
+// req.files['gallery'] -> array tối đa 5 file
 ```
 
 #### 2.6. Thông tin trong `req.file` sau khi upload
@@ -113,8 +109,6 @@ upload.fields([
 | `filename`     | Tên file đã lưu _(chỉ có với diskStorage)_           |
 | `path`         | Đường dẫn đầy đủ đến file _(chỉ có với diskStorage)_ |
 | `buffer`       | Buffer nội dung file _(chỉ có với memoryStorage)_    |
-
----
 
 ### 3. Upload lưu vào server (thư mục public/uploads)
 
@@ -212,8 +206,6 @@ app.use("/api", require("./src/routes/upload.route"));
 
 app.listen(3000, () => console.log("Server chạy trên port 3000"));
 ```
-
----
 
 ### 4. Gửi file bằng JavaScript (Fetch API)
 
@@ -347,8 +339,6 @@ Thay vì submit form HTML thuần, trong thực tế client thường dùng Java
 </script>
 ```
 
----
-
 ### 5. Upload lên Cloudinary (external storage)
 
 Lưu file trên server có nhược điểm lớn: khi deploy lên cloud (Render, Railway), file upload sẽ **mất sau mỗi lần deploy** vì filesystem là ephemeral. Giải pháp là đẩy file lên dịch vụ lưu trữ ngoài như Cloudinary.
@@ -407,8 +397,8 @@ router.post("/upload-cloud", uploadCloud.single("avatar"), (req, res) => {
   }
 
   // Khi dùng CloudinaryStorage:
-  // req.file.path     → URL đầy đủ trên Cloudinary (CDN)
-  // req.file.filename → public_id (dùng để xóa sau này)
+  // req.file.path     -> URL đầy đủ trên Cloudinary (CDN)
+  // req.file.filename -> public_id (dùng để xóa sau này)
   res.json({
     message: "Upload thành công",
     url: req.file.path,
@@ -430,15 +420,13 @@ router.delete("/delete-file/:publicId", async (req, res) => {
 
 **So sánh local upload và Cloudinary:**
 
-|                      | Local           | Cloudinary               |
-| -------------------- | --------------- | ------------------------ |
-| Cài đặt              | Đơn giản        | Cần tài khoản + env vars |
-| Tồn tại sau redeploy | ❌ Mất          | ✅ Vĩnh viễn             |
-| CDN                  | ❌ Không        | ✅ Có sẵn                |
-| Transform ảnh        | ❌ Cần tự xử lý | ✅ Qua URL               |
-| Phù hợp cho          | Dev / test      | Production               |
-
----
+| | Local | Cloudinary |
+| -- | | |
+| Cài đặt | Đơn giản | Cần tài khoản + env vars |
+| Tồn tại sau redeploy | ❌ Mất | ✅ Vĩnh viễn |
+| CDN | ❌ Không | ✅ Có sẵn |
+| Transform ảnh | ❌ Cần tự xử lý | ✅ Qua URL |
+| Phù hợp cho | Dev / test | Production |
 
 ### 6. Xử lý lỗi từ Multer
 
@@ -451,10 +439,10 @@ const multer = require("multer");
 function handleMulterError(err, req, res, next) {
   if (err instanceof multer.MulterError) {
     // Các mã lỗi phổ biến:
-    // LIMIT_FILE_SIZE    → file vượt fileSize limit
-    // LIMIT_FILE_COUNT   → quá số file cho phép
-    // LIMIT_FIELD_COUNT  → quá số text fields cho phép
-    // LIMIT_UNEXPECTED_FILE → field name không khớp
+    // LIMIT_FILE_SIZE    -> file vượt fileSize limit
+    // LIMIT_FILE_COUNT   -> quá số file cho phép
+    // LIMIT_FIELD_COUNT  -> quá số text fields cho phép
+    // LIMIT_UNEXPECTED_FILE -> field name không khớp
     switch (err.code) {
       case "LIMIT_FILE_SIZE":
         return res.status(400).json({ message: "File quá lớn, tối đa 5MB" });
@@ -474,7 +462,7 @@ function handleMulterError(err, req, res, next) {
     return res.status(400).json({ message: err.message });
   }
 
-  next(err); // Lỗi khác → chuyển sang error handler global
+  next(err); // Lỗi khác -> chuyển sang error handler global
 }
 
 module.exports = handleMulterError;
@@ -484,8 +472,6 @@ module.exports = handleMulterError;
 // index.js — đặt SAU tất cả routes
 app.use(handleMulterError);
 ```
-
----
 
 ## Phần 2: Validation với Zod
 
@@ -502,8 +488,6 @@ Zod là schema-based validator. Một schema Zod vừa định nghĩa **cấu tr
 ```bash
 npm install zod
 ```
-
----
 
 ### 2. Zod middleware — dùng được cho mọi route
 
@@ -543,10 +527,8 @@ module.exports = validate;
 Middleware này:
 
 - Validate `req.body` theo mặc định, hoặc `req.query` / `req.params` nếu truyền `source`.
-- Nếu lỗi → trả về `422` với object mô tả lỗi từng field.
-- Nếu hợp lệ → ghi đè lại `req[source]` bằng dữ liệu đã transform (rất quan trọng — xem ví dụ dưới).
-
----
+- Nếu lỗi -> trả về `422` với object mô tả lỗi từng field.
+- Nếu hợp lệ -> ghi đè lại `req[source]` bằng dữ liệu đã transform (rất quan trọng — xem ví dụ dưới).
 
 ### 3. Định nghĩa Zod schema cho từng route
 
@@ -586,8 +568,6 @@ const loginSchema = z.object({
 
 module.exports = { registerSchema, loginSchema };
 ```
-
----
 
 ### 4. Dùng middleware validate cho nhiều route
 
@@ -630,8 +610,6 @@ module.exports = router;
 }
 ```
 
----
-
 ### 5. Validate query params và route params
 
 Middleware `validate` hỗ trợ tham số `source` để validate bất kỳ phần nào của request:
@@ -642,7 +620,7 @@ const { z } = require("zod");
 
 // Validate query string: /products?page=2&limit=10&sort=price
 const productQuerySchema = z.object({
-  page: z.coerce.number().int().min(1).default(1), // coerce: chuyển string "2" → number 2
+  page: z.coerce.number().int().min(1).default(1), // coerce: chuyển string "2" -> number 2
   limit: z.coerce.number().int().min(1).max(100).default(10),
   sort: z.enum(["price", "name", "createdAt"]).optional(),
 });
@@ -682,8 +660,6 @@ router.get(
 );
 ```
 
----
-
 ### 6. Kết hợp Multer và Zod trong cùng một route
 
 Trường hợp thực tế: form cập nhật profile có cả ảnh avatar và text fields.
@@ -709,7 +685,7 @@ const { updateProfileSchema } = require("../validations/user.schema");
 // Thứ tự middleware: Multer trước, Zod sau
 router.patch(
   "/profile",
-  uploadCloud.single("avatar"), // 1. Multer parse multipart → req.body, req.file
+  uploadCloud.single("avatar"), // 1. Multer parse multipart -> req.body, req.file
   validate(updateProfileSchema), // 2. Zod validate req.body
   async (req, res) => {
     const { fullname, bio } = req.body;
@@ -722,17 +698,15 @@ router.patch(
 
 > **Lý do Multer phải đứng trước Zod:** Request `multipart/form-data` chưa được Multer parse thì `req.body` là `{}`. Đặt Zod trước Multer sẽ validate trên object rỗng và luôn báo lỗi.
 
----
-
 ## Tổng kết
 
 **File upload với Multer:**
 
-- `diskStorage` → lưu xuống ổ cứng, kiểm soát tên và thư mục
-- `memoryStorage` → giữ trong RAM, dùng khi đẩy lên cloud
-- `fileFilter` → lọc loại file được phép
-- `limits` → giới hạn kích thước và số lượng
-- `single / array / fields` → tương ứng với 1 file, nhiều file cùng field, nhiều file khác field
+- `diskStorage` -> lưu xuống ổ cứng, kiểm soát tên và thư mục
+- `memoryStorage` -> giữ trong RAM, dùng khi đẩy lên cloud
+- `fileFilter` -> lọc loại file được phép
+- `limits` -> giới hạn kích thước và số lượng
+- `single / array / fields` -> tương ứng với 1 file, nhiều file cùng field, nhiều file khác field
 - Dùng `FormData` + `fetch` (không set Content-Type thủ công) để gửi file từ client
 - Luôn có middleware `handleMulterError` để bắt `MulterError`
 
