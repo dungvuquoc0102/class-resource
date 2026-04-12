@@ -1,0 +1,16 @@
+a {
+  color: yellow !important;
+  font-size: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+div.greeting {
+  border: 1px solid red;
+}
+
+p {
+  margin: 10px;
+  border: inherit;
+  /* cmd/ctrl + / */
+}
