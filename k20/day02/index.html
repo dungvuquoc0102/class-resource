@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
+    />
+    <style>
+      a {
+        color: blue;
+        font-size: 20px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+    </style>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- <div>
+      <code class="lang-javascript">const name = "Fullstack";</code>
+      <div>Hello F8</div> -->
+    <!-- <pre><code class="lang-javascript">
+// server/index.js
+const express = require('express');
+const { createServer } = require('http');
+const { Server } = require('socket.io');
+
+const app = express();
+const httpServer = createServer(app);
+
+// Cấu hình CORS cho React dev server
+const io = new Server(httpServer, {
+  cors: {
+    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    methods: ['GET', 'POST'],
+  },
+});
+
+// Lưu state các phòng game trong memory
+const rooms = {};
+
+io.on('connection', (socket) => {
+  console.log(`Người chơi kết nối: ${socket.id}`);
+
+  // Xử lý tạo/tham gia phòng
+  socket.on('join_room', (roomId) => {
+    socket.join(roomId);
+
+    if (!rooms[roomId]) {
+      // Tạo phòng mới
+      rooms[roomId] = {
+        players: [socket.id],
+        board: Array(9).fill(null),
+        currentTurn: null,
+        status: 'waiting',
+      };
+      socket.emit('room_status', { status: 'waiting', message: 'Đang chờ đối thủ...' });
+    } else if (rooms[roomId].players.length < 2) {
+      // Người thứ 2 vào phòng -> bắt đầu game
+      rooms[roomId].players.push(socket.id);
+      rooms[roomId].currentTurn = rooms[roomId].players[0];
+      rooms[roomId].status = 'playing';
+
+      // Thông báo cho cả phòng
+      io.to(roomId).emit('game_start', {
+        players: rooms[roomId].players,
+        currentTurn: rooms[roomId].currentTurn,
+      });
+    } else {
+      socket.emit('room_full', { message: 'Phòng đã đầy!' });
+    }
+  });
+
+  // Xử lý nước đi
+  socket.on('make_move', ({ roomId, index, symbol }) => {
+    const room = rooms[roomId];
+    if (!room || room.currentTurn !== socket.id) return;
+    if (room.board[index] !== null) return; // Ô đã có quân
+
+    // Cập nhật board
+    room.board[index] = symbol;
+    
+    // Kiểm tra thắng thua
+    const winner = checkWinner(room.board);
+    if (winner) {
+      io.to(roomId).emit('game_over', { winner: socket.id, board: room.board });
+      delete rooms[roomId];
+      return;
+    }
+
+    // Chuyển lượt
+    const nextPlayer = room.players.find((p) => p !== socket.id);
+    room.currentTurn = nextPlayer;
+
+    io.to(roomId).emit('board_update', {
+      board: room.board,
+      currentTurn: nextPlayer,
+    });
+  });
+
+  // Cleanup khi ngắt kết nối
+  socket.on('disconnect', () => {
+    Object.keys(rooms).forEach((roomId) => {
+      const room = rooms[roomId];
+      if (room && room.players.includes(socket.id)) {
+        io.to(roomId).emit('player_left', { message: 'Đối thủ đã rời phòng' });
+        delete rooms[roomId];
+      }
+    });
+  });
+});
+
+// Hàm kiểm tra người thắng
+function checkWinner(board) {
+  const lines = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // Hàng ngang
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Hàng dọc
+    [0, 4, 8], [2, 4, 6],             // Chéo
+  ];
+  return lines.some(([a, b, c]) => board[a] && board[a] === board[b] && board[a] === board[c]);
+}
+
+httpServer.listen(3001, () => console.log('Server chạy tại port 3001'));
+
+        </code>
+      </pre>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/prism.min.js"
+      integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script> -->
+
+    <!-- <p>
+      Email: dungvq@gmail.com<br />
+      Phone: 0909090909<br />
+      Address: 123 Đường ABC, Quận XYZ, TP. HCM
+    </p> -->
+
+    <h1>Đón thư trung thu của Bác Hồ (Phạm Hổ)</h1>
+
+    <p>
+      Theo anh cán bộ<br />
+      Vượt bao đồn thù<br />
+      Thư Bác Hồ đến<br />
+      Đúng rằm Trung thu
+    </p>
+
+    <hr />
+
+    <!-- <img
+      src="https://files.f8.edu.vn/f8-prod/blog_posts/13497/section_0_260325080518_69c334cec76626.07863373.png"
+      alt="Server push thẳng xuống client - không cần polling mỗi giây"
+    />
+
+    <img
+      src="https://files.f8.edu.vn/f8-prod/blog_posts/13497/section_0_260325080518_69c334cec76626.07863373.png"
+      alt="Server push thẳng xuống client - không cần polling mỗi giây"
+    /> -->
+    <!-- <input type="text" /> -->
+    <div>
+      <div>Đây là&nbsp;&nbsp;&nbsp;cấu trúc một trang HTML cơ bản:</div>
+      <pre title="Đây là đoạn code HTML">
+<code class="lang-html">&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta
+      name=&quot;viewport&quot;
+      content=&quot;width=device-width, initial-scale=1.0&quot;
+    /&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+    <hr />
+    <p lang="en" title="Đây là đoạn văn tiếng Anh">
+      Abbreviations are the heart of the Emmet toolkit: these special
+      expressions are parsed in runtime and transformed into structured code
+      block, HTML for example. The abbreviation’s syntax looks like CSS
+      selectors with a few extensions specific to code generation. So every
+      web-developer already knows how to use it.
+    </p>
+
+    <!-- <a style="color: blue; font-size: 30px" href="https://google.com"
+      >Đến Google</a
+    > -->
+    <!-- <a style="color: violet !important" href="https://google.com">Đến Google</a> -->
+
+    <div class="greeting">
+      <p>Hello</p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  </body>
+</html>
