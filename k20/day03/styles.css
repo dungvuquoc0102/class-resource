@@ -1,0 +1,142 @@
+.parent {
+  width: 300px;
+  height: 1000px;
+  background: green;
+}
+
+.parent {
+  .child {
+    width: 100px;
+    height: 100px;
+  }
+  .child-1 {
+    /* &:hover {
+      background: skyblue;
+    } */
+
+    .child-1 {
+      width: 50px;
+      height: 50px;
+      background: red;
+    }
+
+    background: violet;
+    margin: 20px;
+  }
+
+  .child-2 {
+    background: blue;
+    margin: 20px;
+  }
+
+  .child-3 {
+    background: orange;
+    margin: 20px;
+  }
+
+  /* &:hover .child-1 {
+    width: 100px;
+    height: 50px;
+    background: yellow;
+    margin: 20px;
+  } */
+}
+
+/* .parent:hover .child-1 {
+  width: 100px;
+  height: 50px;
+  background: yellow;
+  margin: 20px;
+} */
+
+/* * {
+  color: red;
+} */
+
+#parent {
+  background: white;
+}
+
+body {
+  background: pink;
+}
+
+/* .parent > .child-1 {
+  background: green;
+} */
+
+.parent .child-1,
+.parent .child-2 {
+  border: 1px solid brown;
+}
+
+button {
+  &:active {
+    background: green;
+  }
+}
+
+/* a:link {
+  text-decoration: none;
+} */
+
+a:visited {
+  text-decoration: none;
+}
+
+.parent .child:nth-child(odd) {
+  background: chartreuse;
+}
+
+p::first-line {
+  font-weight: bold;
+}
+
+p::first-letter {
+  font-size: 30px;
+}
+
+/* .parent {
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 100px;
+    background: orangered;
+    margin: 20px;
+  }
+} */
+
+/* ul li::marker,
+ol li::marker {
+  content: "👉";
+  color: red;
+  font-size: 30px;
+} */
+
+p::selection {
+  background: yellow;
+  color: brown;
+}
+
+dialog::backdrop {
+  background: rgba(15, 23, 42, 0.7);
+}
+
+div[class*="child"] {
+  color: violet;
+}
+
+.box-3 ~ .box {
+  color: green;
+}
+li:nth-child(even) {
+  color: red;
+}
+li:nth-child(5) {
+  color: violet;
+}
+ul ul {
+  background-color: gray;
+}
