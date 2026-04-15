@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 3</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Day 3</h1>
+    <dialog id="dlg">
+      <p>Nội dung hộp thoại</p>
+      <form method="dialog"><button>Đóng</button></form>
+    </dialog>
+    <div class="parent" id="parent">
+      <div class="child-1 child">
+        Box child 1
+        <div class="child-1">Box child 1.1</div>
+      </div>
+      <div class="child-2 child">
+        <span>Box child 2</span>
+        <button>Click me</button>
+      </div>
+      <div class="child-3 child">
+        <span>Box child 3</span>
+      </div>
+      <!-- <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+      </ul>
+      <ol>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+      </ol> -->
+      <a href="https://www.google.com">Go to Google.com</a>
+      <p title="paragraph">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, facilis
+        odit quisquam necessitatibus perspiciatis, veritatis deserunt eaque illo
+        tempora cupiditate autem? Dolorum architecto dignissimos asperiores
+        laudantium sed eligendi quia libero!
+      </p>
+      <div class="box box-1">
+        Box 1
+        <div class="box box-2">Box 2</div>
+        <div class="box box-3">
+          Box 3
+          <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>
+              Item 3
+              <ul>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+                <li>Item 4</li>
+                <li>Item 5</li>
+                <li>Item 6</li>
+              </ul>
+            </li>
+            <li>Item 4</li>
+            <li>Item 5</li>
+            <li>Item 6</li>
+          </ul>
+        </div>
+        <div class="box box-4">Box 4</div>
+        <div class="box box-5">Box 5</div>
+      </div>
+    </div>
+  </body>
+</html>
+<!-- Yêu cầu:
+- Chữ của tất cả các box sau box 3 đều có màu green.
+- Tất cả các thẻ li chẵn đều có chữ màu đỏ (red).
+- Tất cả các thẻ li thứ 5 đều có chữ màu tím (violet).
+- Tất cả các thẻ ul nằm trong ul đều có background xám (gray). -->
