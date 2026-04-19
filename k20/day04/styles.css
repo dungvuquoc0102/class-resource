@@ -1,0 +1,53 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.box-1,
+.box-2 {
+  border: 1px solid currentColor;
+}
+
+h1 {
+  font-weight: revert;
+}
+
+.box-1 {
+  width: 200px;
+  height: 100px;
+  /* padding: 30px; */
+  /* border: 5px solid currentColor; */
+  margin-top: 30px;
+  /* outline: 5px solid green; */
+}
+
+.box-2 {
+  color: initial;
+  width: 5em;
+  height: 50px;
+  /* margin-top: 20px; */
+  overflow: hidden;
+}
+
+body .box-1 .box-2 {
+  color: green;
+}
+
+.box-3 {
+  width: 200px;
+  height: 100px;
+  padding: 30px;
+  border: 5px solid blue;
+  margin: 40px;
+  /* outline: 5px solid green; */
+  box-sizing: border-box;
+}
