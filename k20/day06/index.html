@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="/submit" method="POST">
+      <!-- Text input -->
+      <label for="username">Username:</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="Nhập tên"
+        required
+      />
+
+      <!-- Email input -->
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" />
+
+      <!-- Password -->
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" />
+
+      <!-- Checkbox -->
+      <label>
+        <input type="checkbox" name="terms" />
+        Tôi đồng ý với điều khoản
+      </label>
+
+      <!-- Radio button -->
+      <fieldset>
+        <legend>Chọn gói:</legend>
+        <label>
+          <input type="radio" name="plan" value="free" checked />
+          Free
+        </label>
+        <label>
+          <input type="radio" name="plan" value="pro" />
+          Pro
+        </label>
+        <label>
+          <input type="radio" name="plan" value="super" />
+          Super
+        </label>
+      </fieldset>
+
+      <!-- Select dropdown -->
+      <label for="country">Đất nước:</label>
+      <select id="country" name="country">
+        <option value="">-- Chọn --</option>
+        <option value="vn">Việt Nam</option>
+        <option value="th">Thái Lan</option>
+      </select>
+
+      <!-- Textarea -->
+      <label for="message">Tin nhắn:</label>
+      <textarea
+        id="message"
+        name="message"
+        rows="5"
+        placeholder="Nhập tin nhắn..."
+      ></textarea>
+
+      <!-- Submit button -->
+      <button type="submit">Gửi</button>
+      <button type="reset">Xóa</button>
+    </form>
+  </body>
+</html>
