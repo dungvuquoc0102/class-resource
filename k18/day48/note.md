@@ -144,19 +144,19 @@ function StopWatch() {
 | Truy cập giá trị | Trực tiếp biến trong closure        | Qua `.current`                      |
 | Dùng cho         | UI state (count, text, visibility…) | DOM, interval ID, instance lưu trữ  |
 
-### ⚠️ Cẩn thận
+### Lưu ý
 
 ```javascript
 function Example() {
   const ref = useRef(null);
 
-  // ❌ KHÔNG: ref.current thay đổi trong render
+  // ref.current thay đổi trong render
   // (có thể gặp bug khó chẩn đoán)
   if (ref.current === null) {
     ref.current = new DataManager();
   }
 
-  // ✅ CÓ: dùng useCallback/useMemo hoặc lấy lần đầu
+  // Dùng useCallback/useMemo hoặc lấy lần đầu
   useEffect(() => {
     if (ref.current === null) {
       ref.current = new DataManager();
@@ -416,3 +416,222 @@ function getUserData() { ... }
 | **Re-render**    | Có (cập nhật state)                    | Có (cập nhật state)                  | Không                                  |
 | **Cách sử dụng** | `const [val, setVal] = useState(init)` | `const [s, d] = useReducer(r, init)` | `const ref = useRef(init)`             |
 | **Thay đổi**     | Immutable (gọi hàm set)                | Dispatch action → reducer            | Trực tiếp `.current`                   |
+
+---
+
+## Bài tập
+
+### Bài 1: useReducer - Quản lý shopping cart
+
+Tạo một component `ShoppingCart` quản lý giỏ hàng với các action:
+
+- `ADD_ITEM`: Thêm sản phẩm (name, price, quantity)
+- `REMOVE_ITEM`: Xóa sản phẩm theo ID
+- `UPDATE_QUANTITY`: Cập nhật số lượng sản phẩm
+- `CLEAR_CART`: Xóa toàn bộ giỏ hàng
+
+**Yêu cầu:**
+
+- Hiển thị danh sách sản phẩm trong giỏ
+- Hiển thị tổng giá
+- Có nút Add, Remove, Clear, và ô input để thay đổi số lượng
+
+```javascript
+// Gợi ý
+const initialState = { items: [], total: 0 };
+
+function cartReducer(state, action) {
+  switch (action.type) {
+    case "ADD_ITEM":
+      // Cộng thêm item vào state.items
+      // Cập nhật total
+      return { ...state, items: [...state.items, ...], total: ... };
+    // ... các case khác
+  }
+}
+```
+
+### Bài 2: useRef - Video player
+
+Tạo một component `VideoPlayer` với các tính năng:
+
+- Nút Play/Pause
+- Slider để seek video
+- Hiển thị thời gian hiện tại / tổng thời gian
+- Nút Full screen
+
+**Yêu cầu:**
+
+- Dùng `useRef` để lưu DOM reference của `<video>`
+- Không dùng event listener HTML, dùng ref để gọi method (`play()`, `pause()`, `currentTime`)
+
+```javascript
+function VideoPlayer({ src }) {
+  const videoRef = useRef(null);
+
+  const handlePlay = () => {
+    videoRef.current.play();
+  };
+
+  const handlePause = () => {
+    videoRef.current.pause();
+  };
+
+  // ...
+}
+```
+
+### Bài 3: Custom Hook - useDebounce
+
+Tạo custom hook `useDebounce` để **trì hoãn** việc gọi hàm cho đến khi user **dừng gõ** (thường dùng cho search).
+
+**Yêu cầu:**
+
+- Hook nhận 2 params: `value` (giá trị hiện tại) và `delay` (thời gian trì hoãn, ms)
+- Trả về giá trị đã debounce
+- Dùng `useEffect` và `useRef` để lưu timeout
+
+```javascript
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  // ...
+  return debouncedValue;
+}
+
+// Sử dụng
+function SearchUsers() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const debouncedTerm = useDebounce(searchTerm, 500);
+
+  useEffect(() => {
+    console.log("Tìm kiếm:", debouncedTerm); // Chỉ chạy khi dừng gõ 500ms
+  }, [debouncedTerm]);
+
+  return (
+    <input
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      placeholder="Gõ để tìm..."
+    />
+  );
+}
+```
+
+### Bài 4: useReducer + Custom Hook - useLocalStorage Form
+
+Kết hợp `useReducer` và Custom Hook để tạo form login với tính năng:
+
+- Lưu dữ liệu vào `localStorage` tự động
+- Có nút "Restore" để phục hồi data từ localStorage
+- Có nút "Clear" để xóa
+
+**Yêu cầu:**
+
+- Tạo custom hook `useFormWithStorage(key, initialValues)` kết hợp `useReducer`
+- Dùng `useEffect` để lưu vào localStorage mỗi khi form thay đổi
+- Trả về: `{ values, dispatch, restore, clear }`
+
+```javascript
+function useFormWithStorage(storageKey, initialValues) {
+  const [values, dispatch] = useReducer(formReducer, () => {
+    const stored = localStorage.getItem(storageKey);
+    return stored ? JSON.parse(stored) : initialValues;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(storageKey, JSON.stringify(values));
+  }, [values, storageKey]);
+
+  const clear = () => localStorage.removeItem(storageKey);
+  const restore = () => {
+    const stored = localStorage.getItem(storageKey);
+    // Dispatch action để restore
+  };
+
+  return { values, dispatch, clear, restore };
+}
+```
+
+### Bài 5: useRef + useEffect - Focus Management
+
+Tạo component `TodoList` với:
+
+- Input để thêm todo
+- List todos
+- Tự động focus vào input sau khi thêm todo
+- Dùng ref để lưu reference của input
+
+**Yêu cầu:**
+
+- Sau khi nhấn "Add", input phải được focus lại tự động
+- Dùng `useEffect` + `useRef` để gọi `.focus()`
+
+```javascript
+function TodoList() {
+  const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState("");
+  const inputRef = useRef(null);
+
+  const handleAdd = () => {
+    setTodos([...todos, input]);
+    setInput("");
+    // Focus vào input sau khi add
+  };
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [todos]); // Chạy sau mỗi khi todos thay đổi
+
+  return (
+    <div>
+      <input
+        ref={inputRef}
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <button onClick={handleAdd}>Add</button>
+      <ul>
+        {todos.map((todo, i) => (
+          <li key={i}>{todo}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+### Bài 6: Custom Hook - usePrevious
+
+Tạo custom hook `usePrevious` để **lưu giá trị trước đó** của một variable.
+
+**Yêu cầu:**
+
+- Dùng `useRef` để lưu giá trị cũ
+- Dùng `useEffect` để update ref mỗi khi value thay đổi
+- Trả về giá trị trước đó
+
+```javascript
+function usePrevious(value) {
+  const ref = useRef();
+
+  useEffect(() => {
+    ref.current = value; // Lưu giá trị hiện tại vào ref
+  }, [value]);
+
+  return ref.current; // Trả về giá trị lần trước (hoặc undefined lần đầu)
+}
+
+// Sử dụng
+function Counter() {
+  const [count, setCount] = useState(0);
+  const prevCount = usePrevious(count);
+
+  return (
+    <div>
+      <p>Now: {count}</p>
+      <p>Before: {prevCount}</p>
+      <button onClick={() => setCount(count + 1)}>+1</button>
+    </div>
+  );
+}
+```
