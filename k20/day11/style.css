@@ -1,0 +1,15 @@
+.box-1 {
+  width: 300px;
+  height: 500px;
+  background: brown;
+  user-select: none;
+
+  .box-2 {
+    margin: 10px;
+    width: 200px;
+    height: 200px;
+    background: lightgray;
+    /* pointer-events: none; */
+    user-select: all;
+  }
+}
