@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body.dark {
+        background-color: #1f2937;
+        color: white;
+      }
+
+      body.night-shift .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(228, 166, 21, 0.28);
+        pointer-events: none;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+        margin: 50px auto;
+        width: 1200px;
+        max-width: 100%;
+        font-size: 2rem;
+      }
+
+      .box {
+        background-color: brown;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+
+      @media screen and (max-width: 1024px) {
+        .container {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 20px;
+          font-size: 1.5rem;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .container {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="night-shift">
+    <div class="flex flex-col items-center p-7 rounded-2xl">
+      <div class="box">Item 1</div>
+      <div class="box">Item 2</div>
+      <div class="box">Item 3</div>
+      <div class="box">Item 4</div>
+    </div>
+
+    <button onclick="toggleTheme()">Toggle Dark Mode</button>
+    <script>
+      const theme = localStorage.getItem("theme");
+      if (theme === "dark") {
+        document.body.classList.add("dark");
+      }
+      function toggleTheme() {
+        document.body.classList.toggle("dark");
+        if (document.body.classList.contains("dark")) {
+          localStorage.setItem("theme", "dark");
+        } else {
+          localStorage.removeItem("theme");
+        }
+      }
+    </script>
+  </body>
+  <div class="overlay"></div>
+</html>
