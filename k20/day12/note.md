@@ -3,7 +3,6 @@
 1. Giới thiệu
 2. Cài đặt
 3. Các khái niệm chính
-4. Thực hành
 
 ## 1. GIỚI THIỆU
 
@@ -106,12 +105,12 @@ _Simple selectors:_
 
 _Pseudo-classes:_
 
-- `:hover` -> `hover:` prefix: `hover:bg-blue-500`
-- `:focus` -> `focus:` prefix: `focus:outline-none`
-- `:active` -> `active:` prefix: `active:scale-95`
-- `:disabled` -> `disabled:` prefix: `disabled:opacity-50`
-- `:checked` -> `checked:` prefix: `checked:bg-blue-500`
-- `:required` -> `required:` prefix: `required:border-red-500`
+- `:hover` -> `hover:` variant: `hover:bg-blue-500`
+- `:focus` -> `focus:` variant: `focus:outline-none`
+- `:active` -> `active:` variant: `active:scale-95`
+- `:disabled` -> `disabled:` variant: `disabled:opacity-50`
+- `:checked` -> `checked:` variant: `checked:bg-blue-500`
+- `:required` -> `required:` variant: `required:border-red-500`
 - `:invalid` / `:valid` -> `invalid:` / `valid:`
 - `:placeholder-shown` -> `placeholder-shown:`
 - `:focus-within` -> `focus-within:`
