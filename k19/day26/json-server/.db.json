@@ -1,0 +1,59 @@
+{
+  "posts": [
+    {
+      "id": "8044",
+      "title": "HTML",
+      "author": "Nam"
+    },
+    {
+      "id": "aa8f",
+      "title": "CSS",
+      "author": "Minh"
+    },
+    {
+      "id": "f16f",
+      "title": "JS",
+      "author": "Hùng"
+    },
+    {
+      "id": "e0f6",
+      "title": "React",
+      "author": "Huy"
+    },
+    {
+      "id": "9ab8",
+      "title": "Next",
+      "author": "ABC"
+    },
+    {
+      "id": "acec",
+      "title": "Next2",
+      "author": "ABC"
+    },
+    {
+      "id": "0d6e",
+      "title": "Next3",
+      "author": "ABC"
+    },
+    {
+      "id": "942d",
+      "title": "Next4",
+      "author": "ABC"
+    },
+    {
+      "id": "54cf",
+      "title": "Next5",
+      "author": "ABC"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
