@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 26</title>
+    <style>
+      .post-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 8px;
+      }
+      #post-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Day 26</h1>
+    <div>
+      <input class="title" type="text" placeholder="Title..." />
+      <input class="author" type="text" placeholder="Author..." />
+      <button id="add-post">Add Post</button>
+    </div>
+    <div>
+      <input id="search-input" type="text" placeholder="Search..." />
+      <button id="search-post">Search</button>
+    </div>
+    <h2>Post list:</h2>
+    <ul id="post-list"></ul>
+    <script src="script.js"></script>
+  </body>
+</html>
