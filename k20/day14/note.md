@@ -1,4 +1,4 @@
-# Day 14: Câu điều kiện, Vòng lặp, String, Array
+# Day 14: Typeof, Toán tử và biểu thức, Truthy/Falsy, If/else, Switch case, Vòng lặp
 
 ## Kiểu dữ liệu trong Javascript
 
