@@ -1,11 +1,11 @@
-# Day 13: Javascript cơ bản — Biến, Kiểu dữ liệu, Toán tử
+# Day 13: Javascript - Biến, Kiểu dữ liệu, Toán tử
 
 ## Javascript: Ngôn ngữ lập trình web
 
 ### Javascript là gì?
 
 - Javascript (JS) là ngôn ngữ lập trình kịch bản, thông dịch, chạy trên trình duyệt và cả server (Node.js).
-- Vai trò: làm cho website có hành vi — xử lý sự kiện, thay đổi nội dung, gọi API…
+- Vai trò: làm cho website có hành vi - xử lý sự kiện, thay đổi nội dung, gọi API…
 - HTML là cấu trúc, CSS là trình bày, JS là hành vi.
 
 ```
@@ -18,7 +18,7 @@ JS   -> Tương tác / Xử lý
 
 | Đặc điểm        | Giải thích ngắn                                        |
 | --------------- | ------------------------------------------------------ |
-| Thông dịch      | Không cần biên dịch — trình duyệt đọc và chạy luôn     |
+| Thông dịch      | Không cần biên dịch - trình duyệt đọc và chạy luôn     |
 | Động (dynamic)  | Kiểu dữ liệu tự động suy luận, không cần khai báo kiểu |
 | Đa năng         | Frontend + Backend + Mobile + Desktop                  |
 | Hướng đối tượng | Hỗ trợ prototype, class, object literal                |
@@ -35,7 +35,7 @@ alert("Chào bạn!");
 
 ## 3 cách tích hợp JS vào web
 
-### 1. Inline — Viết trực tiếp trong thẻ HTML
+### 1. Inline - Viết trực tiếp trong thẻ HTML
 
 Dùng thuộc tính sự kiện như `onclick`, `onmouseover`…
 
@@ -43,9 +43,9 @@ Dùng thuộc tính sự kiện như `onclick`, `onmouseover`…
 <button onclick="alert('Bạn vừa click!')">Nhấn tôi</button>
 ```
 
-Nhược điểm: khó bảo trì, trộn lẫn HTML và JS — ít dùng trong thực tế.
+Nhược điểm: khó bảo trì, trộn lẫn HTML và JS - ít dùng trong thực tế.
 
-### 2. Internal — Thẻ `<script>` trong file HTML
+### 2. Internal - Thẻ `<script>` trong file HTML
 
 Viết JS trong thẻ `<script>` ở `<head>` hoặc cuối `<body>`.
 
@@ -70,7 +70,7 @@ Viết JS trong thẻ `<script>` ở `<head>` hoặc cuối `<body>`.
 
 Lưu ý vị trí: để `<script>` ở cuối `body` để đảm bảo DOM đã load trước khi JS chạy, hoặc dùng thuộc tính `defer`.
 
-### 3. External — File `.js` riêng
+### 3. External - File `.js` riêng
 
 Tạo file `script.js`, sau đó nhúng vào HTML:
 
@@ -81,7 +81,7 @@ Tạo file `script.js`, sau đó nhúng vào HTML:
 script.js:
 
 ```js
-console.log("External JS — tách biệt hoàn toàn!");
+console.log("External JS - tách biệt hoàn toàn!");
 ```
 
 #### So sánh ba cách
@@ -100,7 +100,7 @@ console.log("External JS — tách biệt hoàn toàn!");
 
 ### Thuộc tính `defer` và `async`
 
-Khi dùng `<script src="...">` ở `<head>`, trình duyệt phải tải và chạy JS xong mới render tiếp — gây chậm.
+Khi dùng `<script src="...">` ở `<head>`, trình duyệt phải tải và chạy JS xong mới render tiếp - gây chậm.
 
 | Thuộc tính | Hành vi                                                          |
 | ---------- | ---------------------------------------------------------------- |
@@ -138,7 +138,7 @@ JS cung cấp ba từ khóa: `var`, `let`, `const`.
 | `let`   | ✅ Có           | Block scope `{}` | ✅ Có (TDZ)                           |
 | `const` | ❌ Không        | Block scope `{}` | ✅ Có (TDZ)                           |
 
-#### `let` — khai báo có thể gán lại, block scope
+#### `let` - khai báo có thể gán lại, block scope
 
 ```js
 let age = 25;
@@ -148,23 +148,23 @@ if (true) {
   let x = 10;
   console.log(x); // 10
 }
-// console.log(x); // ❌ ReferenceError — x không tồn tại ngoài block
+// console.log(x); // ❌ ReferenceError - x không tồn tại ngoài block
 ```
 
-#### `const` — hằng số, không thể gán lại, block scope
+#### `const` - hằng số, không thể gán lại, block scope
 
 ```js
 const PI = 3.14;
-// PI = 3.1416; // ❌ TypeError — không gán lại được
+// PI = 3.1416; // ❌ TypeError - không gán lại được
 
 const user = { name: "An" };
-user.name = "Bình"; // ✅ được — vì const chỉ giữ tham chiếu, object vẫn thay đổi được
+user.name = "Bình"; // ✅ được - vì const chỉ giữ tham chiếu, object vẫn thay đổi được
 // user = {};        // ❌ không gán lại biến được
 ```
 
 > `const` không có nghĩa là giá trị bất biến, chỉ có nghĩa là tham chiếu không đổi.
 
-#### `var` — cách cũ (tránh dùng)
+#### `var` - cách cũ (tránh dùng)
 
 ```js
 var name = "An";
@@ -173,7 +173,7 @@ name = "Bình"; // ✅ gán lại
 if (true) {
   var z = 999;
 }
-console.log(z); // 999 — var "lọt" ra ngoài block!
+console.log(z); // 999 - var "lọt" ra ngoài block!
 ```
 
 `var` có function scope, không có block scope, và dễ gây lỗi.
@@ -205,7 +205,7 @@ function demo() {
   }
 
   console.log(globalVar); // ✅
-  // console.log(blockVar);  // ❌ — blockVar chỉ trong block
+  // console.log(blockVar);  // ❌ - blockVar chỉ trong block
 }
 
 demo();
@@ -214,14 +214,14 @@ demo();
 ### Hoisting và TDZ (Temporal Dead Zone)
 
 - Hoisting: khai báo `var`, `let`, `const`, `function` được "kéo lên" đầu scope.
-- `var` được hoisting và khởi tạo `undefined` — có thể truy cập trước khi khai báo.
-- `let`/`const` được hoisting nhưng không được khởi tạo — truy cập trước dòng khai báo sẽ gặp TDZ -> `ReferenceError`.
+- `var` được hoisting và khởi tạo `undefined` - có thể truy cập trước khi khai báo.
+- `let`/`const` được hoisting nhưng không được khởi tạo - truy cập trước dòng khai báo sẽ gặp TDZ -> `ReferenceError`.
 
 ```js
 console.log(a); // undefined (var được hoisting + khởi tạo undefined)
 var a = 5;
 
-// console.log(b); // ❌ ReferenceError — TDZ
+// console.log(b); // ❌ ReferenceError - TDZ
 let b = 10;
 ```
 
@@ -242,7 +242,7 @@ Các cách đặt tên:
 
 JS có 8 kiểu dữ liệu (7 kiểu nguyên thuỷ + 1 kiểu tham chiếu).
 
-### 1. Kiểu nguyên thuỷ (Primitive)
+### Kiểu nguyên thuỷ (Primitive)
 
 | Kiểu        | Ví dụ                   | typeof           |
 | ----------- | ----------------------- | ---------------- |
@@ -269,8 +269,8 @@ let notANumber = "abc" * 2; // NaN (Not a Number)
 ```js
 let single = "Dùng nháy đơn";
 let double = "Dùng nháy kép";
-let template = `Template literal — có thể viết ${single}`;
-// Kết quả: "Template literal — có thể viết Dùng nháy đơn"
+let template = `Template literal - có thể viết ${single}`;
+// Kết quả: "Template literal - có thể viết Dùng nháy đơn"
 
 let multiLine = `
   Dòng 1
@@ -278,7 +278,7 @@ let multiLine = `
 `;
 ```
 
-> Template literal (`` ` ` ``) cho phép nội suy (`${...}`) và xuống dòng — ưu tiên dùng.
+> Template literal (`` ` ` ``) cho phép nội suy (`${...}`) và xuống dòng - ưu tiên dùng.
 
 #### `boolean`
 
@@ -291,21 +291,21 @@ let isEven = 10 % 2 === 0; // true
 #### `undefined` vs `null`
 
 ```js
-let a; // undefined — chưa gán giá trị
-let b = null; // null — cố tình "không có gì"
+let a; // undefined - chưa gán giá trị
+let b = null; // null - cố tình "không có gì"
 ```
 
 | Giá trị     | Ý nghĩa                           |
 | ----------- | --------------------------------- |
 | `undefined` | Biến được khai báo nhưng chưa gán |
-| `null`      | "Không có giá trị" — chủ động gán |
+| `null`      | "Không có giá trị" - chủ động gán |
 
 > Thực tế:
 
 - Ưu tiên null cho giá trị rỗng có chủ đích (rất phổ biến trong code hiện đại).
 - Dùng undefined chủ yếu để kiểm tra giá trị mặc định hoặc thuộc tính không tồn tại.
 
-### 2. Kiểu tham chiếu (Reference) — Object
+### Kiểu tham chiếu (Reference) - Object
 
 ```js
 // Object literal
@@ -324,14 +324,20 @@ function greet() {
 }
 ```
 
-### `typeof` — kiểm tra kiểu dữ liệu
+---
+
+Hết buổi 13
+
+---
+
+### `typeof` - kiểm tra kiểu dữ liệu
 
 ```js
 console.log(typeof 42); // "number"
 console.log(typeof "JS"); // "string"
 console.log(typeof true); // "boolean"
 console.log(typeof undefined); // "undefined"
-console.log(typeof null); // "object" (lỗi lịch sử — null là primitive)
+console.log(typeof null); // "object" (lỗi lịch sử - null là primitive)
 console.log(typeof {}); // "object"
 console.log(typeof []); // "object"
 console.log(typeof function () {}); // "function"
@@ -340,17 +346,17 @@ console.log(typeof function () {}); // "function"
 ### So sánh Primitive và Reference
 
 ```js
-// Primitive — so sánh giá trị
+// Primitive - so sánh giá trị
 let x = 10;
 let y = 10;
 console.log(x === y); // true
 
-// Reference — so sánh tham chiếu (địa chỉ vùng nhớ)
+// Reference - so sánh tham chiếu (địa chỉ vùng nhớ)
 let objA = { value: 10 };
 let objB = { value: 10 };
 let objC = objA;
-console.log(objA === objB); // false — khác vùng nhớ
-console.log(objA === objC); // true — cùng tham chiếu
+console.log(objA === objB); // false - khác vùng nhớ
+console.log(objA === objC); // true - cùng tham chiếu
 ```
 
 | Đặc điểm | Primitive       | Reference (Object)        |
@@ -448,16 +454,16 @@ console.log(!isLoggedIn); // false
 #### Short-circuit evaluation
 
 ```js
-// && — nếu vế trái false thì không đánh giá vế phải
+// && - nếu vế trái false thì không đánh giá vế phải
 false && console.log("Không chạy"); // không in gì
 
-// || — nếu vế trái truthy thì không đánh giá vế phải
+// || - nếu vế trái truthy thì không đánh giá vế phải
 true || console.log("Không chạy");
 
 // Dùng || để gán giá trị mặc định (cách cũ)
 let username = inputValue || "Khách";
 
-// Dùng ?? — chỉ fallback khi null/undefined
+// Dùng ?? - chỉ fallback khi null/undefined
 let displayName = userInput ?? "Mặc định";
 ```
 
@@ -498,13 +504,13 @@ console.log(status); // "Trưởng thành"
 // }
 ```
 
-### Ép kiểu (Type coercion) — ngầm định
+### Ép kiểu (Type coercion) - ngầm định
 
 JS tự động ép kiểu trong một số tình huống:
 
 ```js
 console.log("5" - 2); // 3  (string -> number)
-console.log("5" + 2); // "52" (number -> string — + ưu tiên nối chuỗi)
+console.log("5" + 2); // "52" (number -> string - + ưu tiên nối chuỗi)
 console.log("5" * "2"); // 10 (cả hai sang number)
 console.log(+"5"); // 5 (unary + ép sang number)
 ```
@@ -540,11 +546,3 @@ console.log(Boolean("abc")); // true
 | `null`            | Mọi object (kể cả `[]`, `{}`) |
 | `undefined`       | Function                      |
 | `NaN`             |                               |
-
-## Tóm tắt buổi học
-
-1. JS là ngôn ngữ lập trình web — thông dịch, động, chạy trên browser/server.
-2. 3 cách tích hợp: Inline (ít dùng), Internal (`<script>` trong HTML), External (file `.js` riêng — khuyến nghị).
-3. Biến: `let` (block scope, gán lại được), `const` (block scope, không gán lại), tránh `var`. Khái niệm hoisting và TDZ.
-4. Kiểu dữ liệu: 7 primitive (`number`, `string`, `boolean`, `undefined`, `null`, `bigint`, `symbol`) + Object. Phân biệt primitive (so sánh giá trị) và reference (so sánh tham chiếu).
-5. Toán tử: số học (`+`, `-`, `*`, `/`, `%`, ``), gán (`=`, `+=`, …), so sánh (luôn dùng `===`/`!==`), logic (`&&`, `||`, `!`, `??`), ternary (`? :`), chuỗi (`+`). Ép kiểu ngầm định và tường minh, truthy/falsy.
