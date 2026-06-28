@@ -1,4 +1,4 @@
-# Day 16: String, Number, Array trong JavaScript
+# Day 16: Array, String, Number trong JavaScript
 
 ## Array: Duyệt và thao tác mảng
 
