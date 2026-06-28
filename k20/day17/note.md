@@ -117,6 +117,10 @@ let y = new String("John");
 
 ---
 
+Hết buổi 17
+
+---
+
 ## PHẦN 2 - NUMBER (Số)
 
 ### 2.1. JavaScript chỉ có MỘT kiểu số
