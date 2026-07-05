@@ -126,13 +126,13 @@
 //   },
 // )();
 
-const prices = [100, 200, 300];
-const total = prices.reduce((acc, cur) => {
-  // Logic
-  return prev + curr;
-}, 0);
+// const prices = [100, 200, 300];
+// const total = prices.reduce((acc, cur) => {
+//   // Logic
+//   return prev + curr;
+// }, 0);
 
-console.log(total);
+// console.log(total);
 
 // const order = [
 //   {
@@ -177,3 +177,25 @@ console.log(total);
 // // Kết quả: 600
 
 // console.log(total);
+
+// console.log(sum(1, 2, 3));
+
+// const sum = (a, b, ...args) => {
+//   let sum = 0;
+//   for (let arg of args) {
+//     sum += arg;
+//   }
+//   return sum;
+// };
+
+// console.log(num2); // TDZ
+
+// var num1 = 10;
+// let num2 = 20;
+// const num3 = 30;
+
+// function calcCircleArea(r) {
+//   return Math.PI * r ** 2;
+// }
+
+// const calcCircleArea = (r) => Math.PI * r ** 2;
