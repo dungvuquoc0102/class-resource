@@ -166,7 +166,7 @@
 // }
 // sum(1, 2);
 
-console.log(this);
+// console.log(this);
 
 // ## 5. Constructors
 
@@ -210,3 +210,39 @@ console.log(this);
 // console.log(user2.learning);
 
 // const string = new String("Hello");
+
+// Ex 6
+
+// const dog = {
+//   name: "Milo",
+//   bark() {
+//     console.log(`Woof! I'm ${this.name}`);
+//   },
+// };
+// dog.bark();
+
+// Ex 9
+// function Person(name, age) {
+//   this.name = name;
+//   this.age = age;
+// }
+
+// const p1 = new Person("An", 20);
+// const p2 = new Person("Bình", 22);
+
+// [p1, p2].forEach((p) => console.log(`Bạn ${p.name} ${p.age} tuổi`));
+
+// Ex 10
+function Animal(name, sound) {
+  this.name = name;
+  this.sound = sound;
+  this.makeSound = function () {
+    console.log(`${this.name} says ${this.sound}`);
+  };
+}
+
+const cat = new Animal("Mèo", "Meo");
+const dog = new Animal("Chó", "Gâu");
+
+cat.makeSound(); // Output: Mèo says Meo
+dog.makeSound(); // Output: Chó says Gâu
