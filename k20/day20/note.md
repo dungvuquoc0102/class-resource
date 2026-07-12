@@ -2,6 +2,13 @@
 
 ## Definitions
 
+- Object literal
+- new Object()
+- Constructor function
+- Object.assign(target, ...sources)
+- Object.create(proto)
+- Object.fromEntries(entries)
+
 ## this
 
 - In object method
@@ -18,412 +25,211 @@
 - Getter
 - Setter
 
-## Object object
-
-- Object.assign
-- Object.create
-- Object.fromEntries
-- Object.groupBy
-
-- Object.defineProperty
-- Object.defineProperties
-- Object.getOwnPropertyDescriptor
-- Object.getOwnPropertyDescriptors
-- Object.getOwnPropertyNames
-- Object.getPrototypeOf
-
-- Object.preventExtensions
-- Object.isExtensible
-- Object.seal
-- Object.isSealed
-- Object.freeze
-- Object.isFrozen
-
-## Prototypes
-
-- Intro
-- Prototype chain
-- Object.setPrototypeOf(obj, proto)
-- hasOwnProperty()
-- Object.hasOwn(obj, prop)
-
-## Iterable
-
-- Intro
-- [Symbol.iterator]
-- next()
-- for...of, spread operator, Array.from()
-
 ## Exercises
 
-### Phần 1 — Trắc nghiệm / Lý thuyết
+markdown# Day 20: Advanced Objects
 
-1. (Definitions) Có mấy cách tạo object trong Javascript? Kể tên từng cách.
+## 1. Definitions
 
-2. (this — arrow function) Đoạn code sau in ra gì? Giải thích tại sao.
+- Object literal
+- new Object()
+- Constructor function
+- Object.assign(target, ...sources)
+- Object.create(proto)
+- Object.fromEntries(entries)
 
-   ```js
-   const obj = {
-     name: "Test",
-     regular: function () {
-       console.log(this.name);
-     },
-     arrow: () => {
-       console.log(this.name);
-     },
-   };
-   obj.regular();
-   obj.arrow();
-   ```
+## 2. This
 
-3. (Get / Set) Getter và Setter dùng để làm gì? Kể tên ít nhất một tình huống nên dùng getter thay vì property thường.
+- In arrow function
+- Bind, call, apply
+- In constructor
+- In class
+- In event listener
 
-4. (Object methods) Giải thích sự khác nhau giữa `Object.freeze(obj)` và `Object.seal(obj)`.
+## 3. Get / Set
 
-5. (Prototypes) `Object.getPrototypeOf(obj)` và `ConstructorFunction.prototype` có giống nhau không? Giải thích.
+- Getter
+- Setter
 
-6. (Iterable) `for...of` và `for...in` khác nhau như thế nào? Cho ví dụ mỗi loại dùng với Array và Object.
+## 4. Exercises
 
-### Phần 2 — Tìm lỗi & sửa
-
-Mỗi đoạn code yêu cầu: (a) chỉ ra vị trí lỗi, (b) giải thích cơ chế gây lỗi, (c) sửa lại.
-
-1. (this + arrow)
-
-   ```js
-   const obj = {
-     name: "Học viên",
-     greet: () => {
-       console.log("Xin chào " + this.name);
-     },
-   };
-   obj.greet(); // Xin chào undefined
-   ```
-
-2. (Get / Set)
-
-   ```js
-   const user = {
-     firstName: "Nguyễn",
-     lastName: "Văn A",
-     get fullName() {
-       return firstName + " " + lastName;
-     },
-   };
-   console.log(user.fullName);
-   ```
-
-3. (Object.freeze)
-
-   ```js
-   const config = Object.freeze({ theme: "dark", version: 1 });
-   config.theme = "light";
-   config.newKey = "value";
-   console.log(config); // { theme: "dark", version: 1 }
-   ```
-
-4. (Prototype assignment)
-
-   ```js
-   function Animal(name) {
-     this.name = name;
-   }
-   Animal.prototype.sayHi = function () {
-     console.log("Hi from " + this.name);
-   };
-
-   const cat = new Animal("Mèo");
-   Animal.prototype = {
-     sayHi: function () {
-       console.log("New hi");
-     },
-   };
-   const dog = new Animal("Chó");
-
-   cat.sayHi(); // ?
-   dog.sayHi(); // ?
-   ```
-
-5. (Iterable)
-
-   ```js
-   const obj = { a: 1, b: 2, c: 3 };
-   for (const x of obj) {
-     console.log(x);
-   }
-   ```
-
-### Phần 3 — Viết code atomic
-
-1. (arrow + this + setTimeout) Viết object `counter` có `count = 0`, method `up()` dùng `setTimeout` với arrow function để sau 1 giây tăng `count` lên 1 và in ra giá trị mới. Gọi `counter.up()`.
-
-2. (bind / call / apply) Viết hàm `introduce(greeting, punctuation)` in ra `"${greeting}, tôi là ${this.name}${punctuation}"`. Dùng `call` để gọi với context `{ name: "An" }`, greeting `"Xin chào"`, punctuation `"!"`.
-
-3. (Getter / Setter) Viết object `thermometer` có `_celsius = 0`, getter `fahrenheit` trả về `_celsius * 9/5 + 32`, setter `fahrenheit(value)` chuyển đổi ngược lại và gán `_celsius`. Test: gán `fahrenheit = 212` rồi in `_celsius`.
-
-4. (Object.assign — merge config) Viết code: `defaultConfig = { theme: "light", lang: "vi", showSidebar: true }`, `userConfig = { theme: "dark", lang: "en" }`. Dùng `Object.assign` tạo `finalConfig` với ưu tiên userConfig. In ra kiểm tra.
-
-5. (Object.create) Tạo `parent = { species: "mammal", sound: "..." }`. Dùng `Object.create(parent)` tạo `child = { name: "Mèo" }`. In `child.species` và `child.name`. Kiểm tra `child.hasOwnProperty("species")`.
-
-6. (Object.freeze — immutable constant) Định nghĩa `COLORS = Object.freeze({ primary: "#3498db", danger: "#e74c3c", success: "#2ecc71" })`. Thử gán `COLORS.primary = "#000"` và in `COLORS.primary`. Giải thích kết quả.
-
-7. (Prototype — thêm method dùng chung) Viết hàm tạo `Vehicle(type)` gán `this.type = type`. Thêm method `describe()` vào `Vehicle.prototype` in ra `"Đây là phương tiện: " + this.type`. Tạo `car = new Vehicle("Ô tô")` và `bike = new Vehicle("Xe máy")`. Gọi `describe()` cho cả 2. Sau đó thêm method `honk()` vào prototype in ra `"Bíp bíp!"` và gọi `car.honk()`.
-
-8. (Custom iterable — range) Tạo object `range = { from: 1, to: 5 }` có `[Symbol.iterator]` trả về iterator đếm từ `from` đến `to`. Dùng `for...of` in ra các số.
-
-9. (Array.from + iterable) Cho `const str = "Hello"`. Dùng `Array.from(str)` chuyển thành mảng ký tự. Dùng `for...of` in từng ký tự kèm chỉ số (dùng `entries()` của mảng).
-
-### Phần 4 — Bài tổng hợp / Capstone
-
-**Product Manager — Quản lý danh sách sản phẩm**
-
-Bước 1: Tạo hàm tạo `Product(name, price, category)` gán các property tương ứng.
-
-Bước 2: Thêm method `getInfo()` vào `Product.prototype` in ra `"${name} - ${category} - ${price}đ"`.
-
-Bước 3: Định nghĩa getter `discountedPrice` cho prototype (dùng `Object.defineProperty` hoặc getter trong class-like pattern) trả về `price * 0.9`.
-
-Bước 4: Tạo mảng `inventory` chứa 3 sản phẩm:
-
-- Laptop (15000000, Electronics)
-- Áo thun (200000, Fashion)
-- Cà phê (50000, Food)
-
-Bước 5: Dùng `Object.assign({}, product, { quantity: 10 })` để tạo bản sao mỗi sản phẩm có thêm `quantity`. Lưu vào mảng `inventoryWithQuantity`.
-
-Bước 6: Dùng `Object.freeze` trên từng sản phẩm của `inventory` gốc. Thử gán `inventory[0].price = 0` và kiểm tra xem giá có đổi không.
-
-Bước 7: Dùng `for...of` duyệt `inventory` gốc và in `getInfo()` của từng sản phẩm.
-
-Bước 8 (Mở rộng): Viết hàm `filterByCategory(products, category)` dùng `Array.from` và `Array.prototype.filter` để trả về mảng các sản phẩm thuộc danh mục `category`. Kiểm tra với category `"Fashion"`.
-
-### Đáp án
-
-#### Phần 1 — Trắc nghiệm / Lý thuyết
-
-1. 4 cách:
-   - Object literal: `const obj = {}`
-   - `new Object()`: `const obj = new Object()`
-   - Constructor function: `function T() {}` + `new T()`
-   - `Object.create(proto)`: tạo object với prototype chỉ định
-
-2. `obj.regular()` in `"Test"` — `this` trỏ đến `obj` vì regular function lấy `this` từ caller.
-   `obj.arrow()` in giá trị của `this.name` ở scope ngoài object (global `name` hoặc `undefined` ở module) — arrow function không có `this` riêng, nó kế thừa `this` từ lexical scope (nơi nó được định nghĩa).
-
-3. Getter cho phép tính toán giá trị khi đọc, Setter cho phép validation/xử lý khi gán. Tình huống nên dùng: tính `fullName` từ `firstName` + `lastName`, hoặc kiểm tra giá trị hợp lệ trước khi gán (VD: nhiệt độ không dưới -273).
-
-4. `Object.freeze(obj)`: không thêm, không sửa, không xóa property nào. `Object.seal(obj)`: không thêm, không xóa, nhưng vẫn sửa được giá trị property existing. `Object.isFrozen` vs `Object.isSealed`.
-
-5. Không hoàn toàn giống:
-   - `Object.getPrototypeOf(obj)` tham chiếu đến prototype thực tế của object (thường là `ConstructorFunction.prototype`).
-   - `ConstructorFunction.prototype` là object prototype mà các instance mới (tạo bằng `new`) sẽ được gán làm prototype.
-   - Nếu gán lại `ConstructorFunction.prototype = {...}` sau khi đã tạo instance, instance cũ vẫn dùng prototype cũ.
-
-6. `for...of` duyệt **values** của iterable (Array, String, Map...). `for...in` duyệt **keys** (property names) của object — kể cả key kế thừa từ prototype. Với Array: `for...of` cho value, `for...in` cho index (string). Object thì không dùng `for...of` được (không iterable), `for...in` duyệt tên key.
-
-#### Phần 2 — Tìm lỗi & sửa
-
-1. (a) Lỗi ở dòng `greet: () => { console.log("Xin chào " + this.name); }`.
-   (b) Arrow function không có `this` riêng. `this` trong arrow lấy từ lexical scope bên ngoài — ở đây là global/module, không phải `obj`. Nên `this.name` là `undefined`.
-   (c) Sửa: dùng regular function.
-
-   ```js
-   greet: function () { console.log("Xin chào " + this.name); }
-   // hoặc
-   greet() { console.log("Xin chào " + this.name); }
-   ```
-
-2. (a) Lỗi ở dòng `return firstName + " " + lastName;` — thiếu `this.`.
-   (b) `firstName` và `lastName` là property của object `user`, cần truy cập qua `this.firstName` và `this.lastName`. Viết không có `this` thì JS tìm biến cùng tên trong scope (không tìm thấy → ReferenceError hoặc undefined ở strict mode).
-   (c) Sửa:
-
-   ```js
-   get fullName() { return this.firstName + " " + this.lastName; }
-   ```
-
-3. (a) Lỗi ở dòng `config.theme = "light"` và `config.newKey = "value"`.
-   (b) `Object.freeze` làm object không thể thêm, sửa, xóa property. Ở strict mode sẽ throw TypeError; ở non-strict thì silently fail — giá trị vẫn giữ nguyên.
-   (c) Muốn cho phép thay đổi, không dùng freeze, hoặc tạo object mới:
-
-   ```js
-   const config = { theme: "dark", version: 1 };
-   // hoặc dùng spread
-   const newConfig = { ...config, theme: "light" };
-   ```
-
-4. (a) `cat.sayHi()` in `"Hi from Mèo"`. `dog.sayHi()` in `"New hi"`.
-   (b) `Animal.prototype` được gán lại bằng object mới **sau khi** `cat` đã tạo. `cat.__proto__` vẫn tham chiếu prototype cũ (có `sayHi` cũ). `dog` được tạo **sau khi** gán lại nên `dog.__proto__` tham chiếu prototype mới.
-   (c) Gán lại `.prototype` không ảnh hưởng đến instance đã tồn tại — mỗi instance giữ tham chiếu đến prototype lúc nó được tạo.
-
-5. (a) `TypeError: obj is not iterable`.
-   (b) Object literal không implement iterable protocol (không có `Symbol.iterator`). `for...of` chỉ hoạt động với iterable.
-   (c) Sửa: dùng `for...in` để duyệt key, hoặc dùng `Object.keys/values/entries`:
-   ```js
-   for (const key in obj) console.log(obj[key]);
-   // hoặc
-   for (const [k, v] of Object.entries(obj)) console.log(v);
-   ```
-
-#### Phần 3 — Viết code atomic
-
-_Gợi ý lời giải — không phải đáp án duy nhất._
-
-1. ```js
-   const counter = {
-     count: 0,
-     up() {
-       setTimeout(() => {
-         this.count++;
-         console.log(this.count);
-       }, 1000);
-     },
-   };
-   counter.up();
-   ```
-
-2. ```js
-   function introduce(greeting, punctuation) {
-     console.log(`${greeting}, tôi là ${this.name}${punctuation}`);
-   }
-   introduce.call({ name: "An" }, "Xin chào", "!");
-   // Hoặc dùng apply: introduce.apply({ name: "An" }, ["Xin chào", "!"]);
-   ```
-
-3. ```js
-   const thermometer = {
-     _celsius: 0,
-     get fahrenheit() {
-       return (this._celsius * 9) / 5 + 32;
-     },
-     set fahrenheit(value) {
-       this._celsius = ((value - 32) * 5) / 9;
-     },
-   };
-   thermometer.fahrenheit = 212;
-   console.log(thermometer._celsius); // 100
-   ```
-
-4. ```js
-   const defaultConfig = { theme: "light", lang: "vi", showSidebar: true };
-   const userConfig = { theme: "dark", lang: "en" };
-   const finalConfig = Object.assign({}, defaultConfig, userConfig);
-   console.log(finalConfig); // { theme: "dark", lang: "en", showSidebar: true }
-   ```
-
-5. ```js
-   const parent = { species: "mammal", sound: "..." };
-   const child = Object.create(parent);
-   child.name = "Mèo";
-   console.log(child.species); // "mammal" (kế thừa)
-   console.log(child.name); // "Mèo" (riêng)
-   console.log(child.hasOwnProperty("species")); // false
-   ```
-
-6. ```js
-   const COLORS = Object.freeze({
-     primary: "#3498db",
-     danger: "#e74c3c",
-     success: "#2ecc71",
-   });
-   COLORS.primary = "#000";
-   console.log(COLORS.primary); // "#3498db" — không đổi, silently fail
-   ```
-
-7. ```js
-   function Vehicle(type) {
-     this.type = type;
-   }
-   Vehicle.prototype.describe = function () {
-     console.log("Đây là phương tiện: " + this.type);
-   };
-   const car = new Vehicle("Ô tô");
-   const bike = new Vehicle("Xe máy");
-   car.describe();
-   bike.describe();
-   Vehicle.prototype.honk = function () {
-     console.log("Bíp bíp!");
-   };
-   car.honk();
-   ```
-
-8. ```js
-   const range = {
-     from: 1,
-     to: 5,
-     [Symbol.iterator]() {
-       let current = this.from;
-       const end = this.to;
-       return {
-         next() {
-           if (current <= end) return { value: current++, done: false };
-           return { done: true };
-         },
-       };
-     },
-   };
-   for (const n of range) console.log(n); // 1 2 3 4 5
-   ```
-
-9. ```js
-   const str = "Hello";
-   const arr = Array.from(str);
-   console.log(arr); // ["H", "e", "l", "l", "o"]
-   for (const [i, ch] of arr.entries()) {
-     console.log(i, ch);
-   }
-   ```
-
-#### Phần 4 — Bài tổng hợp / Capstone
-
-_Gợi ý lời giải — không phải đáp án duy nhất._
+- Exercise 1 (3 cách tạo object): Cho 3 cách viết sau, tạo ra object giống nhau `{ name: "Lan", age: 24 }`:
 
 ```js
-// Bước 1: Constructor
-function Product(name, price, category) {
-  this.name = name;
-  this.price = price;
-  this.category = category;
-}
+// Cách 1: Object literal
+const obj1 = { name: "Lan", age: 24 };
 
-// Bước 2: Method getInfo
-Product.prototype.getInfo = function () {
-  console.log(`${this.name} - ${this.category} - ${this.price}đ`);
+// Cách 2: new Object()
+const obj2 = new Object();
+obj2.name = "Lan";
+obj2.age = 24;
+
+// Cách 3: Constructor function
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+const obj3 = new Person("Lan", 24);
+```
+
+- So sánh `obj1`, `obj2`, `obj3` bằng `console.log` và `typeof`. Giải thích khi nào nên dùng cách nào (object đơn lẻ, cấu hình, hay nhiều instance cùng cấu trúc).
+
+- Exercise 2 (Object.assign): Cho:
+
+```js
+const defaultSettings = { theme: "light", layout: { columns: 2 } };
+const userSettings = { theme: "dark" };
+const finalSettings = Object.assign({}, defaultSettings, userSettings);
+```
+
+- In `finalSettings` ra kiểm tra.
+- Đổi `finalSettings.layout.columns = 5`. In `defaultSettings.layout.columns` ra xem có bị ảnh hưởng không. Giải thích tại sao (shallow copy).
+
+- Exercise 3 (Object.create): Cho:
+
+```js
+const animalProto = {
+  describe() {
+    return `${this.name} is a ${this.type}`;
+  },
 };
 
-// Bước 3: Getter discountedPrice
-Object.defineProperty(Product.prototype, "discountedPrice", {
-  get() {
-    return this.price * 0.9;
-  },
-  enumerable: false,
-});
-
-// Bước 4: Tạo inventory
-const inventory = [
-  new Product("Laptop", 15000000, "Electronics"),
-  new Product("Áo thun", 200000, "Fashion"),
-  new Product("Cà phê", 50000, "Food"),
-];
-
-// Bước 5: Clone + thêm quantity
-const inventoryWithQuantity = inventory.map((p) =>
-  Object.assign({}, p, { quantity: 10 }),
-);
-
-// Bước 6: Freeze từng sản phẩm gốc
-inventory.forEach((p) => Object.freeze(p));
-inventory[0].price = 0;
-console.log(inventory[0].price); // 15000000 (không đổi)
-
-// Bước 7: Duyệt for...of
-for (const p of inventory) {
-  p.getInfo();
-}
-
-// Bước 8: Lọc theo danh mục
-function filterByCategory(products, category) {
-  return Array.from(products).filter((p) => p.category === category);
-}
-const fashionItems = filterByCategory(inventoryWithQuantity, "Fashion");
-console.log(fashionItems);
+const dog = Object.create(animalProto);
+dog.name = "Milo";
+dog.type = "Dog";
 ```
+
+- Gọi `dog.describe()`. In ra kết quả.
+- Dùng `Object.getPrototypeOf(dog)` để kiểm tra prototype của `dog` có phải `animalProto` không.
+- Kiểm tra `dog.hasOwnProperty("describe")` — giải thích tại sao `false`.
+
+- Exercise 4 (Object.fromEntries): Cho:
+
+```js
+const entries = [
+  ["id", 1],
+  ["name", "Laptop"],
+  ["price", 15000000],
+];
+```
+
+- Dùng `Object.fromEntries(entries)` để chuyển thành object. In kết quả ra console.
+- Dùng `Object.entries()` để chuyển ngược object đó về lại mảng entries, xác nhận khớp với `entries` ban đầu.
+
+- Exercise 5 (Arrow function vs regular function — this): Cho:
+
+```js
+const counter = {
+  count: 0,
+  incrementNormal: function () {
+    setTimeout(function () {
+      this.count++;
+      console.log("Normal:", this.count);
+    }, 100);
+  },
+  incrementArrow: function () {
+    setTimeout(() => {
+      this.count++;
+      console.log("Arrow:", this.count);
+    }, 100);
+  },
+};
+
+counter.incrementNormal();
+counter.incrementArrow();
+```
+
+- Chạy code trên, giải thích tại sao `incrementNormal` không tăng đúng `count` nhưng `incrementArrow` thì có. `this` trong mỗi trường hợp đang trỏ tới đâu?
+
+- Exercise 6 (call / apply): Cho:
+
+```js
+const person1 = { name: "An" };
+const person2 = { name: "Bình" };
+
+function introduce(greeting, punctuation) {
+  console.log(`${greeting}, I'm ${this.name}${punctuation}`);
+}
+```
+
+- Dùng `introduce.call(person1, "Hello", "!")` và `introduce.apply(person2, ["Hi", "."])`.
+- Giải thích khác biệt cách truyền tham số giữa `call` và `apply`.
+
+- Exercise 7 (bind): Cho:
+
+```js
+const user = {
+  name: "Chi",
+  greet() {
+    console.log(`Xin chào, tôi là ${this.name}`);
+  },
+};
+
+setTimeout(user.greet, 100);
+```
+
+- Chạy code trên, giải thích tại sao `this.name` bị `undefined`.
+- Sửa lại bằng cách dùng `.bind(user)` để `setTimeout` gọi đúng `this`. In kết quả ra kiểm tra.
+
+- Exercise 8 (this trong constructor function): Viết hàm tạo `Product(name, price)` gán `this.name`, `this.price` và method `getInfo()` in ra `"${name} - ${price}đ"`. Tạo `p1 = new Product("Chuột", 200000)`. Gọi `p1.getInfo()`. Thử gọi `Product("Bàn phím", 500000)` (không dùng `new`), in `this` ra xem điều gì xảy ra và giải thích tại sao.
+
+- Exercise 9 (this trong class): Viết lại `Product` ở Exercise 8 bằng ES6 `class` (constructor + method `getInfo()`). Tạo `p2 = new Product("Màn hình", 3000000)`. Gọi `p2.getInfo()`. So sánh cú pháp class với constructor function — chỗ nào giống, chỗ nào khác về mặt `this`.
+
+- Exercise 10 (this trong event listener): Cho đoạn JS:
+
+```javascript
+const btn = document.getElementById("myBtn");
+btn.addEventListener("click", function () {
+  console.log(this);
+});
+btn.addEventListener("click", () => {
+  console.log(this);
+});
+```
+
+- Click nút, quan sát 2 dòng log. Giải thích tại sao `this` trong function thường là chính element `btn`, còn trong arrow function lại khác.
+
+- Exercise 11 (Getter): Cho:
+
+```js
+const user = {
+  firstName: "Nguyễn",
+  lastName: "An",
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  },
+};
+```
+
+- Truy cập `user.fullName` (không gọi như hàm, không có `()`). In kết quả ra console. Giải thích khác biệt giữa getter và method thường.
+
+- Exercise 12 (Setter): Cho:
+
+```js
+const account = {
+  _balance: 0,
+  get balance() {
+    return this._balance;
+  },
+  set balance(value) {
+    if (value < 0) {
+      console.log("Số dư không được âm!");
+      return;
+    }
+    this._balance = value;
+  },
+};
+```
+
+- Gán `account.balance = 500000`. In `account.balance` ra kiểm tra.
+- Gán `account.balance = -100`. Quan sát kết quả, giải thích vai trò của setter trong việc validate dữ liệu.
+
+- Exercise 13 (Bài tổng hợp — Quản lý tài khoản ngân hàng): Viết `class BankAccount`:
+  - Constructor nhận `owner`, `initialBalance` (mặc định `0`), lưu số dư vào private field `#balance`.
+  - Getter `balance` trả về `#balance` (không cho set trực tiếp).
+  - Method `deposit(amount)`: nếu `amount <= 0` thì log lỗi, ngược lại cộng vào `#balance`.
+  - Method `withdraw(amount)`: nếu `amount > #balance` thì log "Số dư không đủ", ngược lại trừ đi.
+  - Method `getStatement()` in ra `"Chủ tài khoản: ${owner} - Số dư: ${balance}đ"`.
+  - Tạo `acc = new BankAccount("Minh", 1000000)`.
+  - Dùng `setTimeout` để giả lập giao dịch trễ: gọi `acc.deposit(200000)` sau 1 giây — dùng `.bind(acc)` để đảm bảo `this` đúng bên trong `setTimeout`.
+  - Sau đó gọi `acc.getStatement()` để in kết quả cuối cùng.
