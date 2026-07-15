@@ -75,89 +75,102 @@
 - Exercise 5 (getOwnPropertyNames vs Object.keys): Cho lại `user` ở Exercise 2 (đã có `id` với `enumerable: false`).
   - In `Object.keys(user)` và `Object.getOwnPropertyNames(user)` ra console, so sánh 2 kết quả và giải thích khác biệt.
 
-- Exercise 6 (Object.preventExtensions — Cấu hình ứng dụng): Một ứng dụng load cấu hình lúc khởi động, các module sau đó có thể sửa giá trị hoặc xóa cấu hình đã lỗi thời, nhưng tuyệt đối không được vô tình thêm key mới (thường là do gõ nhầm tên biến, gây bug khó phát hiện vì JS không báo lỗi khi gán property lạ vào object thường).
+- Exercise 6 (Cấu hình ứng dụng): Một ứng dụng load cấu hình lúc khởi động, các module sau đó có thể sửa giá trị hoặc xóa cấu hình đã lỗi thời, nhưng tuyệt đối không được vô tình thêm key mới (thường là do gõ nhầm tên biến, gây bug khó phát hiện vì JS không báo lỗi khi gán property lạ vào object thường).
 
-```js
-const appConfig = {
-  theme: "dark",
-  fontSize: 16,
-  language: "vi",
-};
-```
+  ```js
+  const appConfig = {
+    theme: "dark",
+    fontSize: 16,
+    language: "vi",
+  };
+  ```
 
-- Áp dụng đúng phương thức để khóa việc thêm property mới nhưng vẫn cho sửa/xóa property cũ.
-- Test: sửa `appConfig.fontSize = 18` -> phải thành công. Xóa `appConfig.language` -> phải thành công. Thêm `appConfig.debug = true` -> phải thất bại (không có tác dụng, hoặc lỗi ở strict mode).
-- Giả sử ở đâu đó trong code có người gõ nhầm `appConfig.theem = "light"` (thay vì `theme`). Giải thích tại sao dùng `preventExtensions` giúp phát hiện lỗi này dễ hơn so với để object bình thường.
-- Dùng `Object.isExtensible(appConfig)` để xác nhận trạng thái.
+  - Áp dụng đúng phương thức để khóa việc thêm property mới nhưng vẫn cho sửa/xóa property cũ.
+  - Dùng phương thức nào để kiểm tra trạng thái khóa của object.
 
-- Exercise 7 (Object.seal — Bản ghi phiên đăng nhập): Một object đại diện cho session của user, có cấu trúc cố định (không được thêm field lạ vào giữa chừng, không được xóa field bắt buộc), nhưng giá trị các field vẫn cần cập nhật liên tục trong lúc user hoạt động (VD: `lastActive`).
+- Exercise 7 (Bản ghi phiên đăng nhập): Một object đại diện cho session của user, có cấu trúc cố định (không được thêm field lạ vào giữa chừng, không được xóa field bắt buộc), nhưng giá trị các field vẫn cần cập nhật liên tục trong lúc user hoạt động (VD: `lastActive`).
 
-```js
-const session = {
-  userId: 101,
-  username: "minhle",
-  role: "student",
-  lastActive: Date.now(),
-};
-```
+  ```js
+  const session = {
+    userId: 101,
+    username: "minhle",
+    role: "student",
+    lastActive: Date.now(),
+  };
+  ```
 
-- Áp dụng đúng phương thức để khóa thêm/xóa property nhưng vẫn cho sửa giá trị.
-- Test: cập nhật `session.lastActive = Date.now()` (gọi lại sau vài giây) -> phải thành công. Thử thêm `session.tempFlag = true` -> phải thất bại. Thử `delete session.role` -> phải thất bại.
-- Giải thích tại sao tình huống này không dùng `preventExtensions` (vẫn cho xóa được field) mà phải dùng `seal`.
-- Dùng `Object.isSealed(session)` để xác nhận trạng thái.
+  - Áp dụng đúng phương thức để khóa thêm/xóa property nhưng vẫn cho sửa giá trị.
+  - Dùng phương thức nào để kiểm tra trạng thái khóa của object.
 
-- Exercise 8 (Object.freeze — Hằng số cấu hình toàn cục): Một object chứa các hằng số dùng xuyên suốt ứng dụng (API endpoint, giới hạn retry...), về nguyên tắc không bao giờ được thay đổi ở bất kỳ đâu trong runtime — mọi chỗ chỉ được đọc.
+- Exercise 8 (Hằng số cấu hình toàn cục): Một object chứa các hằng số dùng xuyên suốt ứng dụng (API endpoint, giới hạn retry...), về nguyên tắc không bao giờ được thay đổi ở bất kỳ đâu trong runtime — mọi chỗ chỉ được đọc.
 
-```js
-const APP_CONSTANTS = {
-  API_BASE_URL: "https://api.example.com",
-  MAX_RETRIES: 3,
-  TIMEOUT_MS: 5000,
-};
-```
+  ```js
+  const APP_CONSTANTS = {
+    API_BASE_URL: "https://api.example.com",
+    MAX_RETRIES: 3,
+    TIMEOUT_MS: 5000,
+  };
+  ```
 
-- Áp dụng đúng phương thức để khóa hoàn toàn: không thêm, không xóa, không sửa.
-- Test: thử `APP_CONSTANTS.MAX_RETRIES = 10` -> giá trị không đổi. Thử `delete APP_CONSTANTS.TIMEOUT_MS` -> không có tác dụng. Thử thêm `APP_CONSTANTS.NEW_FLAG = true` -> không có tác dụng.
-- Giải thích tại sao ở tình huống hằng số toàn cục, `seal` là không đủ (vẫn cho sửa giá trị, dễ gây bug nếu ai đó vô tình gán đè `MAX_RETRIES`).
-- Dùng `Object.isFrozen(APP_CONSTANTS)` để xác nhận trạng thái.
+  - Áp dụng đúng phương thức để khóa hoàn toàn: không thêm, không xóa, không sửa.
+  - Dùng phương thức nào để kiểm tra trạng thái khóa của object.
 
-Sau khi hoàn thành cả 3 bài, viết vài dòng tổng kết: chọn `preventExtensions` / `seal` / `freeze` dựa vào mức độ thay đổi được phép của object trong từng tình huống thực tế ra sao.
+- Exercise 9 (Prototype chain — Intro)
+  Cho đoạn code sau:
 
-- Exercise 9 (Prototype chain — Intro): Dùng lại function constructor `Product` ở Day 20.
-  - Tạo `const p = new Product("Chuột", 200000)`.
-  - In `Object.getPrototypeOf(p)`, so sánh với `Product.prototype` (dùng `===`).
-  - Tiếp tục `Object.getPrototypeOf(Product.prototype)`, xem nó trỏ tới đâu (gợi ý: `Object.prototype`). Giải thích khái niệm "prototype chain" qua ví dụ này.
+  ```js
+  function Product(name, price) {
+    this.name = name;
+    this.price = price;
+  }
+  ```
 
-- Exercise 10 (Object.setPrototypeOf): Cho:
+  - Tạo phương thức chung cho tất cả các sản phẩm `getInfo()` trả về chuỗi `"Tên: <name>, Giá: <price>"`.
+  - Tạo sản phẩm `"Bàn phím"` với giá `1000000`, sản phẩm `"Loa"` với giá `1500000`, gọi `getInfo()` trên cả 2 sản phẩm, in ra console.
+  - Tìm kiếm object cha mà các sản phẩm kể trên kế thừa, in ra console.
+  - Tìm kiếm object cha của object cha vừa tìm được kế thừa, in ra console. Object tìm được còn kế thừa object nào nữa không?
 
-```js
-const greeter = {
-  greet() {
-    return `Xin chào, tôi là ${this.name}`;
-  },
-};
+- Exercise 10 (Object.setPrototypeOf)
+  Cho đoạn code sau:
 
-const student = { name: "Hoa" };
-```
+  ```js
+  const greeter = {
+    greet() {
+      return `Xin chào, tôi là ${this.name}`;
+    },
+  };
 
-- Trước khi set prototype, thử gọi `student.greet()` — báo lỗi gì?
-- Dùng `Object.setPrototypeOf(student, greeter)`, sau đó gọi lại `student.greet()`. Giải thích tại sao lúc này gọi được.
+  const student1 = { name: "Hoa" };
+  const student2 = { name: "An" };
+  student1.greet();
+  student2.greet();
+  ```
+
+  - Sửa lại một cách tối ưu để chương trình trên không lỗi nữa.
 
 - Exercise 11 (hasOwnProperty vs for...in): Dùng lại `student` đã setPrototypeOf ở Exercise 8.
   - Dùng `for...in` in ra tất cả property/method mà vòng lặp duyệt qua (sẽ thấy cả `greet` dù nó nằm ở prototype).
-  - Trong vòng lặp đó, thêm điều kiện `student.hasOwnProperty(key)` để chỉ in property "của riêng" `student`. So sánh kết quả trước/sau khi thêm điều kiện.
+  - Trong vòng lặp đó, thêm điều kiện `student.hasOwnProperty(key)` để chỉ in property "của riêng" `student`. So sánh kết quả trước/sau khi thêm điều kiện.``
 
-- Exercise 12 (Object.hasOwn vs hasOwnProperty): Cho:
+- Exercise 12 (Object.hasOwn vs hasOwnProperty)
+  Cho:
 
-```js
-const obj = Object.create(null);
-obj.name = "Test";
-```
+  ```js
+  const obj = Object.create(null);
+  obj.name = "Test";
+  ```
 
-- Thử gọi `obj.hasOwnProperty("name")` — quan sát lỗi xảy ra, giải thích tại sao (gợi ý: `obj` không kế thừa từ `Object.prototype`).
-- Sửa lại bằng `Object.hasOwn(obj, "name")`, xác nhận chạy đúng không lỗi. Giải thích tại sao `Object.hasOwn` an toàn hơn.
+  - Thử gọi `obj.hasOwnProperty("name")` — quan sát lỗi xảy ra, giải thích tại sao (gợi ý: `obj` không kế thừa từ `Object.prototype`).
+  - Sửa lại bằng `Object.hasOwn(obj, "name")`, xác nhận chạy đúng không lỗi. Giải thích tại sao `Object.hasOwn` an toàn hơn.
 
-- Exercise 13 (Iterable — Intro): Cho `const arr = [10, 20, 30]` và `const str = "abc"`.
+- Exercise 13 (Iterable — Intro)
+  Cho:
+
+  ```js
+  const arr = [10, 20, 30];
+  const str = "abc";
+  ```
+
   - Dùng `for...of` duyệt qua `arr` và `str`, in từng phần tử.
   - Thử dùng `for...in` duyệt qua `arr`, so sánh kết quả in ra với `for...of` (gợi ý: `for...in` in ra index dạng string, không phải giá trị).
 
