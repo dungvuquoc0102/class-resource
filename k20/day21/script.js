@@ -290,8 +290,149 @@
 
 // console.log(Object.getPrototypeOf(Object.prototype));
 
-const user = Object.create({
-  xyz: "xyz",
+// const user = Object.create({
+//   xyz: "xyz",
+// });
+
+// console.log(user);
+
+// Ex 02
+
+// const user = { name: "An" };
+
+// Object.defineProperty(user, "id", {
+//   value: 1001,
+// });
+// user.id = 9999;
+// console.log(user);
+
+// for (const key in user) {
+//   console.log(key);
+// }
+
+// console.log(Object.keys(user));
+
+// Ex 03
+
+const product = {};
+
+Object.defineProperties(product, {
+  name: {
+    value: "Bàn phím",
+    writable: true,
+    enumerable: true,
+  },
+  price: {
+    value: 500000,
+    writable: true,
+    enumerable: true,
+  },
+  discountedPrice: {
+    get() {
+      return this.price * 0.9;
+    },
+  },
 });
 
-console.log(user);
+// console.log(product.discountedPrice);
+
+// Ex 04
+
+// console.log(Object.getOwnPropertyDescriptor(product, "price"));
+// console.log(Object.getOwnPropertyDescriptors(product));
+
+// console.log(Object.getOwnPropertyNames(product));
+// console.log(Object.keys(product));
+
+// Ex 05
+
+// const appConfig = {
+//   theme: "dark",
+//   fontSize: 16,
+//   language: "vi",
+// };
+
+// Object.preventExtensions(appConfig);
+
+// appConfig.fontSize = 18;
+// delete appConfig.language;
+// appConfig.debug = true;
+// console.log(appConfig);
+
+// console.log(Object.isExtensible(appConfig));
+
+// Ex 06
+// const session = {
+//   userId: 101,
+//   username: "minhle",
+//   role: "student",
+//   lastActive: Date.now(),
+// };
+
+// Object.seal(session);
+
+// console.log(session);
+
+// setTimeout(() => {
+//   session.lastActive = Date.now();
+//   session.tempFlag = true;
+//   delete session.role;
+
+//   console.log(session);
+// }, 1000);
+
+// Ex 07
+
+// const APP_CONSTANTS = {
+//   API_BASE_URL: "https://api.example.com",
+//   MAX_RETRIES: 3,
+//   TIMEOUT_MS: 5000,
+// };
+
+// Object.freeze(APP_CONSTANTS);
+
+// APP_CONSTANTS.MAX_RETRIES = 10;
+// delete APP_CONSTANTS.TIMEOUT_MS;
+// APP_CONSTANTS.NEW_FLAG = true;
+
+// console.log(APP_CONSTANTS);
+// console.log(Object.isFrozen(APP_CONSTANTS));
+
+// Ex 09
+
+// function Product(name, price) {
+//   this.name = name;
+//   this.price = price;
+// }
+// Product.prototype.getInfo = function () {
+//   return `Tên: ${this.name}, Giá: ${this.price}`;
+// };
+// const keyboard = new Product("Aula F75", 1000000);
+// const speaker = new Product("JBL Z10", 1500000);
+// console.log(keyboard.getInfo());
+// console.log(speaker.getInfo());
+
+// // Object cha
+// console.log(Object.getPrototypeOf(keyboard)); // Product.prototype
+// console.log(Object.getPrototypeOf(speaker)); // Product.prototype
+
+// // Object ông
+// console.dir(Object.getPrototypeOf(Product.prototype)); // Object.prototype
+
+// // Object cụ
+// console.log(Object.getPrototypeOf(Object.getPrototypeOf(Product.prototype))); // null
+
+// Các iterable: Array, String
+
+// const points = [10, 20, 30, 40, 50];
+// const points = {
+//   0: 10,
+//   1: 20,
+//   2: 30,
+//   3: 40,
+//   4: 50,
+// };
+const points = "10, 20, 30, 40, 50";
+// for (const point of points) {
+//   console.log(point);
+// }
