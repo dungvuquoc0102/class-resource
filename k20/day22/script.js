@@ -50,6 +50,6 @@
 
 // console.log(date); // Hiển thị múi giờ của máy tính
 
-console.dir(Date.parse("1970-01-01T00:00:01Z"));
+// console.dir(Date.parse("1970-01-01T00:00:01Z"));
 // Số miniseconds từ 1970-01-01T00:00:00Z đến thời điểm truyền vào
-console.log(Date.now());
+// console.log(Date.now());

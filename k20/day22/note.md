@@ -36,6 +36,7 @@
 - Short Date ("MM/DD/YYYY")
 - Long Date ("Mar 25 2015", "25 Mar 2015", "January 25 2015")
 - Date.parse(dateString)
+- Date.now()
 
 ## Get Date Methods
 
