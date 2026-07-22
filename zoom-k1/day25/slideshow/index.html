@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script
+      src="https://kit.fontawesome.com/595b46303d.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Slideshow</title>
+  </head>
+  <body>
+    <div>
+      <h1 class="text-2xl font-bold">Slideshow</h1>
+      <div class="slide-container aspect-[10/3] relative">
+        <!-- Slides -->
+        <div class="slide-wrapper h-full overflow-auto">
+          <div class="slide-batch flex size-full transition-all">
+            <!-- Slide 1 -->
+            <div class="slide-item flex-shrink-0 size-full">
+              <img
+                class="size-full object-cover"
+                src="./img/slide1.jpg"
+                alt="Slide 1"
+              />
+            </div>
+            <!-- Slide 2 -->
+            <div class="slide-item flex-shrink-0 size-full">
+              <img
+                class="size-full object-cover"
+                src="./img/slide2.jpg"
+                alt="Slide 2"
+              />
+            </div>
+            <!-- Slide 3 -->
+            <div class="slide-item flex-shrink-0 size-full">
+              <img
+                class="size-full object-cover"
+                src="./img/slide3.jpg"
+                alt="Slide 3"
+              />
+            </div>
+          </div>
+        </div>
+        <!-- Pagination -->
+        <div class="slide-pagination"></div>
+        <!-- Next and Previous buttons -->
+        <button
+          class="slide-prev absolute cursor-pointer hover:text-gray-500 left-2 top-1/2 text-3xl -translate-y-1/2"
+        >
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button
+          class="slide-next absolute cursor-pointer hover:text-gray-500 right-2 top-1/2 text-3xl -translate-y-1/2"
+        >
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

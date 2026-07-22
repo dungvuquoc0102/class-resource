@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @layer base {
+        .active {
+          @apply bg-blue-700! text-white;
+        }
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <h1 class="text-2xl font-bold">Tab</h1>
+      <div class="tab-container w-fit p-4 border border-gray-400 rounded-md">
+        <!-- Tab title -->
+        <div class="flex border-b border-gray-400">
+          <div
+            class="px-4 py-3 hover:bg-blue-400 cursor-pointer hover:text-white"
+            id="title-1"
+          >
+            Title 1
+          </div>
+          <div
+            class="px-4 py-3 hover:bg-blue-400 cursor-pointer hover:text-white"
+            id="title-2"
+          >
+            Title 2
+          </div>
+          <div
+            class="px-4 py-3 hover:bg-blue-400 cursor-pointer hover:text-white"
+            id="title-3"
+          >
+            Title 3
+          </div>
+        </div>
+        <!-- Tab content -->
+        <div>
+          <div class="px-4 py-2" id="content-1">Content 1</div>
+          <div class="px-4 py-2" id="content-2">Content 2</div>
+          <div class="px-4 py-2" id="content-3">Content 3</div>
+        </div>
+      </div>
+      <div class="tab-container w-fit p-4 border border-gray-400 rounded-md">
+        <!-- Tab title -->
+        <div class="flex border-b border-gray-400">
+          <div
+            class="px-4 py-3 hover:bg-blue-400 cursor-pointer hover:text-white"
+            id="title-1"
+          >
+            Title 1
+          </div>
+          <div
+            class="px-4 py-3 hover:bg-blue-400 cursor-pointer hover:text-white"
+            id="title-2"
+          >
+            Title 2
+          </div>
+          <div
+            class="px-4 py-3 hover:bg-blue-400 cursor-pointer hover:text-white"
+            id="title-3"
+          >
+            Title 3
+          </div>
+        </div>
+        <!-- Tab content -->
+        <div>
+          <div class="px-4 py-2" id="content-1">Content 1</div>
+          <div class="px-4 py-2" id="content-2">Content 2</div>
+          <div class="px-4 py-2" id="content-3">Content 3</div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
