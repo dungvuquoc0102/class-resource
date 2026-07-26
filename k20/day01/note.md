@@ -1,6 +1,6 @@
-# Day 1: Định hướng Fullstack, Nền tảng Web & HTML cơ bản
+# Day 1: Roadmap, Web Fundamental, HTML
 
-## Định hướng học tập
+## Roadmap
 
 ### 1. Lộ trình Fullstack: Học gì và theo thứ tự nào?
 
