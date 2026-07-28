@@ -45,7 +45,7 @@ document
 
 ## 3. Truy cập các phần tử DOM
 
-- `document.getElementById()`: Tìm phần tử theo ID (trả về 1 phần tử hoặc `null`).
+- `document.getElementById()`: Tìm phần tử theo ID (trả về 1 phần tử hoặc `).
 
 ```javascript
 let element = document.getElementById("container");
@@ -283,77 +283,13 @@ form.addEventListener("submit", function (e) {
 });
 ```
 
-## 9. Thực hành: Xây dựng TodoApp
+## Exercise
 
-### Các bước thực hiện:
+### Xây dựng TodoApp:
 
-1. Bước 1: Tạo giao diện form HTML và danh sách hiển thị.
-2. Bước 2: Lấy các phần tử form và danh sách thông qua DOM.
-3. Bước 3: Bắt sự kiện `submit`, thêm dữ liệu vào mảng JavaScript.
-4. Bước 4: Xóa dữ liệu cũ trong ô input và tự động `focus()` lại ô nhập.
-5. Bước 5: Chuyển đổi dữ liệu trong mảng thành danh sách các thẻ HTML (`<li>`).
-6. Bước 6: Đẩy danh sách HTML vừa tạo vào cây DOM.
-
-### Ví dụ hoàn chỉnh:
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Todo List</title>
-  </head>
-  <body>
-    <form id="todo-form">
-      <input type="text" id="todo-input" placeholder="Enter task..." />
-      <button type="submit">Add</button>
-    </form>
-    <ul id="todo-list"></ul>
-
-    <script>
-      const todoForm = document.getElementById("todo-form");
-      const todoInput = document.getElementById("todo-input");
-      const todoList = document.getElementById("todo-list");
-      const tasks = [];
-
-      todoForm.onsubmit = function (event) {
-        event.preventDefault();
-
-        // Kiểm tra input không rỗng
-        if (todoInput.value.trim() === "") return;
-
-        tasks.unshift({ name: todoInput.value, completed: false }); // Thêm công việc mới vào đầu mảng
-        todoInput.value = ""; // Xóa dữ liệu cũ
-        todoInput.focus(); // Set focus lại vào ô input
-
-        renderTasks();
-      };
-
-      function renderTasks() {
-        const html = tasks
-          .map(
-            (task) => `
-            <li>
-              ${task.name}
-              <i class="${
-                task.completed
-                  ? "fa-solid fa-square-check"
-                  : "fa-regular fa-square"
-              }"></i>
-              <button class="edit">
-                <i>Edit</i>
-              </button>
-              <button class="delete">
-                <i>Delete</i>
-              </button>
-            </li>
-          `,
-          )
-          .join("");
-
-        todoList.innerHTML = html;
-      }
-    </script>
-  </body>
-</html>
-```
+- Tạo giao diện form HTML và danh sách hiển thị.
+- Lấy các phần tử form và danh sách thông qua DOM.
+- Bắt sự kiện `submit`, thêm dữ liệu vào mảng JavaScript.
+- Xóa dữ liệu cũ trong ô input và tự động `focus()` lại ô nhập.
+- Chuyển đổi dữ liệu trong mảng thành danh sách các thẻ HTML (`<li>`).
+- Đẩy danh sách HTML vừa tạo vào cây DOM.
