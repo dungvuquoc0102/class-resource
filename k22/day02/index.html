@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      JavaScript ES2025+: Cú pháp mới, array methods và patterns thay thế lodash
+    </title>
+    <script
+      src="https://kit.fontawesome.com/595b46303d.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <img
+        style="width: 40px; height: 40px"
+        src="https://files.fullstack.edu.vn/f8-prod/organization-logos/694743c405102.png"
+        alt="F8 Logo"
+      />
+
+      <img
+        style="width: 40px; height: 40px; border-radius: 50%"
+        src="https://files.f8.edu.vn/f8-prod/public-images/6870d57b274a2.png"
+        alt="Avatar user"
+      />
+    </header>
+    <main>
+      <h1>
+        JavaScript ES2025+: Cú pháp mới, array methods và patterns thay thế
+        lodash
+      </h1>
+      <h2>Mình từng import lodash vào mọi dự án</h2>
+      <p>
+        Hồi mới làm việc, mình nghĩ lodash là một phần không thể thiếu của
+        JavaScript. _.groupBy, _.sortBy, _.cloneDeep... cứ cần gì là npm install
+        lodash. Hậu quả? Bundle size phình to, thêm một dependency phải
+        maintain, và đặc biệt là toàn bộ team phải biết lodash API.
+      </p>
+      <p>
+        Rồi ES2015 ra Array.prototype.find(). ES2019 ra flat(), flatMap(). Và
+        bây giờ, ES2023-2025 đang dần lấp đầy những chỗ trống cuối cùng. Thực tế
+        là phần lớn các tính năng lodash phổ biến nhất giờ đã có native
+        equivalent trong JavaScript.
+      </p>
+      <p>
+        Bài này mình sẽ đi qua các method mới nhất, so sánh code cũ vs mới, và
+        chỉ khi nào vẫn nên giữ lodash.
+      </p>
+      <div>Ưu điểm thực sự của manual testing:</div>
+      <div>Các bước rửa rau:</div>
+      <ol>
+        <li>Xả nước</li>
+        <li>Rửa rau</li>
+        <li>Vẩy rau</li>
+      </ol>
+      <div>Todo list:</div>
+      <ul>
+        <li>Hoàn thành bài tập F8</li>
+        <li>Đọc tài liệu môn ABC</li>
+        <li>Code một bài trên LeetCode</li>
+      </ul>
+      <!-- Ex 1 -->
+      <!-- <ul>
+        <li>
+          Điện thoại, Tablet
+          <ul>
+            <li>
+              Hãng điện thoại
+              <ul>
+                <li>Iphone</li>
+                <li>Samsung</li>
+                <li>Oppo</li>
+                <li>Xiaomi</li>
+              </ul>
+            </li>
+            <li>
+              Mức giá
+              <ul>
+                <li>Dưới 2 triệu</li>
+                <li>Từ 2 triệu tới 4 triệu</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Laptop</li>
+        <li>Âm thanh, Mic thu âm</li>
+      </ul> -->
+      <ul>
+        <li>
+          Điện thoại, Tablet
+          <ul>
+            <li>
+              Hãng điện thoại
+              <ul>
+                <li>Iphone</li>
+                <li>Samsung</li>
+                <li>Oppo</li>
+                <li>Xiaomi</li>
+              </ul>
+            </li>
+            <li>
+              Mức giá
+              <ul>
+                <li>Dưới 2 triệu</li>
+                <li>Từ 2 triệu tới 4 triệu</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Laptop</li>
+        <li>Âm thanh, Mic thu âm</li>
+      </ul>
+      <p>Này, <em>đừng quên đóng cửa trước khi ra ngoài</em>!</p>
+      <p>Món ăn hôm nay có <i>trứng cá hồi</i>, <i>gà rán</i>.</p>
+      <p>
+        Xếp thứ tư về số lượng xe mới bán ra nhưng riêng về xe điện chạy pin
+        (BEV), Việt Nam đang dẫn đầu khu vực Đông Nam Á. Gần
+        <mark>116.000 xe</mark> hầu hết từ VinFast, thương hiệu hiện dẫn đầu
+        lượng bán toàn ngành, và một phần rất nhỏ của Ford với mẫu Mustang (một
+        số hãng bán xe điện không công bố doanh số).
+      </p>
+      <small
+        >Copyright 1999-2026 by Refsnes Data. All Rights Reserved. W3Schools is
+        Powered by W3.CSS.</small
+      >
+      <div><del>$299.00</del> <ins>$199.00</ins></div>
+      <div>log<sub>2</sub>(8)</div>
+      <div>2<sup>3</sup></div>
+      <blockquote>
+        Tôi chưa bao giờ mơ về sự thành công. Tôi đã làm việc vì nó.
+      </blockquote>
+      <p>Anh ta đã nói: <q>Đừng quên tắt bếp trước khi ra ngoài</q></p>
+      <p>Bức <cite>Mona Lisa</cite> thật tuyệt vời!</p>
+      <p>
+        <abbr title="HyperText Markup Language">HTML</abbr> là ngôn ngữ đánh dấu
+        siêu văn bản.
+      </p>
+      <address>
+        <div>Writter: John Doe</div>
+        <div>
+          Email: <a href="mailto:johndoe@example.com">johndoe@example.com</a>
+        </div>
+      </address>
+      <div>
+        Đây là một đoạn HTML:
+        <pre>
+        <code>
+      &lt;ul&gt;
+        &lt;li&gt;
+          &Dstrok;i&#x1EC7;n tho&#x1EA1;i, Tablet
+          &lt;ul&gt;
+            &lt;li&gt;
+              H&atilde;ng &dstrok;i&#x1EC7;n tho&#x1EA1;i
+              &lt;ul&gt;
+                &lt;li&gt;Iphone&lt;/li&gt;
+                &lt;li&gt;Samsung&lt;/li&gt;
+                &lt;li&gt;Oppo&lt;/li&gt;
+                &lt;li&gt;Xiaomi&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+              M&#x1EE9;c gi&aacute;
+              &lt;ul&gt;
+                &lt;li&gt;D&#x1B0;&#x1EDB;i 2 tri&#x1EC7;u&lt;/li&gt;
+                &lt;li&gt;T&#x1EEB; 2 tri&#x1EC7;u t&#x1EDB;i 4 tri&#x1EC7;u&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;Laptop&lt;/li&gt;
+        &lt;li&gt;&Acirc;m thanh, Mic thu &acirc;m&lt;/li&gt;
+      &lt;/ul&gt;
+        </code>
+        </pre>
+      </div>
+      <div>
+        Nhấn <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> để mở DevTools
+      </div>
+    </main>
+    <footer>Footer</footer>
+  </body>
+</html>

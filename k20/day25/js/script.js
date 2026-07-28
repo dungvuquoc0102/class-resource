@@ -82,10 +82,14 @@ let btnOpenEl = document.querySelector("#btn-open");
 // btnOpenEl.onclick = function () {
 //   console.log("Click");
 // };
-btnOpenEl.onclick = function () {
-  console.log("Hello");
-};
-btnOpenEl.onclick = null;
+// btnOpenEl.onclick = function () {
+//   console.log("Hello");
+// };
+// btnOpenEl.onclick = null;
+
+btnOpenEl.addEventListener("click", function (e) {
+  console.dir(e);
+});
 
 // const clickHandler = function () {
 //   console.log("Click");

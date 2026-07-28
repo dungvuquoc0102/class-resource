@@ -72,4 +72,3 @@
   - Browser read
   - Simple HTML structure
   - Favicon
-  - CSS and JS

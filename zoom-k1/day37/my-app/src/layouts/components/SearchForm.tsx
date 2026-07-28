@@ -136,24 +136,19 @@ export const SearchForm = () => {
       >
         {isLoading ? (
           <p>{"Tìm kiếm " + '"' + keyword + '"'}</p>
+        ) : results.courses.length === 0 &&
+          results.lessons.length === 0 &&
+          results.posts.length === 0 ? (
+          <p>{"Không tìm thấy kết quả cho " + '"' + keyword + '"'}</p>
         ) : (
-          <>
+          Object.keys(results).map((key) => (
             <SearchResultSection
-              title="Khóa học"
-              items={results.courses}
+              key={key}
+              title={key.charAt(0).toUpperCase() + key.slice(1)}
+              items={results[key as keyof typeof results]}
               onItemClick={handleItemClick}
             />
-            <SearchResultSection
-              title="Bài học"
-              items={results.lessons}
-              onItemClick={handleItemClick}
-            />
-            <SearchResultSection
-              title="Bài viết"
-              items={results.posts}
-              onItemClick={handleItemClick}
-            />
-          </>
+          ))
         )}
       </div>
     </div>
