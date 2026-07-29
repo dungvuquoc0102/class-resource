@@ -1,4 +1,4 @@
-# Day 2: Syntax, Semantic, Entity, Block and inline elements, Tag types trong HTML
+# Day 2: Syntax, Semantic, Entity, Tag types trong HTML
 
 ## Syntax
 
@@ -17,8 +17,6 @@
 ## Semantic vs Non-semantic elements
 
 ## Entity: Special characters in HTML
-
-## Block and Inline elements (after in CSS)
 
 ## Tag types
 
