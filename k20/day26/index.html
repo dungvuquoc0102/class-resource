@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 26</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @layer base {
+        .active {
+          @apply text-blue-500;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mx-auto">
+      <h1 class="text-2xl font-bold" draggable="true">Day 26</h1>
+      <h2 class="text-xl font-bold">Event trong DOM</h2>
+      <h3 class="text-lg">Event Object</h3>
+      <ul
+        class="event-method-list list-disc pl-10 border border-gray-300 rounded-md py-2"
+      >
+        <li>event.type</li>
+        <li class="active">event.target</li>
+        <li>event.currentTarget</li>
+        <li>event.preventDefault()</li>
+        <li>event.stopPropagation()</li>
+      </ul>
+      <!-- Form -->
+      <div
+        class="flex flex-col gap-3 m-3 border p-2 rounded-md border-gray-300"
+      >
+        <h3 class="text-xl font-bold">Form add user</h3>
+        <form class="user-form flex flex-col gap-2">
+          <label for=""
+            >Username :
+            <input
+              class="user-input border rounded-md px-2 py-1 border-gray-300"
+              placeholder="Enter username..."
+              type="text"
+              name="username"
+              id=""
+          /></label>
+
+          <button
+            type="submit"
+            class="w-fit bg-blue-500 rounded-md px-3 py-2 text-white hover:brightness-110 hover:cursor-pointer"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+      <!-- Checkbox all -->
+      <div
+        lang="vi"
+        class="flex flex-col gap-3 m-3 border p-2 rounded-md border-gray-300 max-w-3xl bg-blue-200"
+      >
+        <h3 class="text-xl font-bold">Danh sách công việc:</h3>
+        <div class="flex justify-between items-center">
+          <div>
+            <input type="checkbox" id="input-all" name="check-all" />
+            <label
+              id="check-all"
+              for="input-all"
+              class="hover:cursor-pointer select-none"
+            >
+              Chọn tất cả
+            </label>
+          </div>
+          <div class="text-xs text-gray-500">
+            <span id="checked-num">0</span> công việc được chọn
+            <nav></nav>
+          </div>
+        </div>
+        <ul class="flex flex-col gap-2">
+          <li>
+            <label
+              class="select-none px-2 py-1 bg-blue-300 w-full block rounded-md hover:brightness-105 hover:cursor-pointer"
+            >
+              <input class="input-todo" type="checkbox" />
+              Todo 1
+            </label>
+          </li>
+          <li>
+            <label
+              class="select-none px-2 py-1 bg-blue-300 w-full block rounded-md hover:brightness-105 hover:cursor-pointer"
+            >
+              <input class="input-todo" type="checkbox" />
+              Todo 2
+            </label>
+          </li>
+          <li>
+            <label
+              class="select-none px-2 py-1 bg-blue-300 w-full block rounded-md hover:brightness-105 hover:cursor-pointer"
+            >
+              <input class="input-todo" type="checkbox" />
+              Todo 3
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
