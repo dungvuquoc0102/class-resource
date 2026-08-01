@@ -1,0 +1,53 @@
+table {
+  border-collapse: collapse;
+}
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+p {
+  color: white;
+  background: brown;
+  padding: 20px;
+  border-radius: 15px;
+  border: 2px solid yellow;
+}
+
+.red-para {
+  color: white;
+  background: red;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.blue-para {
+  color: white;
+  background: blue;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+#special-para {
+  color: white;
+  background: green;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+/* .wrapper > p {
+  color: violet;
+} */
+
+/* #special-para + p {
+  color: orange;
+} */
+
+/* Liền sau, cùng cấp  */
+
+#special-para ~ p {
+  color: orange;
+}
+
+/* Nằm sau, cùng cấp */

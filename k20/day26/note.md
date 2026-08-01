@@ -1,6 +1,6 @@
-# Day 26: DOM Events & Practice
+# Day 26: DOM Events, Thực hành DOM
 
-## Event trong DOM
+## Events trong DOM
 
 ### Event Object
 
