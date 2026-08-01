@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thẻ a - Thuộc tính của thẻ a</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #333;
+      }
+      h1 {
+        color: #2563eb;
+        border-bottom: 2px solid #2563eb;
+        padding-bottom: 10px;
+      }
+      h2 {
+        color: #1d4ed8;
+      }
+      code {
+        background: #f1f5f9;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      .example {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 15px 0;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 15px 0;
+      }
+      th,
+      td {
+        border: 1px solid #e2e8f0;
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background: #2563eb;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background: #f8fafc;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Thẻ a và các thuộc tính của thẻ a</h1>
+
+    <p>
+      Thẻ <code>&lt;a&gt;</code> (anchor) dùng để tạo liên kết (link) trong
+      HTML. Người dùng click vào liên kết để đi đến một trang web, một phần của
+      trang, hoặc mở file, gửi email...
+    </p>
+
+    <h2>Các thuộc tính chính của thẻ a</h2>
+
+    <table>
+      <tr>
+        <th>Thuộc tính</th>
+        <th>Ý nghĩa</th>
+        <th>Ví dụ giá trị</th>
+      </tr>
+      <tr>
+        <td><code>href</code></td>
+        <td>Đường dẫn của trang/file mà liên kết trỏ tới</td>
+        <td><code>https://google.com</code></td>
+      </tr>
+      <tr>
+        <td><code>target</code></td>
+        <td>Cách mở liên kết: tab mới, tab hiện tại...</td>
+        <td><code>_blank</code>, <code>_self</code></td>
+      </tr>
+      <tr>
+        <td><code>title</code></td>
+        <td>Tooltip hiển thị khi di chuột vào liên kết</td>
+        <td><code>Đi tới Google</code></td>
+      </tr>
+      <tr>
+        <td><code>id</code></td>
+        <td>Định danh duy nhất cho liên kết</td>
+        <td><code>link-home</code></td>
+      </tr>
+      <tr>
+        <td><code>class</code></td>
+        <td>Gán class CSS để tạo kiểu</td>
+        <td><code>btn btn-primary</code></td>
+      </tr>
+      <tr>
+        <td><code>rel</code></td>
+        <td>Mối quan hệ giữa trang hiện tại và trang liên kết</td>
+        <td><code>noopener</code>, <code>nofollow</code></td>
+      </tr>
+      <tr>
+        <td><code>download</code></td>
+        <td>Tải file về thay vì mở</td>
+        <td><code>download</code></td>
+      </tr>
+    </table>
+
+    <h2>Ví dụ chi tiết từng thuộc tính</h2>
+
+    <div class="example">
+      <h3>1. Thuộc tính href - đường dẫn liên kết</h3>
+      <p>
+        Liên kết ngoài (website khác):<br />
+        <a href="https://www.google.com" target="_blank" title="Mở Google"
+          >Truy cập Google</a
+        >
+      </p>
+      <p>
+        Liên kết tới file khác trong cùng thư mục:<br />
+        <a href="contact.html">Trang liên hệ</a>
+      </p>
+      <p>
+        Liên kết mail (mở ứng dụng gửi mail):<br />
+        Gửi mail: <a href="mailto:example@gmail.com">example@gmail.com</a>
+      </p>
+      <p>
+        Liên kết số điện thoại (mở ứng dụng gửi số điện thoại):<br />
+        Gọi điện: <a href="tel:+84123456789">+84 123 456 789</a>
+      </p>
+      <p>
+        Neo tới một phần trong trang:<br />
+        <a href="#attribute-rel">Nhảy tới phần 5</a>
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>2. Thuộc tính target - cách mở liên kết</h3>
+      <p>
+        Mở trong tab mới (<code>target="_blank"</code>):<br />
+        <a href="https://www.youtube.com" target="_blank" rel="noopener"
+          >YouTube - tab mới</a
+        >
+      </p>
+      <p>
+        Mở ngay trong tab hiện tại (<code>target="_self"</code> - mặc định):<br />
+        <a href="https://www.youtube.com" target="_self"
+          >YouTube - tab hiện tại</a
+        >
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>3. Thuộc tính title - tooltip</h3>
+      <p>
+        Di chuột vào liên kết bên dưới để xem tooltip:<br />
+        <a href="https://www.wikipedia.org" title="Bách khoa toàn thư mở"
+          >Wikipedia</a
+        >
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>4. Thuộc tính id và class - CSS và JavaScript</h3>
+      <p>
+        <a href="#video" id="link-video" class="btn">Liên kết có id và class</a>
+      </p>
+      <p>
+        Dùng <code>id</code> để liên kết tới một vị trí trong trang (anchor):<br />
+        <a href="#phan-3">Nhảy tới phần 3</a>
+      </p>
+    </div>
+
+    <div class="example">
+      <h3 id="attribute-rel">5. Thuộc tính rel - mối quan hệ</h3>
+      <p>
+        <code>rel="noopener"</code> - tăng bảo mật khi dùng
+        <code>target="_blank"</code>:<br />
+        <a href="https://example.com" target="_blank" rel="noopener nofollow"
+          >Liên kết an toàn</a
+        >
+      </p>
+      <p>
+        <code>rel="nofollow"</code> - bảo máy tìm kiếm không theo dõi liên
+        kết:<br />
+        <a href="https://example.com" rel="noopener nofollow"
+          >Liên kết nofollow</a
+        >
+      </p>
+    </div>
+
+    <div class="example">
+      <h3>6. Thuộc tính download - tải file</h3>
+      <p>
+        Tải file xuống thay vì mở trực tiếp:<br />
+        <a
+          href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9X0yDLn1cEwQBbTYmkbOvDABwOaiD_EpYTfgBeq0EVg&s=10"
+          download="anh-man-hinh.png"
+          >Tải ảnh màn hình</a
+        >
+      </p>
+    </div>
+
+    <h2 id="phan-3">Tổng kết</h2>
+    <p>
+      Thuộc tính quan trọng nhất của thẻ <code>&lt;a&gt;</code> là
+      <code>href</code> - không có <code>href</code> thì liên kết không hoạt
+      động. Các thuộc tính <code>target</code>, <code>title</code>,
+      <code>id</code>, <code>class</code>, <code>rel</code>,
+      <code>download</code> giúp tăng trải nghiệm và chức năng cho liên kết.
+    </p>
+  </body>
+</html>
