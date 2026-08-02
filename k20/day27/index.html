@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 27</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      /* @layer base {
+        .tab-content {
+          @apply p-4;
+        }
+        .tab {
+          @apply cursor-pointer px-4 py-3 hover:bg-blue-300 border-r border-gray-300;
+        }
+        .active {
+          @apply bg-blue-500! text-white!;
+        }
+      } */
+      /* @layer base {
+        .tab-content {
+          @apply p-4;
+        }
+        .tab {
+          @apply cursor-pointer px-4 py-3 hover:bg-blue-300 border-r border-gray-300;
+        }
+        .active {
+          @apply bg-blue-500! text-white!;
+        }
+      }
+      .tab-content {
+        padding: 1rem;
+      }
+      .tab {
+        cursor: pointer;
+        padding: 0.75rem 1rem;
+        border-right: 1px solid #d1d5db;
+      }
+      .tab:hover {
+        background-color: #93c5fd;
+      }
+      .tab.active {
+        background-color: #1670d8;
+      }
+      .tab-content {
+        display: none;
+      }
+      .tab-content.active {
+        display: block;
+      } */
+    </style>
+  </head>
+  <body>
+    <!-- <div class="container mx-auto">
+      <h1 class="text-2xl font-bold">
+        Day 27: Dispatch Event, Custom Event, BOM
+      </h1>
+      <h2 class="text-xl font-bold">Exercise 2 Day 26: Build Tabs component</h2>
+      <div id="tabs-container" class="bg-blue-50 max-w-100">
+        <div id="tabs-title" class="flex border-b border-gray-300">
+          <div class="tab active" data-tab="1">Tab 1</div>
+          <div class="tab" data-tab="2">Tab 2</div>
+          <div class="tab" data-tab="3">Tab 3</div>
+        </div>
+        <div id="tabs-content">
+          <div class="tab-content" data-tab="1">Content for Tab 1</div>
+          <div class="tab-content" data-tab="2">Content for Tab 2</div>
+          <div class="tab-content" data-tab="3">Content for Tab 3</div>
+        </div>
+      </div>
+    </div> -->
+    <!-- <button
+      class="rounded-md bg-blue-300 p-3 hover:cursor-pointer hover:brightness-110"
+      id="dispatch-event"
+    >
+      Dispatch Event
+    </button> -->
+    <button
+      class="rounded-md bg-blue-300 p-3 hover:cursor-pointer hover:brightness-110"
+      id="change-page"
+    >
+      Change page
+    </button>
+    <button
+      class="rounded-md bg-blue-300 p-3 hover:cursor-pointer hover:brightness-110"
+      id="change-page-no-reload"
+    >
+      Change page no reload
+    </button>
+    <script src="script.js"></script>
+  </body>
+</html>
