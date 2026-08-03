@@ -133,3 +133,13 @@ console.log(
     console.log(position.coords.latitude, position.coords.longitude);
   }),
 );
+
+const employee = {
+  name: "Nguyen Van A",
+  age: 30,
+  info() {
+    console.log(`Tên: ${this.name}, tuổi: ${this.age}`);
+  },
+};
+
+const newObj = Object.create(employee);

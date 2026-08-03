@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, #eef2ff 0%, #f8fafc 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 16px;
+      color: #1e293b;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 560px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
+      padding: 28px;
+    }
+
+    /* Header */
+    .app-header { text-align: center; margin-bottom: 20px; }
+    .app-header h1 { font-size: 26px; color: #1e293b; }
+    .app-header p { color: #64748b; font-size: 14px; margin-top: 4px; }
+
+    /* Form thêm todo */
+    .todo-form { display: flex; gap: 10px; }
+    .todo-input {
+      flex: 1;
+      padding: 12px 14px;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .todo-input:focus {
+      border-color: #4c6ef5;
+      box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.15);
+    }
+    .btn-add {
+      padding: 12px 22px;
+      background: #4c6ef5;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-add:hover { background: #3b5bdb; }
+    .btn-add:active { transform: scale(0.97); }
+
+    .error-message {
+      color: #e03131;
+      font-size: 13px;
+      margin-top: 6px;
+      min-height: 18px;
+    }
+
+    /* Bộ lọc */
+    .filters { display: flex; gap: 8px; margin: 18px 0 14px; }
+    .filter-btn {
+      flex: 1;
+      padding: 8px 10px;
+      border: 2px solid #e2e8f0;
+      background: #f8fafc;
+      color: #475569;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: #b6c4f8; background: #f1f5ff; }
+    .filter-btn.active {
+      background: #4c6ef5;
+      border-color: #4c6ef5;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* Danh sách */
+    .todo-list { list-style: none; }
+
+    .todo-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      background: #fbfdff;
+      border: 1px solid #eef2f7;
+      border-radius: 10px;
+      transition: background 0.2s, border-color 0.2s;
+      animation: slide-in 0.25s ease;
+    }
+    .todo-item:hover { background: #f1f5ff; border-color: #d6ddf9; }
+    .todo-item.hidden { display: none; }
+    .todo-item.is-removing { animation: fade-out 0.25s forwards; pointer-events: none; }
+
+    /* Checkbox tuỳ chỉnh */
+    .todo-check {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 8px;
+      margin-left: -8px;
+    }
+    .todo-check input {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .checkmark {
+      position: relative;
+      width: 22px;
+      height: 22px;
+      border: 2px solid #cbd5e1;
+      border-radius: 6px;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .todo-check input:checked + .checkmark { background: #4c6ef5; border-color: #4c6ef5; }
+    .todo-check input:checked + .checkmark::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 46%;
+      width: 5px;
+      height: 9px;
+      border: solid #ffffff;
+      border-width: 0 2px 2px 0;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+    .todo-check input:focus-visible + .checkmark { box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.3); }
+
+    /* Nội dung todo */
+    .todo-text {
+      flex: 1;
+      font-size: 15px;
+      color: #334155;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+    .todo-item.completed .todo-text {
+      text-decoration: line-through;
+      color: #94a3b8;
+    }
+
+    .todo-delete {
+      padding: 6px 12px;
+      background: #ffffff;
+      color: #e03131;
+      border: 1.5px solid #ffc9c9;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .todo-delete:hover { background: #e03131; color: #ffffff; border-color: #e03131; }
+
+    /* Chế độ sửa */
+    .edit-wrap { flex: 1; }
+    .edit-input {
+      width: 100%;
+      font-size: 15px;
+      padding: 7px 9px;
+      border: 2px solid #4c6ef5;
+      border-radius: 8px;
+      outline: none;
+    }
+    .edit-error { color: #e03131; font-size: 12px; margin-top: 4px; }
+
+    /* Thông báo danh sách rỗng */
+    .empty-message {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 14px;
+      padding: 26px 0;
+    }
+    .empty-message.hidden { display: none; }
+
+    /* Footer */
+    .app-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #eef2f7;
+    }
+    .counter { color: #64748b; font-size: 14px; }
+    .btn-clear-all {
+      padding: 8px 14px;
+      background: #fff4f4;
+      color: #e03131;
+      border: 1.5px solid #ffc9c9;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-clear-all:hover { background: #e03131; color: #ffffff; border-color: #e03131; }
+    .btn-clear-all.hidden { display: none; }
+
+    @keyframes slide-in {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes fade-out {
+      to { opacity: 0; transform: translateX(24px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .todo-item { animation: none !important; transition: none !important; }
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 20px 12px; }
+      .app { padding: 20px; }
+      .todo-form { flex-direction: column; }
+      .btn-add { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1>Todo App</h1>
+      <p>Quản lý công việc hằng ngày của bạn</p>
+    </header>
+
+    <!-- Form thêm todo -->
+    <form class="todo-form" id="todo-form" autocomplete="off">
+      <input type="text" class="todo-input" id="todo-input" placeholder="Nhập nội dung todo...">
+      <button type="submit" class="btn-add">Thêm</button>
+    </form>
+    <p class="error-message" id="form-error" role="alert"></p>
+
+    <!-- Bộ lọc -->
+    <div class="filters" role="group" aria-label="Lọc todo">
+      <button type="button" class="filter-btn active" data-filter="all">Tất cả</button>
+      <button type="button" class="filter-btn" data-filter="active">Chưa hoàn thành</button>
+      <button type="button" class="filter-btn" data-filter="completed">Hoàn thành</button>
+    </div>
+
+    <!-- Container danh sách - Event Delegation đặt tại đây -->
+    <ul class="todo-list" id="todo-list"></ul>
+    <p class="empty-message hidden" id="empty-message">Không có todo nào</p>
+
+    <!-- Footer: đếm + xoá tất cả -->
+    <footer class="app-footer">
+      <span class="counter" id="counter">0/0 mục đã hoàn thành</span>
+      <button type="button" class="btn-clear-all hidden" id="clear-all">Xoá tất cả</button>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const todoForm = document.getElementById('todo-form');
+      const todoInput = document.getElementById('todo-input');
+      const formError = document.getElementById('form-error');
+      const todoList = document.getElementById('todo-list');
+      const emptyMessage = document.getElementById('empty-message');
+      const counterEl = document.getElementById('counter');
+      const clearAllBtn = document.getElementById('clear-all');
+      const filterBtns = Array.from(document.querySelectorAll('.filter-btn'));
+
+      let todos = [];
+      let currentFilter = 'all';
+      let editing = null;
+
+      function escapeHtml(value) {
+        const el = document.createElement('div');
+        el.textContent = value;
+        return el.innerHTML;
+      }
+
+      function createId() {
+        return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+      }
+
+      function findTodo(li) {
+        return todos.find((todo) => todo.id === li.dataset.id);
+      }
+
+      // Gỡ một <li> khỏi DOM, dọn dẹp nếu nó đang được sửa
+      function removeLi(li) {
+        if (editing && editing.li === li) editing = null;
+        li.remove();
+      }
+
+      // ---------- Render ----------
+
+      function renderTodo(todo) {
+        const li = document.createElement('li');
+        li.className = 'todo-item' + (todo.completed ? ' completed' : '');
+        li.dataset.id = todo.id;
+        li.innerHTML = `
+          <label class="todo-check" aria-label="Đánh dấu hoàn thành">
+            <input type="checkbox" class="todo-toggle" ${todo.completed ? 'checked' : ''}>
+            <span class="checkmark"></span>
+          </label>
+          <span class="todo-text">${escapeHtml(todo.text)}</span>
+          <button type="button" class="todo-delete">Xoá</button>
+        `;
+        todoList.appendChild(li);
+      }
+
+      function updateFooter() {
+        const done = todos.filter((todo) => todo.completed).length;
+        counterEl.textContent = done + '/' + todos.length + ' mục đã hoàn thành';
+        clearAllBtn.classList.toggle('hidden', done === 0);
+      }
+
+      function applyFilter() {
+        let visibleCount = 0;
+        todoList.querySelectorAll('.todo-item').forEach((li) => {
+          const todo = findTodo(li);
+          if (!todo) return;
+          const match =
+            currentFilter === 'all' ||
+            (currentFilter === 'active' && !todo.completed) ||
+            (currentFilter === 'completed' && todo.completed);
+          li.classList.toggle('hidden', !match);
+          if (match) visibleCount += 1;
+        });
+        emptyMessage.classList.toggle('hidden', visibleCount > 0);
+      }
+
+      // ---------- Thêm todo ----------
+
+      function addTodo(text) {
+        todos.push({ id: createId(), text: text, completed: false });
+        renderTodo(todos[todos.length - 1]);
+        updateFooter();
+        applyFilter();
+      }
+
+      todoForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const value = todoInput.value.trim();
+        if (!value) {
+          formError.textContent = 'Vui lòng nhập nội dung todo!';
+          todoInput.focus();
+          return;
+        }
+        formError.textContent = '';
+        addTodo(value);
+        todoInput.value = '';
+        todoInput.focus();
+      });
+
+      todoInput.addEventListener('input', function () {
+        if (formError.textContent) formError.textContent = '';
+      });
+
+      // ---------- Toggle & Xoá: Event Delegation ----------
+      // Một handler duy nhất gắn trên container, lắng nghe "change" (checkbox)
+      // và "click" (nút Xoá); phân biệt hành động qua event.target.
+
+      function toggleTodo(li, completed) {
+        const todo = findTodo(li);
+        if (!todo) return;
+        todo.completed = completed;
+        li.classList.toggle('completed', completed);
+        updateFooter();
+        applyFilter();
+      }
+
+      function deleteTodo(li) {
+        const todo = findTodo(li);
+        if (!todo) return;
+        const confirmed = window.confirm('Bạn có chắc chắn muốn xoá todo này không?');
+        if (!confirmed) return;
+        // Soft delete: fade ra ngoài rồi mới gỡ khỏi DOM
+        li.classList.add('is-removing');
+        window.setTimeout(function () {
+          todos = todos.filter((item) => item.id !== todo.id);
+          removeLi(li);
+          updateFooter();
+          applyFilter();
+        }, 250);
+      }
+
+      function handleTodoList(event) {
+        const target = event.target;
+        if (target.classList.contains('todo-toggle')) {
+          toggleTodo(target.closest('.todo-item'), target.checked);
+        } else if (target.classList.contains('todo-delete')) {
+          deleteTodo(target.closest('.todo-item'));
+        }
+      }
+
+      todoList.addEventListener('change', handleTodoList);
+      todoList.addEventListener('click', handleTodoList);
+
+      // ---------- Lọc ----------
+
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          currentFilter = btn.dataset.filter;
+          filterBtns.forEach(function (b) {
+            b.classList.toggle('active', b === btn);
+          });
+          applyFilter();
+        });
+      });
+
+      // ---------- Xoá tất cả ----------
+
+      clearAllBtn.addEventListener('click', function () {
+        const done = todos.filter((todo) => todo.completed);
+        if (done.length === 0) return;
+        const confirmed = window.confirm(
+          'Bạn có chắc chắn muốn xoá tất cả ' + done.length + ' todo đã hoàn thành không?'
+        );
+        if (!confirmed) return;
+        done.forEach(function (todo) {
+          const li = todoList.querySelector('.todo-item[data-id="' + todo.id + '"]');
+          if (li) li.classList.add('is-removing');
+        });
+        window.setTimeout(function () {
+          done.forEach(function (todo) {
+            const li = todoList.querySelector('.todo-item[data-id="' + todo.id + '"]');
+            if (li) removeLi(li);
+          });
+          todos = todos.filter((todo) => !todo.completed);
+          updateFooter();
+          applyFilter();
+        }, 250);
+      });
+
+      // ---------- Sửa todo (double-click) ----------
+
+      function showEditError(edit) {
+        if (!edit.errorEl) {
+          edit.errorEl = document.createElement('p');
+          edit.errorEl.className = 'edit-error';
+          edit.errorEl.textContent = 'Vui lòng nhập nội dung todo!';
+          edit.wrap.appendChild(edit.errorEl);
+        }
+      }
+
+      // Kết thúc sửa: save = true lưu nội dung mới, false thì huỷ (khôi phục nội dung cũ)
+      function endEdit(edit, save) {
+        if (editing !== edit) return;
+        const todo = findTodo(edit.li);
+        if (save) {
+          const text = edit.input.value.trim();
+          if (!text) {
+            showEditError(edit);
+            editing = edit;
+            edit.input.focus();
+            return;
+          }
+          todo.text = text;
+        }
+        editing = null;
+        const textEl = document.createElement('span');
+        textEl.className = 'todo-text';
+        textEl.textContent = todo.text;
+        edit.wrap.replaceWith(textEl);
+        edit.li.classList.remove('editing');
+      }
+
+      function startEdit(li, textEl) {
+        if (editing) {
+          endEdit(editing, true);
+          if (editing) return;
+        }
+        const todo = findTodo(li);
+        if (!todo) return;
+        li.classList.add('editing');
+
+        const wrap = document.createElement('div');
+        wrap.className = 'edit-wrap';
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'edit-input';
+        input.value = todo.text;
+        wrap.appendChild(input);
+        textEl.replaceWith(wrap);
+
+        const edit = { li: li, wrap: wrap, input: input, errorEl: null };
+        editing = edit;
+        input.focus();
+        input.setSelectionRange(input.value.length, input.value.length);
+
+        input.addEventListener('keydown', function (event) {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            endEdit(edit, true);
+          } else if (event.key === 'Escape') {
+            event.preventDefault();
+            endEdit(edit, false);
+          }
+        });
+        input.addEventListener('blur', function () {
+          endEdit(edit, true);
+        });
+      }
+
+      todoList.addEventListener('dblclick', function (event) {
+        const textEl = event.target.closest('.todo-text');
+        if (!textEl) return;
+        const li = textEl.closest('.todo-item');
+        if (li.classList.contains('editing')) return;
+        startEdit(li, textEl);
+      });
+    })();
+  </script>
+</body>
+</html>
