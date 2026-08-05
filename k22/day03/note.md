@@ -70,9 +70,7 @@
 - Ex 2: Tạo bảng thời khóa biểu dùng thead, tbody, colspan, rowspan.
 - Ex 3: Chèn video YouTube và ảnh vào trang bằng iframe và img.
 
-# Module 3: CSS
-
-## Introduction
+## Introduction CSS
 
 - Cascading Style Sheets: ngôn ngữ định dạng giao diện cho HTML
 - File `.css`: chứa các luật styling
@@ -83,7 +81,7 @@
   - External: file `.css` riêng, link qua `<link rel="stylesheet" href="">`
   - Ưu tiên dùng External
 
-## Syntax
+## Syntax CSS
 
 - Rule = Selector + Declaration block
 
@@ -94,17 +92,14 @@ selector {
 }
 ```
 
-- Selector: Chọn phần tử để styling
-  - Simple selectors:
-    - element: `p { }`
-    - class: `.class-name { }`
-    - id: `#id-name { }`
-  - Combinators:
-    - descendant: `div p` (con cháu)
-    - child: `div > p` (con trực tiếp)
-    - adjacent sibling: `h1 + p` (kế sau)
-    - general sibling: `h1 ~ p` (cùng cấp phía sau)
+## Selector
 
-## Excercise
-
-- Ex 1: Viết CSS External cho trang HTML, dùng selector element, class, id.
+- Simple selectors
+  - element: `p { }`
+  - class: `.class-name { }`
+  - id: `#id-name { }`
+- Combinators
+  - descendant: `div p`
+  - child: `div > p`
+  - adjacent sibling: `h1 + p`
+  - general sibling: `h1 ~ p`

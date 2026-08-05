@@ -1,0 +1,192 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  /* color: green; */
+  padding: 0;
+  margin: 0;
+}
+
+button.btn {
+  color: red !important;
+  min-width: 200px;
+}
+
+.btn {
+  background: skyblue;
+  border-radius: 8px;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: sans-serif;
+  transition: all 0.3s ease;
+  color: inherit;
+}
+
+/* .btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  filter: brightness(1.1);
+} */
+
+.btn:focus {
+  background: yellow;
+}
+
+/* li:first-child {
+  color: blue;
+} */
+/* li:nth-child(2) {
+  color: blue;
+} */
+/* li:last-child {
+  color: blue;
+} */
+
+/* li:nth-child(odd) {
+  color: blue;
+} */
+/* li:nth-child(2n + 1) {
+  color: blue;
+} */
+
+/* li:nth-child(even) {
+  color: blue;
+} */
+/* li:nth-child(2n) {
+  color: blue;
+} */
+
+ul {
+  /* list-style: none; */
+}
+
+ul::before {
+  content: "First item";
+  color: red;
+  font-size: 10px;
+}
+
+li::marker {
+  color: red;
+  /* font-size: 20px; */
+}
+
+/* li::before {
+  content: "❤️";
+  font-size: 10px;
+  padding-right: 5px;
+}
+
+li::after {
+  content: "🔗";
+  font-size: 10px;
+  padding-left: 5px;
+} */
+
+/* p::first-letter {
+  font-size: 32px;
+  line-height: 32px;
+  color: skyblue;
+  float: left;
+  margin-right: 5px;
+} */
+
+/* p::first-line {
+  color: skyblue;
+} */
+
+/* p::selection {
+  background: skyblue;
+  color: blue;
+} */
+
+li[title="Item 3"] {
+  color: skyblue;
+}
+
+/* li[title^="Item "] {
+  color: skyblue;
+} */
+
+/* li[title~="Item"] {
+  color: skyblue;
+} */
+
+/* li[title|="Item 2"] {
+  color: skyblue;
+} */
+
+/* li[title$="Item"] {
+  color: skyblue;
+} */
+
+/* li[title*="Item"] {
+  color: skyblue;
+} */
+
+li[title="4 Item"] {
+  color: initial;
+}
+
+/* p {
+  font-size: 16px;
+} */
+
+ul {
+  font-size: 10px;
+}
+
+li {
+  font-size: 200%;
+}
+
+p {
+  background: tan;
+  margin: 20px 10px 5px 2px;
+  padding: 20px;
+  border: 5px solid skyblue;
+  width: 200px;
+  height: 100px;
+}
+
+p {
+  display: inline-block;
+  margin-bottom: 100px;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 700px;
+  height: 700px;
+  margin: 50px auto;
+  border: 1px solid;
+}
+
+.flex-item {
+  padding: 20px;
+  width: 100px;
+}
+
+.flex-item-1 {
+  background: skyblue;
+}
+
+.flex-item-2 {
+  background: tan;
+}
+
+.flex-item-3 {
+  background: lightgreen;
+}
+
+.flex-item-4 {
+  background: lightcoral;
+}
+
+.flex-item-5 {
+  background: lightpink;
+}
