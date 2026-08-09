@@ -1,4 +1,4 @@
-# Day 4: CSS Selector, Inheritance, Specificity, Unit, Reset CSS
+# Day 4: Selector, Inheritance, Specificity, Unit, Reset, Layout types CSS
 
 ## Selector
 
