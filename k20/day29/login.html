@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <div class="border border-gray-300 p-4 rounded-lg bg-blue-50 max-w-100">
+      <h1 class="text-center text-xl mb-4 text-blue-600">Welcome back</h1>
+      <form class="flex flex-col gap-4" id="form-login">
+        <input
+          class="border border-gray-300 px-3 py-2"
+          type="email"
+          name="email"
+          placeholder="Email..."
+        />
+        <input
+          class="border border-gray-300 px-3 py-2"
+          type="password"
+          name="password"
+          placeholder="Password..."
+        />
+        <button
+          class="w-fit bg-blue-300 text-blue-600 px-3 py-2 rounded-md hover:cursor-pointer"
+        >
+          Login
+        </button>
+      </form>
+    </div>
+    <script>
+      const formLogin = document.querySelector("#form-login");
+      formLogin.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(formLogin);
+        const data = Object.fromEntries(formData.entries());
+        fetch("https://spotify.f8team.dev/api/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("access_token", data.access_token);
+            localStorage.setItem("refresh_token", data.refresh_token);
+            window.location.href = "/k20/day29/index.html";
+          });
+      });
+
+      fetch("https://spotify.f8team.dev/api/users/me", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.user) {
+            window.location.href = "/k20/day29/index.html";
+          }
+        });
+    </script>
+  </body>
+</html>

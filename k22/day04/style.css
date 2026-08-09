@@ -157,18 +157,23 @@ p {
 
 .flex-container {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
+  /* flex-direction: column; */
+  /* justify-content: flex-end; */
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
   width: 700px;
   height: 700px;
   margin: 50px auto;
   border: 1px solid;
+  /* row-gap: 40px; */
+  /* column-gap: 40px;
+  gap: 40px 20px; */
 }
 
 .flex-item {
   padding: 20px;
-  width: 100px;
+  width: 300px;
 }
 
 .flex-item-1 {
