@@ -9,10 +9,13 @@
 - Tailwind CSS
 - JavaScript
 - TypeScript
-- React - library
-- Next.js - framework
+- React
+- Next.js
+- Node.js
 - Express.js
-- Database
+- MySQL
+- PostgreSQL
+- Redis
 - Deploy
 - AI
 
@@ -20,8 +23,7 @@
 
 - Active Recall
 - Spaced Repetition
-- Build Something Real
-- Debug before asking
+- Productive struggle
 - Teach others
 
 ## Web Fundamentals
