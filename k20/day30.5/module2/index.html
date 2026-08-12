@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spotify - Web Player: Music for everyone</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <div class="h-dvh flex flex-col">
+      <header class="h-16 bg-sky-300">Header</header>
+      <div class="flex gap-2 flex-1">
+        <aside class="w-80 bg-violet-300">Aside</aside>
+        <main id="main" class="flex-1">
+          <div id="album-list"></div>
+        </main>
+      </div>
+      <div id="controls" class="h-22 bg-orange-300">Controls</div>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
