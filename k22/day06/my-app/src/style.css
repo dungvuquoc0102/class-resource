@@ -1,0 +1,104 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary-color: rgb(202, 235, 135);
+}
+
+/* html {
+  scroll-behavior: smooth;
+} */
+
+.parent {
+  max-width: 700px;
+  margin: 30px auto;
+  border: 2px solid;
+  height: 700px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  opacity: 1;
+  background-color: var(--primary-color);
+}
+
+.child {
+  width: 200px;
+  height: 200px;
+  color: white;
+  /* border: 1px solid #ccc; */
+}
+
+.child-1 {
+  background-color: skyblue;
+  /* background-image: url("https://picsum.photos/600"); */
+  background: url("https://picsum.photos/600") center / cover;
+  /* filter: blur(10px); */
+  /* filter: brightness(1.2); */
+  /* filter: contrast(2); */
+  filter: grayscale(1) brightness(1.2);
+  /* transform: translate(10px, 10px); */
+  /* transform: skewY(-20deg); */
+  /* transform: skew(20deg, 20deg); */
+  /* position: relative;
+  top: 10px;
+  left: 10px; */
+  /* transition-property: transform;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s; */
+  transition: transform 0.5s ease-in-out;
+}
+
+.child-1:hover {
+  cursor: pointer;
+  pointer-events: none;
+  transform: translate(10px, 10px) rotateZ(45deg) scale(1.2);
+}
+
+.child-2 {
+  background-image: url("https://picsum.photos/500");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  /* animation-name: trans;
+  animation-duration: 2s;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards; */
+  /* animation-timing-function: cubic-bezier(0, 1.67, 0, -0.73); */
+  animation: trans 2s ease 0s 1 forwards normal;
+}
+
+@keyframes trans {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  /* 50% {
+    transform: translate(100px, 0);
+  } */
+  100% {
+    transform: translate(100px, 0px);
+  }
+}
+
+.child-3 {
+  border-radius: 10px;
+  font-size: 40px;
+  font-weight: 700;
+  text-shadow: 0 0 5px #0000006e;
+  display: grid;
+  place-items: center;
+  background-image:
+    linear-gradient(180deg, var(--primary-color), white),
+    linear-gradient(180deg, blueviolet, white);
+  box-shadow: 0px 10px 20px 10px #cccccc6e;
+  width: calc(100% - 100px);
+}
+
+p {
+  user-select: none;
+}

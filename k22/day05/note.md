@@ -37,14 +37,18 @@
 - Grid container
   - display: grid
   - grid-template-columns / grid-template-rows / grid-template
-  - justify-content / align-content / place-content/ align-items
-  - gap / row-gap / column-gap
+  - justify / align / place
+    - items
+    - content
   - grid-template-areas
+  - gap / row-gap / column-gap
   - grid-auto-columns / grid-auto-rows
   - grid-auto-flow
 - Grid item
   - grid-column-start / grid-column-end / grid-column
   - grid-row-start / grid-row-end / grid-row
+  - justify / align / place
+    - self
   - grid-area
   - order
 

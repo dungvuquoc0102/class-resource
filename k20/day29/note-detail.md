@@ -2,42 +2,108 @@
 
 ## Storage
 
+### Giới thiệu
+
+- Web Storage API cho phép lưu dữ liệu ngay trong trình duyệt (client-side)
+- Dữ liệu giới hạn trong cùng một origin (protocol + domain + port)
+- Đọc / ghi đồng bộ, nhanh, dung lượng giới hạn khoảng 5MB
+- Chỉ lưu được chuỗi (string); muốn lưu object / array phải dùng JSON
+
 ### localStorage
 
-- localStorage.setItem(key, value)
-- localStorage.getItem(key)
-- localStorage.removeItem(key)
-- localStorage.clear()
-- localStorage.key(index)
-- localStorage.length
-
-- localStorage.setItem(key, JSON.stringify(obj)) / JSON.parse(localStorage.getItem(key)) / '""'
+- Dữ liệu không có hạn sử dụng, tồn tại cho đến khi bị xóa thủ công hoặc khi đổi trình duyệt / máy
+- Ghi dữ liệu với `localStorage.setItem(key, value)`
+- Đọc dữ liệu với `localStorage.getItem(key)`
+- Xóa 1 key với `localStorage.removeItem(key)`
+- Xóa toàn bộ dữ liệu với `localStorage.clear()`
+- Lọc theo index: `localStorage.key(index)`
+- Số lượng key hiện có: `localStorage.length`
+- Lưu object: `localStorage.setItem(key, JSON.stringify(obj))`
+- Đọc lại: `JSON.parse(localStorage.getItem(key))`
 
 ### sessionStorage
 
-- sessionStorage.setItem(key, value)
-- sessionStorage.getItem(key)
-- sessionStorage.removeItem(key)
-- sessionStorage.clear()
-- sessionStorage.key(index)
-- sessionStorage.length
+- Cùng bộ API với `localStorage`
+- Khác biệt: dữ liệu chỉ tồn tại trong phiên của tab; đóng tab là dữ liệu bị xóa
+- Không chia sẻ giữa các tab; mỗi tab có một bản riêng
+- Thích hợp cho dữ liệu tạm thời (giỏ hàng tạm, form draft, ...)
+
+### So sánh localStorage và sessionStorage
+
+- Thời gian sống: sessionStorage tồn tại trong tab, localStorage tồn tại lâu dài
+- Dung lượng: đều là giới hạn khoảng 5MB mỗi origin
+- Cách truy cập: hoàn toàn giống nhau
 
 ### Cookies
 
-- document.cookie
+- Lưu tối đa 4KB
+- Tự động gửi lên server với mỗi request
+- Có thể đặt thời gian hết hạn (expires / max-age)
+- Không nên dùng cho dữ liệu lớn, chỉ dùng cho token / phiên đăng nhập
 
-## Auth
+## Authentication
 
-- Authentication
-- Authorization
-- Session
-- JWT
-- Access token
-- Refresh token
-- Register
-- Login
-- Logout
-- Handle 401
+### Giới thiệu
+
+- Authentication là quá trình xác minh danh tính người dùng (bạn là ai)
+- Authorization là quá trình kiểm tra quyền truy cập (bạn được làm gì)
+- Cách cũ: lưu session trên server qua cookie
+- Cách hiện đại: dùng token (thường là JWT) gửi kèm trong mỗi request
+- Token giúp server không cần lưu trạng thái (stateless), dễ mở rộng
+
+### JWT
+
+- JWT (JSON Web Token) gồm 3 phần: header, payload, signature
+- Signature đảm bảo token không bị sửa đổi (do server ký)
+- Payload chứa thông tin như `userId`, `role`, thời gian hết hạn (`exp`)
+- Dạng điển hình: `xxxxx.yyyyy.zzzzz`
+
+### Access token
+
+- Token ngắn hạn (thường 15 - 60 phút)
+- Chứa thông tin người dùng và thời gian hết hạn
+- Client gửi kèm trong mỗi request qua header `Authorization: Bearer <access_token>`
+- Server không lưu lại, chỉ kiểm tra chữ ký
+
+### Refresh token
+
+- Token dài hạn (nhiều ngày đến vài tháng), dùng để xin access token mới
+- Rủi ro thấp hơn vì chỉ gửi tới endpoint đổi token, không gửi trong các request thường
+- Khi access token hết hạn, client gọi tới `/auth/refresh` kèm refresh token
+- Server xác thực refresh token rồi trả về cặp token mới
+
+### Flow đăng ký (Register)
+
+- Client gửi `username` + `password` (và thông tin cần thiết) tới `POST /auth/register`
+- Server tạo tài khoản, mã hóa mật khẩu (bcrypt, hash + salt)
+- Server trả về như thông điệp và thường tạo sẵn token (đăng nhập luôn) hoặc redirect sang login
+
+### Flow đăng nhập (Login)
+
+- Client gửi `username`/`password` tới `POST /auth/login`
+- Server xác minh mật khẩu; sai thì trả `401 Unauthorized`
+- Đúng thì trả về `{ accessToken, refreshToken }`
+- Client lưu cả 2 token vào `localStorage` (hoặc `sessionStorage`)
+
+### Flow đăng xuất (Logout)
+
+- Client xóa `accessToken` và `refreshToken` khỏi storage
+- Nếu server hỗ trợ, gọi `POST /auth/logout` để thu hồi refresh token phía server
+- Quay về trạng thái chưa đăng nhập (ẩn các phần chỉ cho user)
+
+### Xử lý token hết hạn (401)
+
+- Khi API trả về `401 Unauthorized` nghĩa token không còn hợp lệ
+- Client gọi `/auth/refresh` với refresh token để lấy access token mới
+- Lưu trữ token và luôn kèm header khi gọi API
+- Token hết hạn và refresh hết hạn -> đưa người dùng về trang login
+
+### Lưu token an toàn
+
+- `localStorage` / `sessionStorage`: đơn giản nhưng dễ bị đọc nếu có lỗ hổng XSS
+- HttpOnly cookie: chống XSS (JS không đọc được) nhưng cần xử lý CSRF
+- Lựa chọn phù hợp theo mức độ bảo mật của dự án
+- Không nhúng token vào URL, không ghi vào log, không lưu trên git
 
 ## Modules
 
