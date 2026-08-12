@@ -1,4 +1,4 @@
-# Modules, Tools, Web Component
+# Day 30: Modules, Tools
 
 ## Modules
 
@@ -9,21 +9,28 @@
 - Khi import thư viện như React, ta dùng cú pháp module để load chúng
 - Trên trình duyệt dùng thẻ `<script type="module">`
 
-### export
+### import / export
 
-- Named export: `export const name = ...`, `export function sum() {}`
-- Export một danh sách cuối file: `export { a, b, c }`
-- Đổi tên khi export: `export { a as aliasA }`
-- Default export: `export default function` / `export default { ... }`
-- Export cả named lẫn default trong cùng module
+- Named
+  - Export:
+    - `export const name = ...`
+    - `export function sum() {}`
+    - `export { a, b, c }`
+    - `export { a as aliasA }`
+  - Import:
+    - `import { a, b } from "./module.js"`
+    - `import { a as aliasA }`
+- Default
+  - Export:
+    - `export default function`
+    - `export default { ... }`
+  - Import:
+    - `import name from "./module.js"`
 
-### import
-
-- Import default: `import name from "./module.js"`
-- Import named: `import { a, b } from "./module.js"`
-- Đổi tên khi import: `import { a as aliasA }`
-- Import tất cả: `import * as lib from "./module.js"`
-- Import kết hợp: `import name, { a } from "./module.js"`
+- Kết hợp
+  - Import named + default:
+    - `import name, { a, b } from "./module.js"`
+  - Import tất cả: `import * as lib from "./module.js"`
 
 ### type="module"
 
@@ -53,10 +60,10 @@
 - Ví dụ: `await fetch(...)` lấy dữ liệu trước khi đưa ra export
 - Giúp code khởi tạo module ngắn gọn hơn
 
-### CommonJS (nói qua)
+### CommonJS
 
 - Cú pháp `require("./module.js")` và `module.exports`
-- Dùng trong Node.js (cũ), cùng hệ sinh thái npm phía backend
+- Dùng trong Node.js, cùng hệ sinh thái npm phía backend
 - ESM dần trở thành chuẩn chính cho cả browser lẫn Node.js
 
 ## Tools
@@ -114,31 +121,3 @@
 - Import thẳng CSS, JS, ảnh qua ES Modules như import code JavaScript
 - Chạy nhanh hơn việc nạp từng file bằng Live Server
 - Sẽ dùng Vite chính thức từ buổi sau (React / TypeScript)
-
-## Web component (Optional)
-
-### Giới thiệu
-
-- Web Components là chuẩn trình duyệt cho phép tự tạo thẻ HTML riêng tái sử dụng
-- Gồm 3 công nghệ: Custom Elements, Shadow DOM, HTML Template
-
-### Custom Elements
-
-- Tạo thẻ mới: `customElements.define("my-element", class MyElement extends HTMLElement {...})`
-- Tên bắt buộc có dấu gạch ngang: `my-element`, `app-card`, ...
-- Lifecycle:
-  - `connectedCallback()`: chạy khi element được thêm vào document
-  - `disconnectedCallback()`: chạy khi element bị gỡ khỏi document
-  - `attributeChangedCallback(name, oldValue, newValue)`: chạy khi attribute theo dõi thay đổi
-  - `static observedAttributes`: khai báo danh sách attribute cần theo dõi
-
-### Shadow DOM
-
-- `this.attachShadow({ mode: "open" | "closed" })`
-- CSS / DOM bên trong bị cô lập, không bị ảnh hưởng bởi style bên ngoài
-- Giúp đóng gói (encapsulation) giao diện của component
-
-### HTML Template
-
-- Thẻ `<template>` lưu HTML chưa hiển thị cho đến khi được dùng
-- `template.content.cloneNode(true)` tạo bản sao để render vào shadow DOM
