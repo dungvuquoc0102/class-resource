@@ -12,11 +12,17 @@
       <header class="h-16 bg-sky-300">Header</header>
       <div class="flex gap-2 flex-1">
         <aside class="w-80 bg-violet-300">Aside</aside>
-        <main id="main" class="flex-1">
-          <div id="album-list"></div>
+        <main id="main" class="flex-1 bg-background-base rounded-lg">
+          <div>
+            <h2 class="text-2xl font-bold hover:underline hover:cursor-pointer">
+              Albums
+            </h2>
+            <div id="album-list"></div>
+          </div>
         </main>
       </div>
-      <div id="controls" class="h-22 bg-orange-300">Controls</div>
+      <div id="controls" class="h-22 bg-orange-300 hidden">Controls</div>
+      <div id="sign-up" class="h-22 bg-orange-300">Sign up</div>
     </div>
     <script type="module" src="./src/main.js"></script>
   </body>

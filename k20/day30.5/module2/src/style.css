@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+@theme inline {
+  --color-background-base: var(--background-base);
+  --color-foreground-base: var(--foreground-base);
+}
+
+:root {
+  --background-base: #0f171b;
+  --foreground-base: #ffffff;
+}
+
+@layer base {
+  body {
+    color: var(--foreground-base);
+  }
+}
