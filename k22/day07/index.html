@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 07</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --font-be-vietnam-pro: "Be Vietnam Pro", sans-serif;
+        --primary-color: red;
+      }
+
+      @layer base {
+        html {
+          scroll-behavior: smooth;
+        }
+        body {
+          font-family: var(--font-be-vietnam-pro);
+        }
+        @keyframes rotate {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="size-100 border-10 m-2 border-dashed border-sky-400 px-2 py-4 outline"
+    >
+      Hello F8
+    </div>
+    <div class="block">Display: block</div>
+    <div class="inline">Display: inline</div>
+    <div class="inline-block">Display: inline-block</div>
+    <div class="hidden">Display: none</div>
+    <div
+      class="size-100 my-20 flex flex-row-reverse flex-wrap content-start gap-3 outline"
+    >
+      <div class="size-20 bg-sky-300">Child 1</div>
+      <div class="size-20 bg-violet-300">Child 2</div>
+      <div class="size-20 bg-amber-300">Child 3</div>
+    </div>
+    <div class="size-70 relative my-20 border">
+      <div
+        class="size-30 -z-1 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1)]"
+      >
+        Child
+      </div>
+      <!-- <div class="size-30 absolute top-1/4 bg-violet-300">Child</div> -->
+    </div>
+    <h2 class="my-3 text-xl font-bold">Grid</h2>
+    <div
+      class="size-100 mb-20 grid grid-cols-[100px_100px] grid-rows-[100px_100px_100px] place-content-center place-items-center outline"
+    >
+      <div
+        class="col-start-1 col-end-3 row-start-1 row-end-3 h-20 w-full bg-sky-300"
+      >
+        Child 1
+      </div>
+      <div class="h-20 w-full bg-violet-300">Child 2</div>
+      <div class="h-20 w-full bg-amber-300">Child 3</div>
+    </div>
+    <p
+      class="text-shadow-lg bg-linear-to-t font-be-vietnam-pro bg-size-[200%_200%] bg-[url(https://picsum.photos/1000)] from-purple-400 via-green-400 to-orange-400 bg-center bg-no-repeat text-justify text-xl font-black leading-loose tracking-wider text-rose-300/100 grayscale"
+    >
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis,
+      dolore.
+    </p>
+    <h2 class="font-bold text-xl">Transform</h2>
+    <div class="size-70 my-20 border grid place-items-center">
+      <div
+        class="text-[calc(20px*2)] animate-[rotate_2s_linear_2] size-30 bg-sky-300 transition-all duration-200 delay-200 hover:scale-150 hover:rotate-20 select-none"
+      >
+        Child
+      </div>
+    </div>
+  </body>
+</html>
