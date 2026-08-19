@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 8</title>
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icon -->
+    <script
+      src="https://kit.fontawesome.com/595b46303d.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --font-be-vietnam-pro: "Be Vietnam Pro", sans-serif;
+        --breakpoint-md: 800px;
+        --breakpoint-lg: 1200px;
+        --color-foreground-logo: #111827;
+        --color-primary: #f05123;
+        --color-primary-strong: #b73710;
+        --color-secondary: #6b7280;
+        --color-background-button: linear-gradient(135deg, #fff0e8, #fff8f4);
+        --color-background-button-hover: #f0512314;
+        --color-background-notification: #fa3e3e;
+        --color-background-icon-hover: #f5f6f7;
+        --color-border: #eceff3;
+      }
+      @layer base {
+        body {
+          font-family: var(--font-be-vietnam-pro);
+          font-size: 14px;
+        }
+
+        .background-button {
+          background-image: var(--color-background-button);
+        }
+
+        .background-avatar {
+          background-image: conic-gradient(
+            #ea4335 0deg 90deg,
+            #4285f4 90deg 180deg,
+            #34a853 180deg 270deg,
+            #fbbc04 270deg 360deg
+          );
+        }
+        .nav-item-active {
+          background-color: #e8ebed;
+          color: #1a1a1a;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div class="parent">
+      <div class="child child-1">Child 1</div>
+      <div class="child child-2">Child 2</div>
+      <div class="child child-3">Child 3</div>
+    </div> -->
+    <!-- 0 -> 767.98px -->
+    <!-- 768px -> 1023.98px -->
+    <!-- 1024px -> infinity -->
+    <!-- <div
+      class="grid grid-cols-1 grid-rows-3 size-125 border md:grid-cols-2 lg:grid-cols-3"
+    >
+      <div class="bg-sky-300">Child 1</div>
+      <div class="bg-rose-300">Child 2</div>
+      <div class="bg-amber-300">Child 3</div>
+    </div> -->
+    <header
+      class="bg-white/98 fixed top-0 left-0 right-0 flex items-center justify-between h-16 px-7 border-b border-border"
+    >
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-2">
+        <img
+          class="size-9 rounded-md"
+          src="https://files.fullstack.edu.vn/f8-prod/organization-logos/694743c405102.png"
+          alt="F8 Logo"
+        />
+        <h1
+          class="uppercase text-md font-bold text-foreground-logo whitespace-nowrap"
+        >
+          Học lập trình để đi làm
+        </h1>
+      </a>
+      <!-- Search input -->
+      <div
+        class="flex items-center border border-border rounded-full p-0.5 gap-2"
+      >
+        <!-- Category -->
+        <div>
+          <!-- Hover button -->
+          <div
+            class="background-button rounded-full text-primary min-h-11 px-3 flex items-center gap-2 cursor-pointer w-fit hover:bg-background-button-hover hover:text-primary-strong"
+          >
+            <i class="fa-solid fa-table-cells-large"></i>
+            <span class="font-bold">Danh mục</span>
+          </div>
+          <!-- Category -->
+        </div>
+        <!-- Icon search -->
+        <i
+          class="ml-2 fa-solid fa-magnifying-glass text-lg text-[#787878] cursor-pointer"
+        ></i>
+        <!-- Input search -->
+        <input
+          type="text"
+          name="search"
+          id="search"
+          placeholder="Tìm khóa học, bài tập, hỏi đáp..."
+          autocomplete="false"
+          class="outline-none px-2 py-1 w-95"
+        />
+      </div>
+      <!-- Function button -->
+      <div class="flex items-center gap-3">
+        <!-- Course button -->
+        <div
+          class="rounded-full min-h-11 px-3 flex items-center gap-2 cursor-pointer w-fit hover:bg-background-button-hover hover:text-primary-strong"
+        >
+          <span class="font-bold">Khóa học của tôi</span>
+        </div>
+        <!-- Noti button -->
+        <div
+          class="relative size-11 grid place-items-center rounded-full cursor-pointer hover:bg-background-icon-hover group"
+        >
+          <i
+            class="fa-solid fa-bell text-lg group-hover:text-primary-strong"
+          ></i>
+          <span
+            class="bg-background-notification absolute top-0 -right-1 border-2 border-white inline-block px-2 rounded-full bg-red-500 text-white text-xs"
+            >99+</span
+          >
+        </div>
+        <!-- Avatar -->
+        <div
+          class="grid place-items-center rounded-full size-11 cursor-pointer hover:bg-background-icon-hover"
+        >
+          <div
+            class="-rotate-45 background-avatar size-8 rounded-full grid place-items-center"
+          >
+            <img
+              class="rotate-45 rounded-full size-7"
+              src="https://files.f8.edu.vn/f8-prod/public-images/6870d57b274a2.png"
+              alt="Avatar"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="flex mt-16">
+      <!-- Navigation -->
+      <div class="w-24 p-2.5 py-5">
+        <nav>
+          <ul class="flex flex-col gap-1">
+            <li>
+              <a
+                class="nav-item-active rounded-2xl flex flex-col items-center justify-center gap-1 w-full aspect-square"
+                href="index.html"
+              >
+                <i class="fa-solid fa-house text-lg"></i>
+                <span class="text-[11px] font-semibold">Trang chủ</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="rounded-2xl flex flex-col items-center justify-center gap-1 w-full aspect-square hover:bg-background-icon-hover hover:text-[#1a1a1a] text-[#404040]"
+                href="#!"
+              >
+                <i class="fa-solid fa-road text-lg"></i>
+                <span class="text-[11px] font-semibold">Lộ trình</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="rounded-2xl flex flex-col items-center justify-center gap-1 w-full aspect-square hover:bg-background-icon-hover hover:text-[#1a1a1a] text-[#404040]"
+                href="#!"
+              >
+                <i class="fa-solid fa-newspaper text-lg"></i>
+                <span class="text-[11px] font-semibold">Bài viết</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="rounded-2xl flex flex-col items-center justify-center gap-1 w-full aspect-square hover:bg-background-icon-hover hover:text-[#1a1a1a] text-[#404040]"
+                href="#!"
+              >
+                <i class="fa-solid fa-bullhorn text-lg"></i>
+                <span class="text-[11px] font-semibold">Bản tin</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="rounded-2xl flex flex-col items-center justify-center gap-1 w-full aspect-square hover:bg-background-icon-hover hover:text-[#1a1a1a] text-[#404040]"
+                href="#!"
+              >
+                <i class="fa-solid fa-comments text-lg"></i>
+                <span class="text-[11px] font-semibold">Hỏi đáp</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="rounded-2xl flex flex-col items-center justify-center gap-1 w-full aspect-square hover:bg-background-icon-hover hover:text-[#1a1a1a] text-[#404040]"
+                href="#!"
+              >
+                <i class="fa-solid fa-clipboard-list text-lg"></i>
+                <span class="text-[11px] font-semibold">Bài tập</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Main -->
+      <div class="flex-1 p-2.5 py-5">
+        <!-- Process -->
+        <section>
+          <div
+            class="container mx-auto transition-all flex items-center px-4 py-3 rounded-2xl border border-border hover:shadow-md cursor-pointer"
+          >
+            <!-- Percent -->
+            <span
+              class="text-primary font-bold text-[15px] pr-4 border-r border-border"
+              >22%</span
+            >
+            <div class="pl-4 flex-1">
+              <div class="text-[15px] font-bold">JavaScript Pro</div>
+              <div class="text-[13px] text-secondary">
+                Bài tiếp: 33.18 Giải thích code bài tập
+              </div>
+            </div>
+            <button
+              class="bg-primary text-white text-[13px] font-medium px-5 py-2 rounded-full hover:cursor-pointer hover:-translate-y-0.5 hover:brightness-90 transition-all duration-300"
+            >
+              Tiếp tục học
+            </button>
+          </div>
+        </section>
+        <!-- Story -->
+        <section>
+          <div class="container mx-auto mt-5 px-10">
+            <h2 class="text-[17px] font-semibold">Tin</h2>
+            <div class="flex gap-3 mt-2">
+              <!-- Story item -->
+              <div class="flex flex-col items-center gap-2">
+                <img
+                  class="w-29 aspect-[116/206] rounded-2xl object-cover"
+                  src="https://files.f8.edu.vn/f8-prod/public-images/6870d57b274a2.png"
+                  alt=""
+                />
+                <span class="text-[12.5px] font-medium">Tạo tin</span>
+              </div>
+              <!-- Story item -->
+              <div class="relative flex flex-col items-center gap-2">
+                <img
+                  class="w-29 aspect-[116/206] rounded-2xl object-cover"
+                  src="https://files.f8.edu.vn/f8-prod/streamable-videos/2644/0/6a69d7452bc8e.jpg"
+                  alt=""
+                />
+                <span
+                  class="text-[12.5px] font-medium max-w-[68px] line-clamp-1"
+                  >Nga Trần Phương</span
+                >
+                <img
+                  class="top-2 left-2 absolute size-10 border-2 border-primary rounded-full"
+                  src="https://files.f8.edu.vn/f8-prod/avatars/6a45c8c490545.jpg"
+                  alt="Story avatar"
+                />
+              </div>
+              <!-- Story item -->
+              <div class="relative flex flex-col items-center gap-2">
+                <img
+                  class="w-29 aspect-[116/206] rounded-2xl object-cover"
+                  src="https://files.f8.edu.vn/f8-prod/streamable-videos/2708/0/6a84344837799.jpg"
+                  alt=""
+                />
+                <span
+                  class="text-[12.5px] font-medium max-w-[87px] line-clamp-1"
+                  >Bùi Thị Thùy Dương</span
+                >
+                <img
+                  class="top-2 left-2 absolute size-10 border-2 border-primary rounded-full"
+                  src="https://files.f8.edu.vn/f8-prod/avatars/6a3b53b325bdc.jpg"
+                  alt="Story avatar"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <footer></footer>
+  </body>
+</html>
