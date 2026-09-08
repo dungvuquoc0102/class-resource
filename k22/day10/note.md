@@ -1,0 +1,225 @@
+# Day 10: Loops, String, Number, Function, Basic Objects
+
+## Loops
+
+- Vòng lặp dùng để chạy một khối code nhiều lần.
+- `for`
+  - Dùng khi biết trước số lần lặp
+  - Cú pháp: init, condition, update
+  - Duyệt theo index
+  - Đếm tăng / đếm ngược
+- `while`
+  - Dùng khi chưa biết trước số lần lặp
+  - Kiểm tra điều kiện trước khi chạy
+- `do...while`
+  - Chạy ít nhất một lần rồi mới kiểm tra điều kiện
+- `for...of`
+  - Dùng để duyệt các iterable
+  - Hay dùng với array, string
+  - Lấy trực tiếp value
+- `for...in`
+  - Dùng để duyệt key/index
+  - Hay dùng với object
+  - Với array nên ưu tiên `for`, `for...of`, hoặc array methods hơn
+- `break`
+  - Thoát vòng lặp
+- `continue`
+  - Bỏ qua lượt lặp hiện tại
+- Nested loops
+  - Vòng lặp lồng nhau
+  - Bảng cửu chương
+  - Ma trận
+  - Vẽ hình bằng ký tự
+- Lưu ý
+  - Tránh infinite loop
+  - Luôn xác định điều kiện dừng
+
+## String
+
+- Tạo string
+  - Nháy đơn
+  - Nháy đôi
+  - Template literals
+- Template literals
+  - Nội suy biến với `${}`
+  - Viết chuỗi nhiều dòng
+- Escape characters
+  - `\'`
+  - `\"`
+  - `\\`
+  - `\n`
+  - `\t`
+- `.length`
+- Truy cập ký tự
+  - `str[index]`
+- Method thường dùng
+  - `toLowerCase()`
+  - `toUpperCase()`
+  - `trim()`
+  - `includes()`
+  - `startsWith()`
+  - `endsWith()`
+  - `indexOf()`
+  - `slice()`
+  - `replace()`
+  - `split()`
+- Tách và nối chuỗi
+  - `split()`
+  - `join()`
+- String primitive vs String object
+  - Dùng string literal
+  - Tránh `new String()`
+- Lỗi hay gặp
+  - Quên string là immutable
+  - Nhầm index bắt đầu từ 1
+  - Quên `trim()` khi xử lý input
+
+## Number
+
+- JavaScript chỉ có một kiểu `number`
+  - Số nguyên
+  - Số thực
+  - Scientific notation
+- Floating point precision
+  - `0.1 + 0.2`
+  - Cách xử lý: nhân lên thành số nguyên rồi chia lại
+- Number + String
+  - `+` có thể là cộng hoặc nối chuỗi
+  - JS tính từ trái sang phải
+- Numeric strings
+  - `-`, `*`, `/` thường ép chuỗi số thành number
+  - `+` dễ bị nối chuỗi
+- Giá trị đặc biệt
+  - `NaN`
+  - `Infinity`
+  - `-Infinity`
+- Kiểm tra number
+  - `Number.isNaN()`
+  - `Number.isFinite()`
+  - `Number.isInteger()`
+  - `Number.isSafeInteger()`
+- Chuyển đổi thành number
+  - `Number()`
+  - `parseInt()`
+  - `parseFloat()`
+  - Unary plus: `+value`
+- Number methods
+  - `toString()`
+  - `toFixed()`
+- BigInt
+  - Dùng khi số nguyên vượt quá safe integer
+  - Không trộn trực tiếp BigInt với Number
+
+## Math
+
+- `Math` là built-in object hỗ trợ tính toán.
+- Method thường dùng
+  - `Math.round()`
+  - `Math.floor()`
+  - `Math.ceil()`
+  - `Math.trunc()`
+  - `Math.abs()`
+  - `Math.max()`
+  - `Math.min()`
+  - `Math.pow()`
+  - `Math.sqrt()`
+  - `Math.random()`
+- Random number
+  - Random từ 0 đến dưới 1
+  - Random integer trong khoảng min - max
+
+## Function
+
+- Function là khối code tái sử dụng, chỉ chạy khi được gọi.
+- Function declaration
+  - Có hoisting
+- Function expression
+  - Gán function vào biến
+  - Không gọi trước khi gán
+- Arrow function
+  - Cú pháp ngắn
+  - Không có `this` riêng
+  - Không nên dùng làm object method nếu cần `this`
+- Invocation
+  - `sayHello`: tham chiếu function
+  - `sayHello()`: gọi function
+- Parameters vs Arguments
+  - Parameter: tên biến khi định nghĩa
+  - Argument: giá trị khi gọi
+  - JS không kiểm tra kiểu argument
+  - JS không kiểm tra số lượng argument
+- Default parameters
+- Return
+  - Trả kết quả ra ngoài
+  - Dừng function ngay lập tức
+  - Không `return` thì nhận `undefined`
+- `arguments` object
+  - Có trong function thường
+  - Không có trong arrow function
+- Rest parameter
+  - `...args`
+  - Nhận nhiều argument thành array thật
+- Pass by value vs pass by reference
+  - Primitive: truyền theo giá trị
+  - Object/array/function: truyền theo tham chiếu
+- Pure function
+  - Cùng input trả cùng output
+  - Ít side effect
+- Callback function
+  - Function được truyền vào function khác
+
+## Closures
+
+- Closure là khi inner function ghi nhớ biến ở outer function.
+- Dù outer function đã chạy xong, inner function vẫn dùng được biến đó.
+- Ví dụ nên demo
+  - `createCounter()`
+  - Private variable
+  - Function factory
+- Ứng dụng
+  - Lưu state riêng
+  - Che giấu dữ liệu
+  - Callback giữ dữ liệu từ scope ngoài
+
+## Basic Objects
+
+- Object dùng để lưu dữ liệu theo cặp key-value.
+- Tạo object
+  - Object literal
+  - `new Object()`
+- Property
+  - Key
+  - Value
+- Method
+  - Function nằm trong object
+- Access
+  - Dot notation
+  - Bracket notation
+- Add
+- Change
+- Delete
+- Check if a property exists
+  - `in`
+  - `hasOwnProperty()`
+- Nested objects
+- Display object
+  - `console.log(obj)`
+  - `[object Object]`
+  - `JSON.stringify()`
+- Duyệt object
+  - `for...in`
+  - `Object.keys()`
+  - `Object.values()`
+  - `Object.entries()`
+- Basic `this`
+  - In object method
+  - In function
+  - In global
+  - In arrow function
+- Constructor function
+  - Dùng để tạo nhiều object cùng cấu trúc
+  - Gọi với `new`
+  - `this` trỏ tới object mới
+- Object reference
+  - Object so sánh theo tham chiếu
+  - Gán object cho biến khác không tạo bản copy mới
