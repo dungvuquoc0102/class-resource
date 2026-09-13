@@ -235,20 +235,6 @@ const multiply = function (a, b) {
 multiply(4, 5); // 20
 ```
 
-#### Anonymous Function
-
-Function expression không cần tên.
-
-```javascript
-const sayHello = function () {
-  return "Hello World";
-};
-
-sayHello(); // "Hello World"
-```
-
-> Function expression kết thúc bằng dấu `;` vì nó là câu lệnh gán.
-
 #### Hoisting
 
 | Loại                 | Hoisted?                              |
@@ -270,21 +256,6 @@ const add = function (a, b) {
 };
 ```
 
-### Local Variables (Biến địa phương)
-
-Biến khai báo trong hàm chỉ tồn tại trong hàm đó.
-
-```javascript
-function myFunction() {
-  let carName = "Volvo";
-  // code trong hàm có thể dùng carName
-}
-// code ngoài hàm không thể dùng carName
-```
-
-- Local variables được tạo khi hàm chạy, xoá khi hàm kết thúc
-- Có thể dùng cùng tên biến ở các hàm khác nhau
-
 ### Arrow Functions
 
 Cú pháp ngắn gọn hơn cho function expression (giới thiệu).
@@ -297,6 +268,37 @@ const add = function (a, b) {
 
 // Arrow function
 const add = (a, b) => a + b;
+```
+
+### IIFE (Immediately Invoked Function Expression)
+
+Function được định nghĩa và gọi ngay lập tức.
+
+```javascript
+(function () {
+  console.log("Hello World");
+})();
+```
+
+### Anonymous function
+
+Function không có tên.
+
+```javascript
+function () {
+  return "Hello World";
+};
+```
+
+### Callback function
+
+Function được truyền vào như một đối số của function khác.
+
+```javascript
+function greet(name, callback) {
+  console.log("Hello " + name);
+  callback();
+}
 ```
 
 ## Object trong JavaScript
@@ -335,8 +337,6 @@ const add = (a, b) => a + b;
 - In arrow function
 - Bind, call, apply
 - In constructor
-- In class
-- In event listener
 
 ### Get / Set
 
@@ -358,3 +358,7 @@ function a() {
 }
 
 a.name
+
+```
+
+```
