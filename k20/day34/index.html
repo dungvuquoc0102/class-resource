@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu</title>
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <style>
+      .main-menu {
+        margin: auto;
+        max-width: 70rem;
+        min-height: 600px;
+        background-image: url(https://i.pinimg.com/originals/db/ef/7e/dbef7e5e9f5d11db75f4fee9e9ea8dee.jpg);
+      }
+
+      .nav > li:not(:last-child) > a {
+        border-right: 1px solid #000;
+        padding-inline: 20px;
+      }
+
+      .hearder-menu {
+        background-color: rgb(144, 144, 148);
+        height: 35px;
+        display: inline-block;
+        width: 100%;
+      }
+
+      .nav {
+        list-style-type: none;
+        display: flex;
+      }
+      .nav li {
+        position: relative;
+        display: inline-block;
+        /* padding: 0 10px; */
+      }
+      .nav > li > a {
+        color: #fff;
+      }
+
+      .nav li a {
+        text-decoration: none;
+        font-size: 1rem;
+        display: block;
+        line-height: 35px;
+      }
+
+      .nav .sub-nav {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .nav .sub-nav a {
+        width: 380px;
+        color: black;
+      }
+      .nav .sub-nav a:hover {
+        background-color: #9d9898;
+        color: #fff;
+      }
+
+      .nav li a:hover {
+        background-color: #fff;
+        color: black;
+      }
+      .nav li a:active {
+        background-color: rgb(225, 217, 207);
+        transform: scale(0.95);
+      }
+
+      .nav li:hover .sub-nav {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-menu">
+      <div class="hearder-menu">
+        <ul class="nav">
+          <li><a href="">Home</a></li>
+          <li><a href="">Other Demos</a></li>
+          <li><a href="">Blog</a></li>
+          <li><a href="">Dashboard</a></li>
+          <li><a href="">Cart</a></li>
+          <li><a href="">Guest Orders</a></li>
+
+          <li>
+            <a href="">More</a>
+            <ul class="sub-nav">
+              <li><a href="">Custom Link Templates</a></li>
+              <li><a href="">Another Sample Menu</a></li>
+              <li><a href="">New Menu Item</a></li>
+            </ul>
+          </li>
+
+          <li><a href="">Sample Page</a></li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
