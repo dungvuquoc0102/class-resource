@@ -4,7 +4,13 @@
 // Tự xử lý routing -> React Router để giải quyết
 // Dự án 1 file -> Component để giải quyết
 
-# Day 34: React router, Layout, useReducer, useContext, useRef, useImperativeHandle, useMemo, useCallback
+- useState
+- useEffect
+  - component Products - server Products
+  - component Video playing - DOM
+  - component Connection - Service
+
+# Day 35: useReducer, useContext, useRef, useImperativeHandle, useMemo, useCallback
 
 ## Mục tiêu buổi học
 
@@ -957,6 +963,198 @@ Không phải mọi render lại đều là vấn đề.
 
 ---
 
+## `useRef`
+
+### Giới thiệu
+
+`useRef` tạo ra một object có dạng:
+
+```jsx
+{
+  current: giá_trị;
+}
+```
+
+Giá trị trong `.current` được giữ lại giữa các lần render, nhưng thay đổi `.current` không làm component render lại.
+
+```jsx
+const ref = useRef(initialValue);
+```
+
+### Truy cập DOM element
+
+```jsx
+import { useRef } from "react";
+
+function LoginForm() {
+  const inputRef = useRef(null);
+
+  function focusInput() {
+    inputRef.current.focus();
+  }
+
+  return (
+    <div>
+      <input ref={inputRef} placeholder="Email" />
+      <button onClick={focusInput}>Focus input</button>
+    </div>
+  );
+}
+```
+
+### Lưu giá trị không cần render lại
+
+Ví dụ lưu số lần render:
+
+```jsx
+import { useEffect, useRef, useState } from "react";
+
+function RenderCounter() {
+  const [count, setCount] = useState(0);
+  const renderCountRef = useRef(0);
+
+  useEffect(() => {
+    renderCountRef.current += 1;
+  });
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <p>Số lần render: {renderCountRef.current}</p>
+      <button onClick={() => setCount(count + 1)}>Tăng</button>
+    </div>
+  );
+}
+```
+
+Ví dụ lưu timer id:
+
+```jsx
+import { useRef } from "react";
+
+function Timer() {
+  const intervalRef = useRef(null);
+
+  function startTimer() {
+    intervalRef.current = setInterval(() => {
+      console.log("Tick");
+    }, 1000);
+  }
+
+  function stopTimer() {
+    clearInterval(intervalRef.current);
+  }
+
+  return (
+    <div>
+      <button onClick={startTimer}>Start</button>
+      <button onClick={stopTimer}>Stop</button>
+    </div>
+  );
+}
+```
+
+### `useRef` khác gì `useState`?
+
+| `useState`                        | `useRef`                                  |
+| --------------------------------- | ----------------------------------------- |
+| Thay đổi làm component render lại | Thay đổi không làm component render lại   |
+| Dùng cho dữ liệu hiển thị trên UI | Dùng cho DOM, timer id, cache giá trị phụ |
+| Cập nhật bằng setter              | Cập nhật bằng `.current`                  |
+
+> Lưu ý: Không nên dùng `useRef` để né render cho dữ liệu thật sự cần hiển thị lên UI. Nếu UI cần thay đổi, hãy dùng `useState`.
+
+---
+
+## `useImperativeHandle`
+
+### Giới thiệu
+
+Thông thường React khuyến khích luồng dữ liệu một chiều:
+
+```txt
+Cha truyền props xuống con
+Con báo sự kiện ngược lên cha qua callback
+```
+
+`useImperativeHandle` là hook dùng để component con tự định nghĩa những hàm mà component cha có thể gọi thông qua `ref`.
+
+Hook này ít dùng hơn các hook khác, thường chỉ cần trong:
+
+- Component input custom cần expose `focus()`
+- Modal cần expose `open()` / `close()`
+- Component tích hợp thư viện UI hoặc DOM bên ngoài React
+
+### Ví dụ custom input expose hàm `focus`
+
+Từ React 19, component có thể nhận `ref` như một prop. Vì vậy không cần dùng `forwardRef` cho ví dụ mới.
+
+```jsx
+import { useImperativeHandle, useRef } from "react";
+
+function TextInput({ ref, ...props }) {
+  const inputRef = useRef(null);
+
+  useImperativeHandle(ref, () => {
+    return {
+      focus() {
+        inputRef.current.focus();
+      },
+      clear() {
+        inputRef.current.value = "";
+      },
+    };
+  }, []);
+
+  return <input ref={inputRef} {...props} />;
+}
+
+function LoginPage() {
+  const emailInputRef = useRef(null);
+
+  function handleFocusEmail() {
+    emailInputRef.current.focus();
+  }
+
+  function handleClearEmail() {
+    emailInputRef.current.clear();
+  }
+
+  return (
+    <div>
+      <TextInput ref={emailInputRef} placeholder="Email" />
+      <button onClick={handleFocusEmail}>Focus email</button>
+      <button onClick={handleClearEmail}>Clear email</button>
+    </div>
+  );
+}
+```
+
+> Lưu ý: Trong React 18 trở về trước, muốn component nhận `ref` thì phải dùng `forwardRef`. Từ React 19, `forwardRef` không còn cần thiết cho trường hợp này và nằm trong nhóm API cũ.
+
+### Vì sao không truyền thẳng DOM ref?
+
+Nếu truyền thẳng DOM ref, component cha có thể truy cập toàn bộ DOM node:
+
+```jsx
+emailInputRef.current.value = "abc";
+emailInputRef.current.style.color = "red";
+emailInputRef.current.remove();
+```
+
+Với `useImperativeHandle`, component con chỉ expose những API được phép:
+
+```jsx
+{
+  focus() {},
+  clear() {}
+}
+```
+
+> Thực tế: Dùng `useImperativeHandle` khi thật sự cần điều khiển imperative. Với phần lớn UI thông thường, props và state vẫn là cách nên dùng.
+
+---
+
 ## `useMemo`
 
 ### Giới thiệu
@@ -1209,198 +1407,6 @@ function ProductPage({ categoryId }) {
 | Truyền callback xuống component có `memo` | Function nhỏ dùng ngay trong component |
 | Callback là dependency của hook khác      | Dùng cho mọi event handler             |
 | Component con render nặng                 | Chưa có vấn đề hiệu năng rõ ràng       |
-
----
-
-## `useRef`
-
-### Giới thiệu
-
-`useRef` tạo ra một object có dạng:
-
-```jsx
-{
-  current: giá_trị;
-}
-```
-
-Giá trị trong `.current` được giữ lại giữa các lần render, nhưng thay đổi `.current` không làm component render lại.
-
-```jsx
-const ref = useRef(initialValue);
-```
-
-### Truy cập DOM element
-
-```jsx
-import { useRef } from "react";
-
-function LoginForm() {
-  const inputRef = useRef(null);
-
-  function focusInput() {
-    inputRef.current.focus();
-  }
-
-  return (
-    <div>
-      <input ref={inputRef} placeholder="Email" />
-      <button onClick={focusInput}>Focus input</button>
-    </div>
-  );
-}
-```
-
-### Lưu giá trị không cần render lại
-
-Ví dụ lưu số lần render:
-
-```jsx
-import { useEffect, useRef, useState } from "react";
-
-function RenderCounter() {
-  const [count, setCount] = useState(0);
-  const renderCountRef = useRef(0);
-
-  useEffect(() => {
-    renderCountRef.current += 1;
-  });
-
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <p>Số lần render: {renderCountRef.current}</p>
-      <button onClick={() => setCount(count + 1)}>Tăng</button>
-    </div>
-  );
-}
-```
-
-Ví dụ lưu timer id:
-
-```jsx
-import { useRef } from "react";
-
-function Timer() {
-  const intervalRef = useRef(null);
-
-  function startTimer() {
-    intervalRef.current = setInterval(() => {
-      console.log("Tick");
-    }, 1000);
-  }
-
-  function stopTimer() {
-    clearInterval(intervalRef.current);
-  }
-
-  return (
-    <div>
-      <button onClick={startTimer}>Start</button>
-      <button onClick={stopTimer}>Stop</button>
-    </div>
-  );
-}
-```
-
-### `useRef` khác gì `useState`?
-
-| `useState`                        | `useRef`                                  |
-| --------------------------------- | ----------------------------------------- |
-| Thay đổi làm component render lại | Thay đổi không làm component render lại   |
-| Dùng cho dữ liệu hiển thị trên UI | Dùng cho DOM, timer id, cache giá trị phụ |
-| Cập nhật bằng setter              | Cập nhật bằng `.current`                  |
-
-> Lưu ý: Không nên dùng `useRef` để né render cho dữ liệu thật sự cần hiển thị lên UI. Nếu UI cần thay đổi, hãy dùng `useState`.
-
----
-
-## `useImperativeHandle`
-
-### Giới thiệu
-
-Thông thường React khuyến khích luồng dữ liệu một chiều:
-
-```txt
-Cha truyền props xuống con
-Con báo sự kiện ngược lên cha qua callback
-```
-
-`useImperativeHandle` là hook dùng để component con tự định nghĩa những hàm mà component cha có thể gọi thông qua `ref`.
-
-Hook này ít dùng hơn các hook khác, thường chỉ cần trong:
-
-- Component input custom cần expose `focus()`
-- Modal cần expose `open()` / `close()`
-- Component tích hợp thư viện UI hoặc DOM bên ngoài React
-
-### Ví dụ custom input expose hàm `focus`
-
-Từ React 19, component có thể nhận `ref` như một prop. Vì vậy không cần dùng `forwardRef` cho ví dụ mới.
-
-```jsx
-import { useImperativeHandle, useRef } from "react";
-
-function TextInput({ ref, ...props }) {
-  const inputRef = useRef(null);
-
-  useImperativeHandle(ref, () => {
-    return {
-      focus() {
-        inputRef.current.focus();
-      },
-      clear() {
-        inputRef.current.value = "";
-      },
-    };
-  }, []);
-
-  return <input ref={inputRef} {...props} />;
-}
-
-function LoginPage() {
-  const emailInputRef = useRef(null);
-
-  function handleFocusEmail() {
-    emailInputRef.current.focus();
-  }
-
-  function handleClearEmail() {
-    emailInputRef.current.clear();
-  }
-
-  return (
-    <div>
-      <TextInput ref={emailInputRef} placeholder="Email" />
-      <button onClick={handleFocusEmail}>Focus email</button>
-      <button onClick={handleClearEmail}>Clear email</button>
-    </div>
-  );
-}
-```
-
-> Lưu ý: Trong React 18 trở về trước, muốn component nhận `ref` thì phải dùng `forwardRef`. Từ React 19, `forwardRef` không còn cần thiết cho trường hợp này và nằm trong nhóm API cũ.
-
-### Vì sao không truyền thẳng DOM ref?
-
-Nếu truyền thẳng DOM ref, component cha có thể truy cập toàn bộ DOM node:
-
-```jsx
-emailInputRef.current.value = "abc";
-emailInputRef.current.style.color = "red";
-emailInputRef.current.remove();
-```
-
-Với `useImperativeHandle`, component con chỉ expose những API được phép:
-
-```jsx
-{
-  focus() {},
-  clear() {}
-}
-```
-
-> Thực tế: Dùng `useImperativeHandle` khi thật sự cần điều khiển imperative. Với phần lớn UI thông thường, props và state vẫn là cách nên dùng.
 
 ---
 
