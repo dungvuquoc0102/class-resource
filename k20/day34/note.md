@@ -4,7 +4,7 @@
 // Tự xử lý routing -> React Router để giải quyết
 // Dự án 1 file -> Component để giải quyết
 
-# Day 34: React router, Layout, useContext, useReducer, useMemo, memo, useCallback, useRef, useImperativeHandle
+# Day 34: React router, Layout, useReducer, useContext, useRef, useImperativeHandle, useMemo, useCallback
 
 ## Mục tiêu buổi học
 
