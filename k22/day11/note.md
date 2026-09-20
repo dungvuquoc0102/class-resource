@@ -347,18 +347,3 @@ function greet(name, callback) {
 
 - Intro
 - Prototype chain
-
-- Object
-- Object literal: `{ name: "Lan", age: 24 }`
-- Function: `function <name>() {...}`
-- Array: `[1, 2, 3]`
-
-function a() {
-...
-}
-
-a.name
-
-```
-
-```

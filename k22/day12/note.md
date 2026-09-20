@@ -1,4 +1,4 @@
-# Day 12: Array, Math, Date, Scope, Error, Class, DOM cơ bản
+# Day 12: Array, Math trong JavaScript
 
 ## 1. Array trong JavaScript
 
