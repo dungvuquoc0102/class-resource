@@ -1,8 +1,8 @@
-# Day 3: Link, Media, Form, Table HTML, Selector CSS
+# Day 3: Nhóm thẻ Link, Media, Form, Table trong HTML; Introduction, Syntax trong CSS
 
-## Link
+## Tag types
 
-- Attributes:
+- Link: a
   - href
     - External URL
     - Internal URL
@@ -15,46 +15,42 @@
     - noopener
     - noreferrer
 
-## Media
+- Media:
+  - img
+    - src, alt
+  - audio
+    - src, controls, autoplay, loop, muted
+  - video
+    - src, controls, autoplay, loop, muted, poster
+  - iframe
+    - src, allowfullscreen
+    - Embed external content: YouTube, Google Maps
 
-- `img`
-  - src, alt
-- `audio`
-  - src, controls, autoplay, loop, muted
-- `video`
-  - src, controls, autoplay, loop, muted, poster
-- `iframe`
-  - src, allowfullscreen
-  - Embed external content: YouTube, Google Maps
+- Form:
+  - form
+    - action
+    - method
+  - input
+    - type: text, password, email, checkbox, radio, file
+    - Attributes: name, value, placeholder, required, readonly, disabled, min, max, step
+  - textarea
+    - rows, cols, placeholder
+  - select
+  - option
+  - button
+    - type: submit, reset, button
+  - label
+    - for + id, labal bọc input (association)
+    - Click vào label -> focus vào input
 
-## Form
-
-- `<form action="" method="">`
-  - action
-  - method
-- `input`
-  - Types: text, password, email, checkbox, radio, file
-  - Attributes: name, value, placeholder, required, readonly, disabled, min, max, step
-- `textarea`
-  - rows, cols, placeholder
-- `select`
-  - option, optgroup, selected
-- `button`
-  - type: submit, reset, button
-  - `<button>` vs `<input type="submit">`
-- `label`
-  - for + id, labal bọc input (association)
-  - Click vào label -> focus vào input
-
-## Table
-
-- `table`
-- `tr` (table row)
-- `th` (table header cell)
-- `td` (table data cell)
-- `caption`
-- Attributes: colspan, rowspan
-- `thead`, `tbody`, `tfoot`
+- Table
+  - table
+  - caption
+  - thead, tbody, tfoot
+  - tr
+  - th
+  - td
+  - Attributes: colspan, rowspan
 
 ## Block and Inline elements
 
@@ -64,13 +60,7 @@
   - span, a, img, input, button, label, strong, em, small
 - Block vs Inline: khác biệt về layout, width, margin/padding
 
-## Excercise
-
-- Ex 1: Tạo form đăng nhập (username, password, button submit) có label đi kèm.
-- Ex 2: Tạo bảng thời khóa biểu dùng thead, tbody, colspan, rowspan.
-- Ex 3: Chèn video YouTube và ảnh vào trang bằng iframe và img.
-
-## Introduction CSS
+## Introduction to CSS
 
 - Cascading Style Sheets: ngôn ngữ định dạng giao diện cho HTML
 - File `.css`: chứa các luật styling
@@ -81,25 +71,24 @@
   - External: file `.css` riêng, link qua `<link rel="stylesheet" href="">`
   - Ưu tiên dùng External
 
-## Syntax CSS
+## Syntax
 
-- Rule = Selector + Declaration block
+- Rule = Selector + Declaration
 
-```
+```css
 selector {
   property: value;
   property: value;
 }
 ```
 
-## Selector
-
-- Simple selectors
-  - element: `p { }`
-  - class: `.class-name { }`
-  - id: `#id-name { }`
-- Combinators
-  - descendant: `div p`
-  - child: `div > p`
-  - adjacent sibling: `h1 + p`
-  - general sibling: `h1 ~ p`
+- Selector
+  - Simple selectors
+    - element: `p { }`
+    - class: `.class-name { }`
+    - id: `#id-name { }`
+  - Combinators
+    - descendant: `div p`
+    - child: `div > p`
+    - adjacent sibling: `h1 + p`
+    - general sibling: `h1 ~ p`

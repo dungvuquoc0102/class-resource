@@ -1,5 +1,10 @@
 # Day 2: Syntax, Semantic, Entity, Tag types trong HTML
 
+## Tools
+
+- VS Code
+- Browser
+
 ## Syntax
 
 - Element

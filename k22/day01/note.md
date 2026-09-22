@@ -1,4 +1,4 @@
-# Day 1: Phương pháp học, Kiến thức Web Fundamental, Giới thiệu về HTML
+# Day 1: Learning Orientation, Web Fundamentals, Introduction to HTML
 
 ## Learning Orientation
 
@@ -28,9 +28,7 @@
 
 ## Web Fundamentals
 
-### Model
-
-- Client-Server
+### Model Client-Server
 
 ### Network
 
@@ -66,11 +64,10 @@
 - Cmd + / (Mac)
 - Ctrl + / (Windows)
 
-## HTML
+## Introduction to HTML
 
-- Introduction
-  - HyperText Markup Language
-  - File .html
-  - Browser read
-  - Simple HTML structure
-  - Favicon
+- HyperText Markup Language
+- File .html
+- Browser read
+- Simple HTML structure
+- Favicon

@@ -1,10 +1,11 @@
-# Day 4: Selector, Inheritance, Specificity, Unit, Reset, Layout types CSS
+# Day 4: Selector, Inheritance, Specificity, Unit, Reset, Layout types trong CSS
 
-## Selector
+## Syntax
 
-- Pseudo-classes
-- Pseudo-elements
-- Attribute selectors
+- Selector
+  - Pseudo-classes
+  - Pseudo-elements
+  - Attribute selectors
 
 ## Inheritance
 
@@ -24,14 +25,13 @@
 - Absolute: px, cm, mm, in
 - Relative: em, rem, %, vw / vh
 
-## Reset CSS
+## Reset
 
-- reset.css
-- normalize.css
+- Reset
+- Normalize
 
 ## Property types
 
 - Layout
-  - Box model: margin, padding, border, content (width, height), outline
+  - Box model: outline, border, margin, padding, width, height
   - Display: block, inline, inline-block, none
-  - Flexbox: container và item properties

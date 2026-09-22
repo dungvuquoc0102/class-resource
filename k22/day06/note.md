@@ -1,4 +1,4 @@
-# Day 06: CSS Background, Effect, Transform, Transition, Animation
+# Day 06: Icon, Background, Effect, Filter, Transform, Transition, Animation, Interactivity, Function, Responsive Design trong CSS
 
 ## Property types
 
@@ -9,17 +9,17 @@
 - Background
   - Color
   - Image
+  - Size
   - Repeat
   - Position
-  - Size
   - Attachment
 - Effect
   - Box shadow
   - Text shadow
   - Opacity
 - Filter
-  - Brightness
   - Blur
+  - Brightness
   - Grayscale
   - Contrast
 - Transform
