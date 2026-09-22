@@ -336,14 +336,9 @@ function greet(name, callback) {
 - In global
 - In arrow function
 - Bind, call, apply
-- In constructor
+- In class
 
 ### Get / Set
 
 - Getter
 - Setter
-
-### Prototypes
-
-- Intro
-- Prototype chain

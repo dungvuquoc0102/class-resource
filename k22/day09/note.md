@@ -1,20 +1,8 @@
-# Day 9: Biến, Kiểu dữ liệu, Toán tử, Cấu trúc điều khiển trong JavaScript
+# Day 9: Introduction, Variables, Basic data types, Operators, Conditions trong JavaScript
 
-## JavaScript: Ngôn ngữ lập trình web
+## Introduction
 
-### JavaScript là gì?
-
-- JavaScript (JS) là ngôn ngữ lập trình kịch bản, thông dịch, chạy trên trình duyệt và cả server (Node.js).
-- Vai trò: làm cho website có hành vi - xử lý sự kiện, thay đổi nội dung, gọi API…
-- HTML là cấu trúc, CSS là trình bày, JS là hành vi.
-
-```
-HTML -> Nội dung / Cấu trúc
-CSS  -> Trang trí / Bố cục
-JS   -> Tương tác / Xử lý
-```
-
-### Đặc điểm
+- Features
 
 | Đặc điểm        | Giải thích ngắn                                        |
 | --------------- | ------------------------------------------------------ |
@@ -24,97 +12,12 @@ JS   -> Tương tác / Xử lý
 | Hướng đối tượng | Hỗ trợ prototype, class, object literal                |
 | Event-driven    | Phản ứng khi user click, gõ phím, load trang…          |
 
-### Chạy thử JavaScript
+- Integration
+  - Inline - Viết trực tiếp trong thẻ HTML
+  - Internal - Thẻ `<script>` trong file HTML
+  - External - File `.js` riêng
 
-Mở DevTools (F12 / Cmd+Option+I) -> tab Console -> gõ:
-
-```js
-console.log("Hello, world!");
-alert("Chào bạn!");
-```
-
-## 3 cách tích hợp JS vào web
-
-### 1. Inline - Viết trực tiếp trong thẻ HTML
-
-Dùng thuộc tính sự kiện như `onclick`, `onmouseover`…
-
-```html
-<button onclick="alert('Bạn vừa click!')">Nhấn tôi</button>
-```
-
-Nhược điểm: khó bảo trì, trộn lẫn HTML và JS - ít dùng trong thực tế.
-
-### 2. Internal - Thẻ `<script>` trong file HTML
-
-Viết JS trong thẻ `<script>` ở `<head>` hoặc cuối `<body>`.
-
-```html
-<!DOCTYPE html>
-<html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Internal JS</title>
-  </head>
-  <body>
-    <h1>Trang web</h1>
-
-    <script>
-      console.log("Internal JS chạy!");
-      const name = prompt("Tên bạn là gì?");
-      document.querySelector("h1").textContent = "Chào " + name;
-    </script>
-  </body>
-</html>
-```
-
-Lưu ý vị trí: để `<script>` ở cuối `body` để đảm bảo DOM đã load trước khi JS chạy, hoặc dùng thuộc tính `defer`.
-
-### 3. External - File `.js` riêng
-
-Tạo file `script.js`, sau đó nhúng vào HTML:
-
-```html
-<script src="script.js"></script>
-```
-
-script.js:
-
-```js
-console.log("External JS - tách biệt hoàn toàn!");
-```
-
-#### So sánh ba cách
-
-| Cách     | Ưu điểm                                | Nhược điểm                |
-| -------- | -------------------------------------- | ------------------------- |
-| Inline   | Nhanh, không cần file phụ              | Khó đọc, khó bảo trì      |
-| Internal | Gọn trong một file HTML                | Không tái dùng được       |
-| External | Tách biệt, tái dùng, cache bởi browser | Phải load thêm file `.js` |
-
-> Thực tế:
-
-- Luôn dùng External để tách biệt HTML và JS, dễ bảo trì, tái sử dụng.
-- Dùng Internal khi script ngắn, chỉ phục vụ cho một trang cụ thể, cần chạy ngay ở đầu trang, giảm số request.
-- Dùng Inline tương tụ Internal.
-
-### Thuộc tính `defer` và `async`
-
-Khi dùng `<script src="...">` ở `<head>`, trình duyệt phải tải và chạy JS xong mới render tiếp - gây chậm.
-
-| Thuộc tính | Hành vi                                                          |
-| ---------- | ---------------------------------------------------------------- |
-| (không)    | Tải và chạy ngay khi gặp, chặn parsing HTML trong suốt quá trình |
-| `defer`    | Tải song song với HTML, chạy sau khi HTML parse xong             |
-| `async`    | Tải xong lúc nào thì chạy lúc đó, khi chạy thì chặn parsing HTML |
-
-> Thực tế:
-
-- Để ở cuối `body` thì không cần `defer`/`async`, đôi khi gây lỗi hiệu năng.
-- Dùng `defer` cho tính năng giao diện, tương tác với DOM.
-- Dùng `async` cho script không phụ thuộc vào DOM.
-
-## Biến: var, let, const và scope
+## Variables
 
 ### Biến là gì?
 
@@ -128,117 +31,13 @@ message = "Hello"; // gán lại giá trị
 console.log(message); // "Hello"
 ```
 
-### Khai báo biến
+### Khai báo biến |
 
-JS cung cấp ba từ khóa: `var`, `let`, `const`.
-
-| Từ khóa | Có thể gán lại? | Scope (phạm vi)  | Hoisting?                             |
-| ------- | --------------- | ---------------- | ------------------------------------- |
-| `var`   | ✅ Có           | Function scope   | ✅ Có (được hoisting nhưng undefined) |
-| `let`   | ✅ Có           | Block scope `{}` | ✅ Có (TDZ)                           |
-| `const` | ❌ Không        | Block scope `{}` | ✅ Có (TDZ)                           |
-
-#### `let` - khai báo có thể gán lại, block scope
-
-```js
-let age = 25;
-age = 26; // ✅ gán lại được
-
-if (true) {
-  let x = 10;
-  console.log(x); // 10
-}
-// console.log(x); // ❌ ReferenceError - x không tồn tại ngoài block
-```
-
-#### `const` - hằng số, không thể gán lại, block scope
-
-```js
-const PI = 3.14;
-// PI = 3.1416; // ❌ TypeError - không gán lại được
-
-const user = { name: "An" };
-user.name = "Bình"; // ✅ được - vì const chỉ giữ tham chiếu, object vẫn thay đổi được
-// user = {};        // ❌ không gán lại biến được
-```
-
-> `const` không có nghĩa là giá trị bất biến, chỉ có nghĩa là tham chiếu không đổi.
-
-#### `var` - cách cũ (tránh dùng)
-
-```js
-var name = "An";
-name = "Bình"; // ✅ gán lại
-
-if (true) {
-  var z = 999;
-}
-console.log(z); // 999 - var "lọt" ra ngoài block!
-```
-
-`var` có function scope, không có block scope, và dễ gây lỗi.
-
-> Thực tế:
-
-- Chỉ dùng `var` khi cần hỗ trợ trình duyệt cũ (IE11 trở về trước) hoặc gặp dự án cũ đã dùng `var`.
-- Luôn dùng `const` nếu có thể.
-- Nếu không dùng được `const` (ví dụ cần gán lại), thì dùng `let`.
-
-### Scope (phạm vi)
-
-Scope là vùng mã nguồn nơi biến có hiệu lực.
-
-```js
-// Global scope
-let globalVar = "Tôi ở global";
-
-function demo() {
-  // Function scope
-  var funcVar = "Tôi trong function";
-
-  if (true) {
-    // Block scope
-    let blockVar = "Tôi trong block";
-    console.log(globalVar); // ✅
-    console.log(funcVar); // ✅
-    console.log(blockVar); // ✅
-  }
-
-  console.log(globalVar); // ✅
-  // console.log(blockVar);  // ❌ - blockVar chỉ trong block
-}
-
-demo();
-```
-
-### Hoisting và TDZ (Temporal Dead Zone)
-
-- Hoisting: khai báo `var`, `let`, `const`, `function` được "kéo lên" đầu scope.
-- `var` được hoisting và khởi tạo `undefined` - có thể truy cập trước khi khai báo.
-- `let`/`const` được hoisting nhưng không được khởi tạo - truy cập trước dòng khai báo sẽ gặp TDZ -> `ReferenceError`.
-
-```js
-console.log(a); // undefined (var được hoisting + khởi tạo undefined)
-var a = 5;
-
-// console.log(b); // ❌ ReferenceError - TDZ
-let b = 10;
-```
+### Hoisting
 
 ### Cách đặt tên biến trong JS
 
-Các cách đặt tên:
-
-- camelCase: `firstName`, `isLoggedIn`
-- snake_case: `first_name`, `is_logged_in`
-- kebab-case: `first-name`, `is-logged-in`
-- PascalCase: `FirstName`, `IsLoggedIn`
-
-> Thực tế:
-
-- Ưu tiên camelCase cho biến và hàm.
-
-## Kiểu dữ liệu trong JavaScript
+## Basic data types
 
 JS có 8 kiểu dữ liệu (7 kiểu nguyên thuỷ + 1 kiểu tham chiếu).
 
@@ -359,9 +158,9 @@ console.log(objA === objC); // true - cùng tham chiếu
 | So sánh  | Theo giá trị    | Theo tham chiếu (địa chỉ) |
 | Gán biến | Copy giá trị    | Copy tham chiếu           |
 
-## Toán tử và biểu thức
+## Operators & Expressions
 
-### 1. Toán tử số học (Arithmetic)
+### Toán tử số học (Arithmetic)
 
 | Toán tử | Ý nghĩa        | Ví dụ            |
 | ------- | -------------- | ---------------- |
@@ -384,7 +183,7 @@ counter++; // counter = 1
 counter--; // counter = 0
 ```
 
-### 2. Toán tử gán (Assignment)
+### Toán tử gán (Assignment)
 
 | Toán tử | Tương đương | Ví dụ              |
 | ------- | ----------- | ------------------ |
@@ -402,7 +201,7 @@ score += 5; // 15
 score *= 2; // 30
 ```
 
-### 3. Toán tử so sánh (Comparison)
+### Toán tử so sánh (Comparison)
 
 Trả về `boolean` (`true` / `false`).
 
@@ -427,7 +226,7 @@ console.log(null == undefined); // true  (đặc biệt)
 console.log(null === undefined); // false
 ```
 
-### 4. Toán tử logic (Logical)
+### Toán tử logic (Logical)
 
 | Toán tử | Ý nghĩa  | Ví dụ                              |
 | ------- | -------- | ---------------------------------- |
@@ -467,7 +266,7 @@ let displayName = userInput ?? "Mặc định";
 | `"" ?? "x" -> ""`         | `""` tương tự                                |
 | `null ?? "x" -> "x"`      | null -> fallback                             |
 
-### 5. Toán tử chuỗi (String operator) `+`
+### Toán tử chuỗi (String operator) `+`
 
 Toán tử `+` với chuỗi thực hiện nối chuỗi:
 
@@ -480,7 +279,7 @@ let fullName = firstName + " " + lastName; // "Nguyễn An"
 let greeting = `Xin chào ${fullName}!`; // "Xin chào Nguyễn An!"
 ```
 
-### 6. Toán tử ba ngôi (Ternary)
+### Toán tử ba ngôi (Ternary)
 
 Cú pháp rút gọn của `if/else`:
 
@@ -541,7 +340,7 @@ console.log(Boolean("abc")); // true
 | `undefined`       | Function                      |
 | `NaN`             |                               |
 
-## If condition
+## Conditions
 
 - If
 - If...else

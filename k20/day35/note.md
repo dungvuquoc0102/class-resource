@@ -3,12 +3,16 @@
 // Phải trả về htmlString -> JSX để giải quyết
 // Tự xử lý routing -> React Router để giải quyết
 // Dự án 1 file -> Component để giải quyết
+// Query DOM -> useRef để giải quyết
 
-- useState
-- useEffect
-  - component Products - server Products
-  - component Video playing - DOM
-  - component Connection - Service
+// Bất cập khi code React
+// Đồng bộ với hệ thống bên ngoài -> useEffect để giải quyết
+// Quản lý state phức tạp -> useReducer để giải quyết
+// Prop Drilling -> useContext để giải quyết
+// Tối ưu render -> useMemo, useCallback để giải quyết
+// Tái sử dụng logic -> custom hooks để giải quyết
+// Tạo API cho component con -> useImperativeHandle để giải quyết
+// Controller Component -> useRef, Reacr Hook Form để giải quyết
 
 # Day 35: useReducer, useContext, useRef, useImperativeHandle, useMemo, useCallback
 

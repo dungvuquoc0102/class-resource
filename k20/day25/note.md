@@ -68,14 +68,3 @@
 
 - parent.removeChild(child);
 - child.remove();
-
-## Exercise
-
-### Xây dựng TodoApp:
-
-- Tạo giao diện form HTML và danh sách hiển thị.
-- Lấy các phần tử form và danh sách thông qua DOM.
-- Bắt sự kiện `submit`, thêm dữ liệu vào mảng JavaScript.
-- Xóa dữ liệu cũ trong ô input và tự động `focus()` lại ô nhập.
-- Chuyển đổi dữ liệu trong mảng thành danh sách các thẻ HTML (`<li>`).
-- Đẩy danh sách HTML vừa tạo vào cây DOM.
