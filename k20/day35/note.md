@@ -14,7 +14,7 @@
 // Tạo API cho component con -> useImperativeHandle để giải quyết
 // Controller Component -> useRef, Reacr Hook Form để giải quyết
 
-# Day 35: useReducer, useContext, useRef, useImperativeHandle, useMemo, useCallback
+# Day 35: useReducer, useContext, useRef, useImperativeHandle trong React
 
 ## Mục tiêu buổi học
 

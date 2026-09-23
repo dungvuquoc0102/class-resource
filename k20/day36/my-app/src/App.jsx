@@ -1,5 +1,14 @@
+import ExpensiveComponent from "./components/ExpensiveComponent";
+import RegisterForm from "./components/RegisterForm";
+
 function App() {
-  return <h1>Hello F8</h1>;
+  return (
+    <>
+      <ExpensiveComponent />
+      <hr />
+      <RegisterForm />
+    </>
+  );
 }
 
 export default App;
