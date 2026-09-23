@@ -179,17 +179,17 @@ Các thuộc tính thường dùng của đối tượng `Error`:
 
 ---
 
-## 5. Scope (Phạm vi truy cập biến)
+## 5. Scope (Phạm vi truy cập)
 
-`Scope` xác định những nơi có thể truy cập một biến. Khi viết chức năng, nên khai báo biến trong phạm vi cần dùng để tránh ảnh hưởng đến các phần khác của chương trình.
+`Scope` xác định những nơi có thể truy cập một biến, hàm, class,... Khi viết chức năng, nên khai báo biến trong phạm vi cần dùng để tránh ảnh hưởng đến các phần khác của chương trình.
 
 ### Các phạm vi thường gặp
 
-| Phạm vi | Công dụng / Đặc điểm |
-| ------- | ------------------- |
-| Global scope | Biến ở phạm vi toàn cục, có thể được truy cập từ các phạm vi bên trong |
-| Function scope | Tham số và biến khai báo trong hàm chỉ được truy cập bên trong hàm đó |
-| Block scope | Biến khai báo bằng `let`, `const` trong khối `{}` chỉ được truy cập trong khối đó và các phạm vi bên trong |
+| Phạm vi        | Công dụng / Đặc điểm                                                                                       |
+| -------------- | ---------------------------------------------------------------------------------------------------------- |
+| Global scope   | Biến ở phạm vi toàn cục, có thể được truy cập từ các phạm vi bên trong                                     |
+| Function scope | Tham số và biến khai báo trong hàm chỉ được truy cập bên trong hàm đó                                      |
+| Block scope    | Biến khai báo bằng `let`, `const` trong khối `{}` chỉ được truy cập trong khối đó và các phạm vi bên trong |
 
 ### Ứng dụng: Tính giá đơn hàng, tách riêng dữ liệu của từng lần tính
 

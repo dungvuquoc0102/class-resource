@@ -9,54 +9,57 @@
 
 ### window
 
-- window.document
-- window.innerWidth, window.innerHeight
-- window.outerWidth, window.outerHeight
-- window.location
-- window.navigator
-- window.alert(message)
-- window.confirm(message)
-- window.prompt(message, defaultValue)
-- setTimeout(callback, delay)
-- setInterval(callback, delay)
-- open(url, name, specs)
+- document
+- screen
+- location
+- history
+- navigator
+
+- innerWidth, innerHeight
+- outerWidth, outerHeight
+- setTimeout()
+- setInterval()
+- alert()
+- confirm()
+- prompt()
+- open()
 - close()
 
 ### screen
 
-- screen.width, screen.height
-- screen.availWidth, screen.availHeight
-- screen.orientation
+- width, height
+- availWidth, availHeight
+- orientation
 
 ### location
 
-- location.href
-- location.protocol
-- location.host
-- location.hostname
-- location.port
-- location.pathname
-- location.search
-- location.hash
-- location.assign(url)
-- location.replace(url)
-- location.reload()
+- href
+- protocol
+- host
+- hostname
+- port
+- pathname
+- search
+- hash
+- assign(url)
+- replace(url)
+- reload()
 
 ### history
 
-- history.length
-- history.back()
-- history.forward()
-- history.go(n)
-- history.pushState(state, title, url)
-- history.replaceState(state, title, url)
+- length
+- back()
+- forward()
+- go(n)
+- pushState(state, title, url)
+- replaceState(state, title, url)
 
 ### navigator
 
-- navigator.userAgent
-- navigator.language
-- navigator.languages
-- navigator.onLine
-- navigator.platform
-- navigator.geolocation
-- navigator.geolocation.getCurrentPosition()
+- userAgent
+- language
+- languages
+- onLine
+- platform
+- geolocation
+- geolocation.getCurrentPosition()
