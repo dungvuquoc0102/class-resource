@@ -1,7 +1,6 @@
 // Object literal -> đối tượng
 // Array -> danh sách
 // Map -> danh sách với nhiều tính năng
-
 function greeting(name) {
   console.log(`Hello ${name}`);
 }
@@ -145,3 +144,84 @@ try {
 }
 
 console.log(2);
+let a = 10;
+function greeting2(name) {
+  let a = 20;
+  a++;
+  console.log(a);
+}
+
+// if (true) {
+//   var a = 20;
+// }
+
+// {
+//   var a = 30;
+// }
+
+greeting2();
+greeting2();
+
+function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    console.log(count);
+  };
+}
+
+const innerFunc = outer();
+innerFunc();
+innerFunc();
+innerFunc();
+// innerFunc = null;
+
+const innerFunc2 = outer();
+innerFunc2();
+innerFunc2();
+innerFunc2();
+
+const categories = [
+  {
+    id: 1,
+    name: "Điện thoại",
+    children: [
+      {
+        id: 3,
+        name: "Điện thoại chơi game",
+        children: [
+          {
+            id: 5,
+            name: "Điện thoại chơi game giá rẻ",
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: "Điện thoại gập",
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Máy tính",
+  },
+];
+
+const flattedCategories = [];
+
+function makeFlattedCategories(categories) {
+  for (const category of categories) {
+    flattedCategories.push(category);
+    if (category.children) {
+      makeFlattedCategories(category.children);
+    }
+  }
+}
+
+makeFlattedCategories(categories);
+
+console.log(flattedCategories);
+
+const content = document.querySelector("div");
+console.log((content.style.color = "red"));

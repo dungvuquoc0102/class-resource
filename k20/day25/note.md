@@ -4,7 +4,7 @@
 
 ## DOM Tree
 
-### Data types
+## Data types
 
 - Document
 - Node
@@ -12,7 +12,9 @@
 - Attribute
 - Text
 
-## Select DOM elements
+## CRUD DOM elements
+
+### Select DOM elements
 
 - document.getElementById()
 - document.getElementsByClassName()
@@ -28,33 +30,32 @@
 - element.nextElementSibling
 - element.closest()
 
-## Manipulate DOM elements
+### Manipulate DOM elements
 
-- innerHTML
-- textContent
-- innerText
+- Manipulate DOM content nodes
+  - innerHTML
+  - textContent
+  - innerText
 
-- outerHTML
-- outerText
+  - outerHTML
+  - outerText
 
-### Manipulate DOM attribute nodes
+- Manipulate DOM attribute nodes
+  - element.getAttribute()
+  - element.setAttribute()
+  - element.hasAttribute()
+  - element.removeAttribute()
 
-- element.getAttribute()
-- element.setAttribute()
-- element.hasAttribute()
-- element.removeAttribute()
+- Manipulate style DOM attribute nodes
+  - element.style
+  - element.style.camelCaseAttribute
+  - element.className
+  - element.classList.add()
+  - element.classList.remove()
+  - element.classList.toggle()
+  - element.classList.contains()
 
-### Manipulate style DOM attribute nodes
-
-- element.style
-- element.style.camelCaseAttribute
-- element.className
-- element.classList.add()
-- element.classList.remove()
-- element.classList.toggle()
-- element.classList.contains()
-
-## Create DOM element
+### Create DOM element
 
 - document.createElement()
 - document.createAttribute()
@@ -64,7 +65,7 @@
 - element.prepend
 - element.insertAdjacentHTML
 
-## Delete DOM element
+### Delete DOM element
 
 - parent.removeChild(child);
 - child.remove();
