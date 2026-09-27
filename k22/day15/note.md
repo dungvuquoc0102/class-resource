@@ -46,7 +46,7 @@
     - element.<attributeName> = <value>
 
   - Special attribute
-    - element.style = <styleObject>
+    - Object.assign(element.style, <styleObject>)
     - element.style.<propertyName> = <value>
     - element.className
     - element.classList.add()
@@ -132,6 +132,18 @@
 - event.preventDefault()
 - event.stopPropagation()
 
+### Event Types
+
+- Mouse / Pointer / Touch: click, dblclick, contextmenu, pointerover, pointerleave, pointerdown, pointerup
+  - clientX, clientY, pageX, pageY, screenX, screenY
+  - button, buttons, ctrlKey, shiftKey, altKey, metaKey
+- Keyboard: keydown, keyup, keypress
+  - key, code, ctrlKey, shiftKey, altKey, metaKey
+- Form: submit, change, input, focus, blur
+- Window: load, resize, scroll, DOMContentLoaded, beforeunload
+- Clipboard: copy, paste, cut
+  - clipboardData
+
 ### Event Listener
 
 - element.addEventListener(type, listener, options)
@@ -147,14 +159,6 @@
 ### Event Delegation
 
 - Gán 1 listener lên parent, dùng event.target để xử lý child
-
-### Event Types
-
-- Mouse / Pointer / Touch: click, dblclick, contextmenu, pointerover, pointerleave, pointerdown, pointerup
-- Keyboard: keydown, keyup, keypress
-- Form: submit, change, input, focus, blur
-- Window: load, resize, scroll, DOMContentLoaded, beforeunload
-- Clipboard: copy, paste, cut
 
 ### Dispatch event
 

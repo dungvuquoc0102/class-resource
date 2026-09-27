@@ -1,4 +1,4 @@
-# Buổi 36: useMemo, memo, useCallback, custom hooks, React Hook Form, Zod
+Buổi 36: useMemo, memo, useCallback, custom hooks, React Hook Form, Zod
 
 ## Render và tối ưu trong React
 
