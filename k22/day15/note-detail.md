@@ -562,5 +562,5 @@ Listener nằm ở `ul` nên vẫn xử lý được các mục được thêm v
 
 - `preventDefault()` ngăn hành vi mặc định, không ngăn bubbling.
 - `stopPropagation()` ngăn sự kiện tiếp tục lan truyền; không cần dùng trong ví dụ này và không nên gọi mặc định vì có thể làm listener ở cha không nhận được sự kiện.
-- Luồng sự kiện còn có capturing, đi từ ngoài vào phần tử đích trước giai đoạn bubbling. Buổi này chỉ cần nhận biết, chưa cần thực hành `{ capture: true }`.
+- Luồng sự kiện còn có capturing, đi từ ngoài vào phần tử đích trước giai đoạn bubbling.
 - Không phải mọi sự kiện đều bubbling; ví dụ `focus` và `blur` không bubbling như `click`.
