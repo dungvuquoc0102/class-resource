@@ -1,4 +1,4 @@
-# Day 15: DOM Tree, Data types, Select, Manipulate, Create, Delete DOM elements, DOM Events trong JavaScript
+# Day 15: DOM
 
 ## DOM Tree
 

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <h1>Product List</h1>
+    <ul id="product-list" class="grid grid-cols-3 gap-4">
+      <li class="border border-orange-400 rounded-sm p-3 flex flex-col gap-3">
+        <h2 class="text-2xl">Product 1</h2>
+        <p class="text-red-500">$10.00</p>
+        <button
+          data-product-id="1"
+          class="w-full block p-2 rounded-sm font-bold bg-orange-400 text-white"
+        >
+          <span>Add to Cart</span>
+        </button>
+      </li>
+      <li class="border border-orange-400 rounded-sm p-3 flex flex-col gap-3">
+        <h2 class="text-2xl">Product 2</h2>
+        <p class="text-red-500">$12.00</p>
+        <button
+          data-product-id="2"
+          class="w-full block p-2 rounded-sm font-bold bg-orange-400 text-white"
+        >
+          <span>Add to Cart</span>
+        </button>
+      </li>
+      <li class="border border-orange-400 rounded-sm p-3 flex flex-col gap-3">
+        <h2 class="text-2xl">Product 3</h2>
+        <p class="text-red-500">$15.00</p>
+        <button
+          data-product-id="3"
+          class="w-full block p-2 rounded-sm font-bold bg-orange-400 text-white"
+        >
+          <span>Add to Cart</span>
+        </button>
+      </li>
+    </ul>
+
+    <button
+      class="mt-5 block p-2 rounded-sm font-bold bg-violet-400 text-white"
+      id="clear-interval"
+    >
+      Clear interval
+    </button>
+    <p>Hello anh em!</p>
+    <p class="text-gray-300 text-sm" id="time-ago"></p>
+    <a href="https://google.com">Chuyển sang trang Google</a>
+    <button id="navigate-user-page">Trang user</button>
+    <script src="script.js"></script>
+  </body>
+</html>
