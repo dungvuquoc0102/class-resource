@@ -1,21 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { instance } from "./api/http";
 
 export async function fetchProducts() {
-  const res = await fetch("https://dummyjson.com/products");
-  if (!res.ok) {
-    throw new Error("Có lỗi xảy ra!");
-  }
-  return res.json();
+  const res = await instance.get("products");
+
+  return res.data;
 }
+
+// Component -> Server
+// Conponent (data) ~ cache (data)
+
+// Form
+// component ProductList
 
 export default function ProductList() {
   const { isFetching, error, data } = useQuery({
     queryKey: ["products"],
     queryFn: fetchProducts,
+    staleTime: 0,
+    gcTime: 1000 * 60 * 5,
   });
-
-  console.log(data);
 
   return (
     <div>
