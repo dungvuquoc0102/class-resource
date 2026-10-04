@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #fafafa;
+  --color-nav-hover-bg: #00000009;
+  --color-nav-fg: #b8b8b8;
+  --color-border: #00000026;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg);
+  }
+  .border {
+    border-color: var(--color-border);
+  }
+}
+
+@layer utilities {
+  .container {
+    @apply mx-auto max-w-160 px-4;
+  }
+}

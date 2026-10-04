@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #result {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+      }
+      .product {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+
+      .product img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+      .product img + p {
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .product p + p {
+        font-size: 14px;
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Login form</h2>
+    <form>
+      <div>
+        <label for="">Email</label>
+        <input id="email" type="text" placeholder="Enter email" />
+      </div>
+      <button>Submit</button>
+    </form>
+    <div id="result"></div>
+    <script type="module" src="script.js"></script>
+    <script type="module" src="script2.js"></script>
+  </body>
+</html>
