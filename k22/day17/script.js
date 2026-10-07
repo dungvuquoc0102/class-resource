@@ -73,3 +73,4 @@
 // result.innerHTML = `<button onclick="console.log(localStorage.getItem('p'));">Click me</button>`;
 
 // // server gửi yêu cầu set cookie về cho trình duyệt httpOnly: true
+const a = 10;
