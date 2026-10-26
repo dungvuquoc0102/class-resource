@@ -1,4 +1,4 @@
-# Day 3: Nhóm thẻ Link, Media, Form, Table trong HTML; Introduction, Syntax trong CSS
+# Day 3: Link, Media, Form, Table tags in HTML, Introduction, Syntax in CSS
 
 ## Tag types
 
