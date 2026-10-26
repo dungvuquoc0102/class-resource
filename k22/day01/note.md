@@ -21,7 +21,7 @@
 
 ### Effective Programming Learning Methods
 
-- Active Recall
+- Active Learning
 - Spaced Repetition
 - Productive struggle
 - Teach others

@@ -1,4 +1,4 @@
-# Day 07: Tailwind CSS
+# Day 7: Tailwind CSS
 
 ## Introduction
 

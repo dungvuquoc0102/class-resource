@@ -1,4 +1,4 @@
-# Day 2: Syntax, Semantic, Entity, Tag types trong HTML
+# Day 2: Tools, Syntax, Semantic, Entity, Tag types in HTML
 
 ## Tools
 

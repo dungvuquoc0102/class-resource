@@ -1,4 +1,4 @@
-# Day 06: Icon, Background, Effect, Filter, Transform, Transition, Animation, Interactivity, Function, Responsive Design trong CSS
+# Day 6: Icon, Background, Effect, Filter, Transform, Transition, Animation, Interactivity, Function, Responsive Design in CSS
 
 ## Property types
 
