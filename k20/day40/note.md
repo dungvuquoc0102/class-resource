@@ -1,4 +1,4 @@
-# Buổi 40: TypeScript từ cơ bản đến nâng cao
+# Buổi 40: TypeScript (Part 1)
 
 ## Mục tiêu buổi học
 
@@ -139,7 +139,7 @@ Array dùng cho danh sách sản phẩm, người dùng hoặc kết quả API. 
 
 ### Định nghĩa
 
-Khai báo kiểu hàm bằng kiểu tham số và kiểu trả về. Hàm có thể có tham số tùy chọn (`?`), giá trị mặc định, rest parameter (`...`) hoặc không trả giá trị hữu ích (`void`). `never` biểu thị hàm không kết thúc bình thường, chẳng hạn luôn ném lỗi.
+Khai báo kiểu hàm bằng kiểu tham số và kiểu trả về. Hàm có thể có tham số tùy chọn (`?`), giá trị mặc định, rest parameter (`...`) hoặc không trả giá trị hữu ích (`void`). `never` biểu thị hàm không kết thúc bình thường, chẳng hạn luôn ném lỗi. Promises có thể khai báo kiểu trả về `Promise<T>`; `async` tạo Promise nên thường dùng `Promise<T>`.
 
 ### Ví dụ
 
@@ -323,9 +323,14 @@ function describe(value: string | Date) {
 
 type User = { id: number; name: string };
 function isUser(value: unknown): value is User {
-  return typeof value === "object" && value !== null &&
-    "id" in value && typeof value.id === "number" &&
-    "name" in value && typeof value.name === "string";
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "id" in value &&
+    typeof value.id === "number" &&
+    "name" in value &&
+    typeof value.name === "string"
+  );
 }
 ```
 
@@ -456,7 +461,7 @@ Conditional type có dạng `T extends U ? X : Y`, chọn kiểu kết quả the
 type ElementOf<T> = T extends (infer Item)[] ? Item : T;
 
 type A = ElementOf<string[]>; // string
-type B = ElementOf<number>;   // number
+type B = ElementOf<number>; // number
 type C = ElementOf<string | number[]>; // string | number
 ```
 
