@@ -36,3 +36,34 @@ export async function getProducts(query = "", page = 1, pageSize = 5) {
   const data = await request<ProductPage>(`products?${params.toString()}`);
   return data;
 }
+
+export async function getProductById(id: number): Promise<Product | null> {
+  return await request<Product>(`/products/${id}`);
+}
+
+export function getProductStats(): Promise<ProductStats> {
+  return request<ProductStats>("/products/stats");
+}
+
+export function createProduct(input: ProductInput): Promise<Product> {
+  return request<Product>("/products", {
+    method: "POST",
+    body: JSON.stringify(input),
+  });
+}
+
+export function updateProduct(
+  id: number,
+  input: ProductInput,
+): Promise<Product> {
+  return request<Product>(`/products/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(input),
+  });
+}
+
+export function deleteProduct(id: number): Promise<{ message: string }> {
+  return request<{ message: string }>(`/products/${id}`, {
+    method: "DELETE",
+  });
+}

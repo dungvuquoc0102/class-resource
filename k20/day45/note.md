@@ -1,3 +1,5 @@
+# Day 45: Next.js App Router
+
 ## 8. Static and Dynamic Rendering — dữ liệu thay đổi khi nào?
 
 | Kiểu render | Ý nghĩa                             | Ví dụ                                        |
@@ -10,6 +12,15 @@ Server Component **không đồng nghĩa** với “render lại ở mọi reque
 > Lưu ý: Với dữ liệu ít thay đổi, có thể chọn cache hoặc revalidation thay vì lấy mới ở mọi request.
 
 ## 9. Streaming — hiện giao diện trong lúc chờ dữ liệu
+
+Xử lý loading khi chưa có dữ liệu
+
+Streaming: live stream, video call, AI nhả text
+
+2 bước:
+
+- Gửi giao diện loading về client khi chưa có dữ liệu
+- Gửi dữ liệu về client khi đã lấy xong
 
 API demo phản hồi nhanh. Để quan sát loading/streaming trong lớp, `ProductStats` dưới đây cố ý chờ thêm 1,5 giây trước khi gọi API. Xóa dòng `delay` sau khi thực hành.
 
@@ -479,20 +490,7 @@ function ExampleForm({
 
 Đây là **mẫu mở rộng độc lập**, chưa thay thế `ProductForm` của chương 11. Khi áp dụng thật, Server Action phải trả về `{ message: ... }` cho lỗi dự kiến, và chỉ redirect khi lưu thành công.
 
-## 14. Adding Authentication — phân biệt đăng nhập và phân quyền
-
-Bài gốc dùng thư viện xác thực và bảo vệ dashboard. Với demo dữ liệu giả, trước tiên cần hiểu:
-
-| Khái niệm      | Câu hỏi          | Ví dụ                               |
-| -------------- | ---------------- | ----------------------------------- |
-| Authentication | Bạn là ai?       | Đăng nhập bằng tài khoản            |
-| Authorization  | Bạn được làm gì? | Chỉ quản trị viên được xóa sản phẩm |
-
-Lớp **không thêm màn hình đăng nhập giả** vào demo để tránh hiểu nhầm rằng ẩn nút Xóa hoặc kiểm tra ở client là bảo vệ dữ liệu. Nếu mở rộng thành ứng dụng thật, dùng giải pháp xác thực có session, bảo vệ route ở server, và **kiểm tra quyền trong từng Server Action** `createProductAction`, `updateProductAction`, `deleteProductAction` trước khi ghi dữ liệu. API demo hiện lưu mảng trong bộ nhớ; ứng dụng thật cần database để dữ liệu tồn tại bền vững.
-
-> Câu hỏi thảo luận: Nếu người dùng tự gửi request đến `deleteProductAction`, việc ẩn nút Xóa trên giao diện có ngăn được họ không? Vì sao cần kiểm tra quyền ngay trong action?
-
-## 15. Adding Metadata — tiêu đề và mô tả trang
+## 14. Adding Metadata — tiêu đề và mô tả trang
 
 Metadata giúp browser và công cụ tìm kiếm hiểu trang. Thêm vào `app/layout.tsx` (giữ nguyên `RootLayout` đã tạo ở chương 4):
 
