@@ -1,4 +1,4 @@
-# Buổi 24: Zustand, TanStack Query
+# Buổi 24: Zustand, TanStack Query trong React
 
 ## Phân biệt state trong ứng dụng
 

@@ -6,6 +6,7 @@ import { CountProvider } from "./CountContext.jsx";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter } from "react-router";
 
 const useCount = (set, get) => ({
   count: 0,
@@ -41,13 +42,15 @@ export const useCountTheme = create(
 // store: 1 cái kho chứa dữ liệu dùng chung, và thường là 1 object
 // state là 1 dữ liệu trong store
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
   // <StrictMode>
   // <CountProvider>
   <QueryClientProvider client={queryClient}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </QueryClientProvider>,
   // </CountProvider>,
   // </StrictMode>,

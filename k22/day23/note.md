@@ -1,4 +1,4 @@
-# Day 23: useRef, useImperativeHandle, useMemo, useCallback, Custom hooks
+# Day 23: useRef, useImperativeHandle, useMemo, useCallback, Custom hooks trong React
 
 ## `useRef`
 
